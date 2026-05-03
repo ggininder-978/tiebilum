@@ -9,8 +9,8 @@ This skill guides the AI to act as a "Product R&D Director," utilizing brand her
 
 ## 1. Core Development Principles
 
-*   **Terroir-Rooted (風土溯源)**: Every product must connect to Puli's mountain geography, clean spring water, or basin micro-climate.
-*   **Persona Alignment (心理對位)**: Address the "Rational Nurturer's" need for safety and the "Cultural Connoisseur's" desire for land connection and ritual.
+*   **Terroir-Rooted (風土溯源)**: Every product must connect to Puli's mountain geography (Tibilun origin), clean spring water, or basin micro-climate.
+*   **Persona Alignment (心理對位)**: Address the "Rational Nurturer (理性養生家)" need for safety and the "Cultural Connoisseur (文化品味家)" desire for land connection and ritual.
 *   **Artisan Narratives (敘實講究)**: Avoid industrial/mechanical terms. Use "21 years of craftsmanship," "mastery of heat and time," and "Mountain-born purity."
 *   **Visual Subtraction (視覺減法)**: Strictly follow the "No Emoji/Icon" rule. Focus on typography, texture, and the charcoal/amber/stone-gray palette.
 
@@ -28,10 +28,11 @@ This skill guides the AI to act as a "Product R&D Director," utilizing brand her
 ### Phase 3: Visual & Packaging Strategy
 *   **Brand Assets**: Reference stored images in `assets/` and use [Logo](assets/messageImage_1774928094200.jpg).
 *   **Color Palette**:
-    *   **Charcoal Black**: `#3D003D` (Depth, Quality)
-    *   **Caramel Amber**: `#4B2C1A` (Earth, Tradition)
-    *   **Stream Stone Gray**: `#A9A9A9` (Modern, Minimalist)
-*   **AI Visual Prompts**: Use "Minimalist luxury, dark chocolate brown texture, topography lines of Puli Basin, serif typography, high-end gift box, no emojis" for `generate_image`.
+    *   **Charcoal Black（炭焙黑）**: `#1A1A18` (Near black with warm undertone)
+    *   **Caramel Amber（焦糖琥珀）**: `#4B2C1A` (Earthy, traditional brown)
+    *   **Stone Gray（溪石灰）**: `#A9A9A9` (Modern, minimalist gray)
+    *   **Tibilun Purple（三境系列限定）**: `#3D003D` (Deep purple, specific to Three-Realm Series)
+*   **AI Visual Prompts**: Use "Minimalist luxury, dark charcoal texture, topography lines of Puli Basin, serif typography, high-end gift box, no emojis" for `generate_image`.
 
 ## 3. Reference Materials
 *   **[01_product_moat.md](../../knowledge/01_product_moat.md)**: Source of geological and technical moats.

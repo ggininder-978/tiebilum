@@ -8,10 +8,10 @@
 
 | 目錄 | 用途 | 核心內容 |
 |---|---|---|
-| `strategy/` | **核心戰略** | 品牌識別 (01_Identity)、成長戰略 (02_Growth) |
-| `knowledge/` | **知識資產** | 產品護城河 (01_Moat)、市場客群 Persona (02_Audience) |
-| `content/` | **對外執行** | 官網文案 (01_WebCopy)、產品研發提案 (proposals/) |
-| `archive/` | **封存文件** | 歷史戰略與舊版文件備查 |
+| `strategy/` | **核心戰略** | 品牌識別、成長戰略、定位紀錄 |
+| `knowledge/` | **知識資產** | 產品護城河、市場客群、紅甘蔗史 |
+| `content/` | **對外執行** | 官網文案、產品研發提案 |
+| `archive/` | **封存文件** | 診斷報告、歷史研發資料 |
 
 ## 2. 專屬研發工具 (Specialized Tools)
 
@@ -23,9 +23,13 @@
 ## 3. 核心文件索引 (Core Index)
 
 *   **[01_brand_identity.md](strategy/01_brand_identity.md)**：品牌靈魂 — 定位、溫潤語調、視覺規範與文案禁忌。
-*   **[01_product_moat.md](knowledge/01_product_moat.md)**：產品底蘊 — 埔里避風盆地、Badila 品種演進、創辦人的品質堅持。
+*   **[02_brand_positioning_record.md](strategy/02_brand_positioning_record.md)**：定位共識 — 最終確認的定位句與品牌故事背景。
+*   **[02_growth_strategy.md](strategy/02_growth_strategy.md)**：成長戰略 — 針對 DTC 與通路的成長引擎。
+*   **[01_product_moat.md](knowledge/01_product_moat.md)**：產品底蘊 — 帖比倫起源、埔里避風盆地、創辦人的品質堅持。
+*   **[02_market_audience.md](knowledge/02_market_audience.md)**：市場洞察 — 理性養生家與文化品味家的 Persona 研究。
+*   **[03_puli_sugarcane_history.md](knowledge/03_puli_sugarcane_history.md)**：歷史溯源 — Badila 品種引進史與埔里紅甘蔗榮光。
 *   **[01_website_copy.md](content/01_website_copy.md)**：品牌傳播 — 以職人視角呈現的官網精煉文案。
-*   **[proposals/](content/proposals/)**：最新研發提案 — 包含「古湖系列」黑糖蜜與「三境系列」組合包裝。
+*   **[proposals/](content/proposals/)**：產品提案 — 包含「古湖系列」黑糖蜜與「三境系列」。
 
 ---
-*Last Updated: 2026-04-02*
+*Last Updated: 2026-05-04*
