@@ -9,3 +9,6 @@ Thumbs.db
 
 # App Data
 .gemini/
+
+# Generated analysis workspaces
+outputs/**/node_modules/
