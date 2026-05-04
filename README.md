@@ -29,6 +29,8 @@
 *   **[02_market_audience.md](knowledge/02_market_audience.md)**：市場洞察 — 理性養生家與文化品味家的 Persona 研究。
 *   **[03_puli_sugarcane_history.md](knowledge/03_puli_sugarcane_history.md)**：歷史溯源 — Badila 品種引進史與埔里紅甘蔗榮光。
 *   **[04_sales_analysis.md](knowledge/04_sales_analysis.md)**：數據診斷 — 2025 產品成本結構與銷量深度分析。
+*   **[05_product_cost_structure.md](knowledge/05_product_cost_structure.md)**：成本詳解 — 各通路毛利分析與禮盒風險預警。
+*   **[06_2025_sales_stats.md](knowledge/06_2025_sales_stats.md)**：獲利診斷 — 2025 年度淨利排行與產品戰略矩陣。
 *   **[01_website_copy.md](content/01_website_copy.md)**：品牌傳播 — 以職人視角呈現的官網精煉文案。
 *   **[proposals/](content/proposals/)**：產品提案 — 包含「古湖系列」黑糖蜜與「三境系列」。
 
