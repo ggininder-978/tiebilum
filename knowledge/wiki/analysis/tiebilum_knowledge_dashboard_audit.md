@@ -17,3 +17,7 @@
 - Removed website architecture as a required input.
 - Refocused the website lane on missing materials, copy, product information, and brand context.
 - Renamed `AI 維護` to `品牌資料維護`.
+
+## 2026-05-10 Platform Naming
+
+- Updated the collaborator label from generic shop-platform wording to `QDM 開店平台`.
