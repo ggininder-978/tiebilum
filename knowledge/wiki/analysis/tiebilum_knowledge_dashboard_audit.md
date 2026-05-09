@@ -21,3 +21,21 @@
 ## 2026-05-10 Platform Naming
 
 - Updated the collaborator label from generic shop-platform wording to `QDM 開店平台`.
+
+## 2026-05-10 Dashboard Data Build
+
+- Generated: `knowledge/dashboard-data.json`
+- Files read: 10
+- Library cards: 9
+- Warnings: none
+
+## 2026-05-10 Implementation Verification
+
+- Files read by generator: `knowledge/index.md`, `knowledge/log.md`, selected wiki entity/concept/analysis pages, and `knowledge/specs/tiebilum_knowledge_dashboard_spec.md`.
+- Files generated or updated: `knowledge/dashboard-data.json`, `index.html`, `tools/build_knowledge_dashboard_data.mjs`, `tools/build_knowledge_dashboard_data.test.mjs`, `tools/dashboard_ui_smoke.test.mjs`, `tools/verify_dashboard_render.mjs`.
+- Verification commands:
+  - `node --test tools/build_knowledge_dashboard_data.test.mjs tools/dashboard_ui_smoke.test.mjs`: pass, 2 tests.
+  - `node tools/build_knowledge_dashboard_data.mjs`: generated 9 library cards.
+- `node tools/verify_dashboard_render.mjs`: loaded local dashboard, initial cards 9, QDM search cards 2, brand maintenance cards 2.
+- Screenshots generated: `C:\tmp\tiebilum-dashboard-desktop.png`, `C:\tmp\tiebilum-dashboard-mobile.png`.
+- Warnings: none.
