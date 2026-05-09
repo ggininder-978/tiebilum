@@ -10,3 +10,10 @@
 
 - Rewrote `knowledge/specs/tiebilum_knowledge_dashboard_spec.md` as a Traditional Chinese executable spec.
 - Fixed mojibake in Chinese labels and preserved the original data contract, UI requirements, build rules, verification rules, and audit requirements.
+
+## 2026-05-10 Scope Refinement
+
+- Revised the spec for an existing shop-platform website workflow.
+- Removed website architecture as a required input.
+- Refocused the website lane on missing materials, copy, product information, and brand context.
+- Renamed `AI 維護` to `品牌資料維護`.
