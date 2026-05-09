@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鐵比倫 Tiebilum | 專案計畫與進度實錄</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+TC:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F8F9FA;
+            --primary: #4A3728; /* 黑糖深棕 */
+            --accent: #D4AF37;  /* 甘蔗金 */
+            --success: #2D4033; /* 山林綠 */
+            --text-main: #1A1A1A;
+            --text-sub: #666;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Noto Sans TC', 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 0.1rem;
+            margin-bottom: 10px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        /* Roadmap Styles */
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #EEE;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -35px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #DDD;
+            border: 2px solid var(--white);
+        }
+
+        .timeline-item.active::before {
+            background: var(--accent);
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+        }
+
+        .timeline-item.done::before {
+            background: var(--success);
+        }
+
+        .timeline-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-sub);
+        }
+
+        /* Asset Checklist */
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #F0F0F0;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #DDD;
+            border-radius: 4px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .checkbox.checked {
+            background: var(--success);
+            border-color: var(--success);
+            position: relative;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            left: 3px;
+            top: -2px;
+            font-size: 14px;
+        }
+
+        .btn-small {
+            display: inline-block;
+            margin-left: 10px;
+            padding: 2px 10px;
+            font-size: 0.75rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .btn-small:hover {
+            opacity: 0.8;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: auto;
+        }
+
+        .tag.internal { background: #E3F2FD; color: #1976D2; }
+        .tag.external { background: #F3E5F5; color: #7B1FA2; }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .team-member {
+            background: #F9F9F9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .team-member .role {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>鐵比倫專案進度同步</h1>
+        <div class="status-badge">Phase 1: 素材採集與知識整理</div>
+    </div>
+
+    <div class="container">
+        <!-- Main Roadmap -->
+        <div class="main-content">
+            <div class="card">
+                <h2>執行路徑 (Roadmap)</h2>
+                <div class="timeline">
+                    <div class="timeline-item done">
+                        <div class="timeline-content">
+                            <h3>基礎架構與數據診斷</h3>
+                            <p>已完成 Tiebilum OS 初始化、2025 年度數據清洗與獲利診斷報告。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item active">
+                        <div class="timeline-content">
+                            <h3>Phase 1: 素材資產採集</h3>
+                            <p>目標：整理官網所需視覺素材、品牌故事與 SEO 知識庫。確保所有素材皆符合「職人誠實」語調。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Phase 2: 官網建置與 CIS 重構並行</h3>
+                            <p>目標：官網 UI/UX 開發；同時將 Wiki 知識提供給 CIS 團隊進行包裝設計。</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <h3>Phase 3: D2C 品牌正式轉型</h3>
+                            <p>目標：新版官網上線、新包裝產品首發、開啟數據驅動的精準行銷。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>官網素材採集清單</h2>
+                <ul class="checklist">
+                    <li class="checklist-item">
+                        <div class="checkbox checked"></div>
+                        <span>品牌核心文案 (已完成診斷)</span>
+                        <a href="brand_showcase.html" target="_blank" class="btn-small">查看內容</a>
+                        <span class="tag internal">內部</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>產品實物與情境攝影 (原味/薑汁/黑糖蜜)</span>
+                        <span class="tag internal">內部</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>埔里在地風土照片 (蔗田、帖比倫溪)</span>
+                        <span class="tag internal">內部</span>
+                    </li>
+                    <li class="checklist-item">
+                        <div class="checkbox"></div>
+                        <span>SEO 知識文章 (Badila 史、黑糖選購)</span>
+                        <span class="tag internal">內部</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sidebar / Team -->
+        <div class="sidebar">
+            <div class="card">
+                <h2>團隊角色同步</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <strong>Tiebilum OS</strong>
+                        <span class="role">大腦/策略/數據</span>
+                    </div>
+                    <div class="team-member">
+                        <strong>素材人員</strong>
+                        <span class="role">攝影/文案採集</span>
+                    </div>
+                    <div class="team-member" style="grid-column: span 2; margin-top: 10px; background: rgba(212,175,55,0.1);">
+                        <strong>專業 CIS 團隊</strong>
+                        <span class="role">包裝視覺/品牌識別設計</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Wiki 關鍵節點</h2>
+                <p style="font-size: 0.9rem; color: var(--text-sub);">
+                    所有產出將掛載於 `knowledge/wiki/`，作為外部團隊的設計參考。
+                </p>
+                <ul style="margin-top: 15px; font-size: 0.85rem; padding-left: 20px;">
+                    <li>[[brand_identity]]</li>
+                    <li>[[brand_history]]</li>
+                    <li>[[market_positioning]]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
