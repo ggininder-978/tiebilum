@@ -1,5 +1,10 @@
 # Tiebilum OS Operation Log
 
+## [2026-05-09] 🧬 Skill | 建立 HTML Effectiveness 技能
+- **Extraction**: 提取 `thariqs.github.io/html-effectiveness/` 核心知識點。
+- **Synthesis**: 建立 `skills/html-effectiveness/SKILL.md`，定義空間資訊化、互動式探索與閉環編輯器三大準則。
+- **Outcome**: 強化 Tiebilum OS 與人類的溝通密度，確保複雜決策能透過高品質 HTML 介面呈現。
+
 ## [2026-05-09] 🧹 Archive | 封存產品提案相關資料與技能
 - **Archive**: 將 `content/proposals/` 與 `skills/tiebilum-product-dev/` 移至 `archive/20260509_product_proposals/`。
 - **Cleanup**: 更新 `README.md` 移除失效索引。

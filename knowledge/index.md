@@ -32,6 +32,8 @@
 - [[superpowers_philosophy]]: 代理人開發哲學。
 - [[superpowers_workflow]]: 標準開發工作流。
 - [[superpowers_skills_index]]: 技能集索引。
+- [[html_effectiveness]]: 利用 HTML 提升資訊傳達密度的核心技能。
+
 
 ## 🧠 Karpathy Thinking (宗師開發思維)
 - [[karpathy_coding_philosophy]]: 解決 LLM 編碼陷阱的四大原則。
