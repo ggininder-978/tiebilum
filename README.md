@@ -33,7 +33,7 @@
 *   **[07_weighted_product_performance.csv](knowledge/07_weighted_product_performance.csv)**：收效報表 — 以產品為核心的加權平均獲利分析。
 *   **[08_spec_efficiency_analysis.csv](knowledge/08_spec_efficiency_analysis.csv)**：規格診斷 — 不同出貨單位 (380g vs 600g) 的獲利密度分析。
 *   **[01_website_copy.md](content/01_website_copy.md)**：品牌傳播 — 以職人視角呈現的官網精煉文案。
-*   **[proposals/](content/proposals/)**：產品提案 — 包含「古湖系列」黑糖蜜與「三境系列」。
 
 ---
+
 *Last Updated: 2026-05-04*

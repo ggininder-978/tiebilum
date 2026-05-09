@@ -1,0 +1,61 @@
+﻿source_row,product_name_raw,raw_route,revenue_source,profit_source,quality_flags
+5,,ODM/貼牌,reported,reported,missing_price;missing_cost;missing_spec
+6,原味黑糖 ,"批發-台糖
+(單顆包裝夾鏈袋260g)",reported,reported,
+7,薑汁黑糖,,reported,reported,missing_spec
+8,桂圓黑糖,,reported,reported,missing_spec
+9,玫瑰四物黑糖,,reported,reported,missing_spec
+10,桂圓紅棗薑黑糖,,reported,reported,missing_spec
+11,冬瓜,,reported,reported,missing_spec
+12,原味黑糖 ,"批發-台糖
+(手切夾鏈袋380g)",reported,reported,
+13,薑汁黑糖,,reported,reported,missing_spec
+14,桂圓黑糖,,reported,reported,missing_spec
+15,玫瑰四物黑糖,,reported,reported,missing_spec
+16,原味黑糖 ,"批發-農會
+(手切夾鏈袋380g)",reported,reported,
+17,薑汁黑糖,,reported,reported,missing_spec
+18,桂圓黑糖,,reported,reported,missing_spec
+19,玫瑰四物黑糖,,reported,reported,missing_spec
+20,原味黑糖 ,"貼牌客戶-埔里農會
+(手切夾鏈袋380g)",reported,reported,
+21,薑汁黑糖,,reported,reported,missing_spec
+22,桂圓黑糖,,reported,reported,missing_spec
+23,玫瑰四物黑糖,,reported,reported,missing_spec
+24,原味黑糖 ,"批發-
+(手切夾鏈袋380g)",reported,reported,
+25,薑汁黑糖,,reported,reported,missing_spec
+26,桂圓黑糖,,reported,reported,missing_spec
+27,玫瑰四物黑糖,,reported,reported,missing_spec
+28,原味黑糖 ,手切(每台斤),reported,reported,
+29,薑汁黑糖,,reported,reported,missing_spec
+30,桂圓黑糖,,reported,reported,missing_spec
+31,玫瑰四物黑糖,,reported,reported,missing_spec
+32,原味黑糖 ,單顆包(每台斤）,reported,reported,
+33,薑汁黑糖,,reported,reported,missing_spec
+34,桂圓黑糖,,reported,reported,missing_spec
+35,玫瑰四物黑糖,,reported,reported,missing_spec
+36,桂圓紅棗薑,,reported,reported,missing_spec
+37,冬瓜,,reported,reported,missing_spec
+38,黑糖蜜,蜜類-350ml,reported,reported,
+39,黑糖檸檬,蜜類-150ml,reported,reported,negative_profit
+40,百香果黑糖,,reported,reported,missing_spec
+41,梅精黑糖,,reported,reported,missing_spec
+42,黑糖蜜,蜜類-1890ml,reported,reported,missing_price;missing_cost
+43,梅精黑糖,蜜類-1890ml,reported,reported,missing_price;missing_cost
+44,,通路上架,reported,missing,missing_price;missing_cost;missing_spec
+45,原味黑糖 ,日月町罐裝(160g）,reported,missing,negative_profit
+46,薑汁黑糖,,reported,missing,missing_spec
+47,桂圓黑糖,,reported,missing,missing_spec
+48,玫瑰四物黑糖,,reported,missing,missing_spec
+49,桂圓紅棗薑,,reported,missing,missing_spec
+50,冬瓜,,reported,missing,missing_spec
+51,2入任搭組合,日月町禮盒組,reported,missing,missing_spec;negative_profit
+52,,OEM：客戶提供產品規格、設計圖、配方，我們依照客戶需求生產。,missing,missing,missing_price;missing_cost;missing_spec
+53,黑糖薑母茶,科技中藥廠,calculated,calculated,calculated_revenue;calculated_profit;missing_spec
+110,,,missing,missing,missing_price;missing_cost;missing_spec
+111,"海陸奢華霸王組8~10人
+贈玫瑰鹽一罐(市價89元)",,calculated,missing,calculated_revenue;missing_cost;missing_spec
+112,五星級海陸烤肉組(5-8人份),,calculated,missing,calculated_revenue;missing_cost;missing_spec
+113,超值燒肉烤肉組,,calculated,missing,calculated_revenue;missing_cost;missing_spec
+114,中秋烤肉海陸豪華14件組(約5-7人/份),,calculated,missing,calculated_revenue;missing_cost;missing_spec

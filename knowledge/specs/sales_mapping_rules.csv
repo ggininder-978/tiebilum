@@ -1,0 +1,74 @@
+rule_type,source_table,source_field,raw_pattern,canonical_field,canonical_value,transform,priority,notes
+source_field,sales,客戶/通路,,raw_route,,copy,100,銷售表原始通路/規格欄
+source_field,sales,合作方式/MOQ,,raw_moq,,copy,100,銷售表原始合作方式或MOQ
+source_field,sales,品名,,product_name_raw,,trim,100,保留原始品名並另做標準化
+source_field,sales,2025訂購數量,,quantity_2025,,number,100,移除千分位逗號
+source_field,sales,批價,,wholesale_price,,number,100,批發價格
+source_field,sales,產品成本,,product_cogs,,number,100,單件產品成本
+source_field,sales,商品毛利,,gross_profit_per_unit,,number,100,單件商品毛利
+source_field,sales,商品毛利率,,gross_margin,,percent,100,百分比轉小數
+source_field,sales,營業費用,,operating_expense_per_unit,,number,100,單件營業費用
+source_field,sales,發票5%,,invoice_tax_per_unit,,number,100,單件發票成本
+source_field,sales,費用小計,,expense_subtotal_per_unit,,number,100,單件費用小計
+source_field,sales,淨利,,reported_net_profit_per_unit,,number,100,原表可能四捨五入，僅作對照
+source_field,sales,商品貢獻淨利,,reported_contribution_profit,,number,100,原表已填總貢獻淨利
+source_field,sales,營業額,,reported_revenue,,number,100,原表已填營業額
+route_mapping,sales,客戶/通路,"批發-台糖*單顆包裝夾鏈袋260g",channel_type,批發,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*單顆包裝夾鏈袋260g",channel_name,台糖,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*單顆包裝夾鏈袋260g",package_type,單顆包裝夾鏈袋,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*單顆包裝夾鏈袋260g",unit_quantity,260,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*單顆包裝夾鏈袋260g",unit,g,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*手切夾鏈袋380g",channel_type,批發,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*手切夾鏈袋380g",channel_name,台糖,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*手切夾鏈袋380g",package_type,手切夾鏈袋,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*手切夾鏈袋380g",unit_quantity,380,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-台糖*手切夾鏈袋380g",unit,g,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-農會*手切夾鏈袋380g",channel_type,批發,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-農會*手切夾鏈袋380g",channel_name,農會,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-農會*手切夾鏈袋380g",package_type,手切夾鏈袋,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-農會*手切夾鏈袋380g",unit_quantity,380,pattern_match,90,
+route_mapping,sales,客戶/通路,"批發-農會*手切夾鏈袋380g",unit,g,pattern_match,90,
+route_mapping,sales,客戶/通路,"貼牌客戶-埔里農會*手切夾鏈袋380g",channel_type,貼牌,pattern_match,90,
+route_mapping,sales,客戶/通路,"貼牌客戶-埔里農會*手切夾鏈袋380g",channel_name,埔里農會,pattern_match,90,
+route_mapping,sales,客戶/通路,"貼牌客戶-埔里農會*手切夾鏈袋380g",package_type,手切夾鏈袋,pattern_match,90,
+route_mapping,sales,客戶/通路,"貼牌客戶-埔里農會*手切夾鏈袋380g",unit_quantity,380,pattern_match,90,
+route_mapping,sales,客戶/通路,"貼牌客戶-埔里農會*手切夾鏈袋380g",unit,g,pattern_match,90,
+route_mapping,sales,客戶/通路,"手切*每台斤*",channel_type,批發/未分類,pattern_match,80,原始欄位更像規格而非通路
+route_mapping,sales,客戶/通路,"手切*每台斤*",package_type,手切,pattern_match,80,
+route_mapping,sales,客戶/通路,"手切*每台斤*",unit_quantity,600,pattern_match,80,一台斤以600g標準化
+route_mapping,sales,客戶/通路,"手切*每台斤*",unit,g,pattern_match,80,
+route_mapping,sales,客戶/通路,"手切*每台斤*",sales_unit,台斤,pattern_match,80,
+route_mapping,sales,客戶/通路,"單顆包*每台斤*",channel_type,批發/未分類,pattern_match,80,
+route_mapping,sales,客戶/通路,"單顆包*每台斤*",package_type,單顆包,pattern_match,80,
+route_mapping,sales,客戶/通路,"單顆包*每台斤*",unit_quantity,600,pattern_match,80,
+route_mapping,sales,客戶/通路,"單顆包*每台斤*",unit,g,pattern_match,80,
+route_mapping,sales,客戶/通路,"單顆包*每台斤*",sales_unit,台斤,pattern_match,80,
+route_mapping,sales,客戶/通路,"蜜類-350ml",package_type,蜜類瓶裝,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-350ml",unit_quantity,350,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-350ml",unit,ml,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-350ml",sales_unit,瓶,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-150ml",package_type,蜜類瓶裝,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-150ml",unit_quantity,150,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-150ml",unit,ml,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-150ml",sales_unit,瓶,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-1890ml",package_type,蜜類瓶裝,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-1890ml",unit_quantity,1890,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-1890ml",unit,ml,exact_match,90,
+route_mapping,sales,客戶/通路,"蜜類-1890ml",sales_unit,瓶,exact_match,90,
+route_mapping,sales,客戶/通路,"科技中藥廠",channel_type,OEM,exact_match,90,
+route_mapping,sales,客戶/通路,"科技中藥廠",channel_name,科技中藥廠,exact_match,90,
+route_mapping,sales,客戶/通路,"科技中藥廠",package_type,薑母茶,exact_match,90,
+route_mapping,sales,客戶/通路,"日月町禮盒組",channel_type,通路上架,exact_match,90,
+route_mapping,sales,客戶/通路,"日月町禮盒組",channel_name,日月町,exact_match,90,
+route_mapping,sales,客戶/通路,"日月町禮盒組",package_type,禮盒,exact_match,90,
+derive,sales,,,"calculated_net_profit_per_unit",,"gross_profit_per_unit - operating_expense_per_unit - invoice_tax_per_unit",100,精準單件淨利
+derive,sales,,,"calculated_contribution_profit",,"quantity_2025 * net_profit_per_unit",100,reported 空白時採用
+derive,sales,,,"calculated_revenue",,"quantity_2025 * wholesale_price",100,reported 空白時採用
+derive,sales,,,"analysis_sku",,"product_name_std + channel_name + spec_name + wholesale_price + product_cogs",100,分析用SKU鍵
+quality_flag,sales,,,"calculated_revenue",,"reported_revenue is blank and calculated_revenue is not blank",100,營收為補算值
+quality_flag,sales,,,"calculated_profit",,"reported_contribution_profit is blank and calculated_contribution_profit is not blank",100,貢獻淨利為補算值
+quality_flag,sales,,,"missing_price",,"wholesale_price is blank",100,不可補算營收
+quality_flag,sales,,,"missing_cost",,"product_cogs is blank",100,成本分析不完整
+quality_flag,sales,,,"missing_spec",,"unit_quantity is blank",100,不可做規格標準化
+quality_flag,sales,,,"negative_profit",,"net_profit_per_unit < 0 or contribution_profit < 0",100,需檢查定價或成本
+quality_flag,sales,,,"zero_reported_revenue",,"quantity_2025 > 0 and reported_revenue = 0",100,需確認是否未填或不計營收

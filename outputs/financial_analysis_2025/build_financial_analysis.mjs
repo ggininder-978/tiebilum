@@ -9,7 +9,7 @@ const knowledgeDir = path.join(repoRoot, "knowledge");
 const outputPath = path.join(__dirname, "tiebilum_2025_financial_sales_analysis.xlsx");
 
 const files = {
-  sales: path.join(knowledgeDir, "鐵比倫-產品成本結構試算.xlsx - 2025 營收銷量(原始檔案).csv"),
+  sales: path.join(knowledgeDir, "cleaned_sales_sku_master.csv"),
   productCosts: path.join(knowledgeDir, "鐵比倫-產品成本結構試算.xlsx - 單品成本結構(原始檔案).csv"),
   operatingCosts: path.join(knowledgeDir, "鐵比倫-產品成本結構試算.xlsx - 營業成本(原始檔案).csv"),
 };
@@ -126,79 +126,60 @@ function getHeaderMap(row) {
 }
 
 function cleanSales(rows) {
-  const headerIndex = rows.findIndex((row) => row.includes("2025訂購數量") && row.includes("商品貢獻淨利"));
-  const header = rows[headerIndex];
+  const [header, ...data] = rows;
   const h = getHeaderMap(header);
-  const rawSummary = rows
-    .slice(headerIndex + 1)
-    .find((row) => row[h["商品貢獻淨利"]] && row[h["營業額"]] && !row[h["品名"]]);
-  let currentChannel = splitChannel("");
-  let currentMoq = "";
 
-  const cleaned = [];
   let inCompetitorSection = false;
-  for (let sourceRow = headerIndex + 2; sourceRow < rows.length; sourceRow += 1) {
-    const row = rows[sourceRow];
-    if ((row[h["合作方式/MOQ"]] || "").trim() === "競品") {
+  const cleaned = data.map((row) => {
+    if ((row[h["raw_moq"]] || "").trim() === "競品") {
       inCompetitorSection = true;
     }
-    if (inCompetitorSection) continue;
+    if (inCompetitorSection) return null;
 
-    if ((row[h["客戶/通路"]] || "").trim()) {
-      currentChannel = splitChannel(row[h["客戶/通路"]]);
-      currentMoq = (row[h["合作方式/MOQ"]] || "").replace(/\r?\n/g, " / ").trim();
-    }
+    if (!(row[h["product_name_raw"]] || "").trim()) return null;
 
-    const product = (row[h["品名"]] || "").trim();
-    const qty = toNumber(row[h["2025訂購數量"]]);
-    if (!product || qty === null || qty <= 0) continue;
-
-    const wholesalePrice = toNumber(row[h["批價"]]);
-    const netProfitPerUnit = toNumber(row[h["淨利"]]);
-    const reportedContribution = toNumber(row[h["商品貢獻淨利"]]);
-    const reportedRevenue = toNumber(row[h["營業額"]]);
+    const qty = toNumber(row[h["quantity_2025"]]);
+    if (qty === null || qty <= 0) return null;
+    const wholesalePrice = toNumber(row[h["wholesale_price"]]);
+    const netProfitPerUnit = toNumber(row[h["net_profit_per_unit"]]);
+    const revenue = toNumber(row[h["revenue"]]);
+    const totalNetProfit = toNumber(row[h["contribution_profit"]]);
 
     const baseRow = {
-      sourceRow: sourceRow + 1,
-      channel: currentChannel.channel,
-      spec: currentChannel.spec,
-      customer: currentChannel.customer,
-      moq: currentMoq,
-      product,
+      sourceRow: toNumber(row[h["source_row"]]),
+      channel: row[h["channel_name"]] || "未分類",
+      spec: row[h["package_type"]] || "未標示規格",
+      customer: "", // 暫不從原始字串解析
+      moq: row[h["raw_moq"]],
+      product: row[h["product_name_raw"]],
       quantity: qty,
       wholesalePrice,
-      productCost: toNumber(row[h["產品成本"]]),
-      grossProfit: toNumber(row[h["商品毛利"]]),
-      grossMargin: toPercent(row[h["商品毛利率"]]),
-      operatingExpense: toNumber(row[h["營業費用"]]),
-      invoiceTax: toNumber(row[h["發票5%"]]),
-      expenseSubtotal: toNumber(row[h["費用小計"]]),
+      productCost: toNumber(row[h["product_cogs"]]),
+      grossProfit: toNumber(row[h["gross_profit_per_unit"]]),
+      grossMargin: toNumber(row[h["gross_margin"]]),
+      operatingExpense: toNumber(row[h["operating_expense_per_unit"]]),
+      invoiceTax: toNumber(row[h["invoice_tax_per_unit"]]),
+      expenseSubtotal: toNumber(row[h["expense_subtotal_per_unit"]]),
       netProfitPerUnit,
-      netMargin: toPercent(row[h["淨利率"]]),
-      reportedContribution,
-      reportedRevenue,
-      totalNetProfit: reportedContribution ?? (qty && netProfitPerUnit !== null ? qty * netProfitPerUnit : 0),
-      revenue: reportedRevenue ?? (qty && wholesalePrice !== null ? qty * wholesalePrice : 0),
+      netMargin: wholesalePrice ? netProfitPerUnit / wholesalePrice : 0,
+      reportedContribution: toNumber(row[h["reported_contribution_profit"]]),
+      reportedRevenue: toNumber(row[h["reported_revenue"]]),
+      totalNetProfit,
+      revenue,
+      unitBasis: `${row[h["unit_quantity"]] || ""}${row[h["unit"]] || ""}`,
+      normalizedUnitQty: toNumber(row[h["unit_quantity"]]),
+      normalizedUnitType: row[h["unit"]],
+      comparabilityNote: row[h["quality_flags"]],
+      analysisSku: row[h["analysis_sku"]],
     };
-    const unit = inferUnitBasis(baseRow);
-    cleaned.push({
-      ...baseRow,
-      ...unit,
-      analysisSku: [
-        baseRow.product,
-        baseRow.channel,
-        baseRow.spec || "未標示規格",
-        `批價${baseRow.wholesalePrice ?? "NA"}`,
-        `成本${baseRow.productCost ?? "NA"}`,
-      ].join(" | "),
-    });
-  }
+    return baseRow;
+  }).filter(Boolean);
 
   return {
     rows: cleaned,
-    sourceRevenueTotal: rawSummary ? toNumber(rawSummary[h["營業額"]]) : null,
-    sourceContributionTotal: rawSummary ? toNumber(rawSummary[h["商品貢獻淨利"]]) : null,
-    sourceMargin: rawSummary ? toPercent(rawSummary[15]) : null,
+    sourceRevenueTotal: cleaned.reduce((sum, r) => sum + (r.revenue || 0), 0),
+    sourceContributionTotal: cleaned.reduce((sum, r) => sum + (r.totalNetProfit || 0), 0),
+    sourceMargin: null,
   };
 }
 
