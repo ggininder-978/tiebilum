@@ -1,61 +1,61 @@
-# Tiebilum Knowledge Dashboard Spec
+# 鐵比倫知識儀表板規格
 
-> Last updated: 2026-05-10
+> 最後更新：2026-05-10
 
-## Purpose
+## 目的
 
-Build a public-facing collaboration dashboard for Tiebilum's brand, website, CIS, and marketing partners.
+建立一個面向協作夥伴的靜態知識儀表板，供鐵比倫的官網建置夥伴、CIS/視覺夥伴與行銷團隊使用。
 
-The dashboard is not the brand website. It is a shared brand reference room and AI-maintained workbench that lets collaborators understand the current brand state, inspect available material, find source-backed knowledge, and generate follow-up prompts for the agent.
+這個儀表板不是鐵比倫正式官網，而是「品牌資料室 + AI 工作台」。它讓合作夥伴可以快速理解目前品牌狀態、查看可用資料、找到有來源脈絡的知識，並複製常用的 AI 代理人追問 prompt。
 
-## Primary Audiences
+## 主要使用者
 
-1. Website partner: needs brand context, site architecture inputs, copy direction, product information, and missing-asset status.
-2. CIS / visual partner: needs brand story, tone, positioning, visual cues, product context, and current design-progress status.
-3. Marketing team: needs product facts, selling points, campaign context, sales-analysis summaries, and current knowledge gaps.
-4. AI agent / maintainer: needs a visible state of wiki freshness, audit status, and next actions.
+1. **官網建置夥伴**：需要品牌脈絡、網站架構輸入、文案方向、商品資訊與缺漏素材狀態。
+2. **CIS / 視覺夥伴**：需要品牌故事、語氣、定位、視覺線索、商品脈絡與目前設計進度。
+3. **行銷團隊**：需要商品事實、銷售重點、活動脈絡、銷售分析摘要與目前知識缺口。
+4. **AI 代理人 / 維護者**：需要看見 wiki freshness、audit 狀態與下一步行動。
 
-## Success Criteria
+## 成功標準
 
-- A collaborator can understand Tiebilum's current brand state within 30 seconds.
-- A collaborator can find brand, product, positioning, and analysis material without browsing repository folders.
-- The page clearly separates confirmed knowledge from missing or needs-review items.
-- The dashboard gives copyable "ask agent" prompts for common follow-up tasks.
-- The dashboard is deployable through GitHub Pages as static files with `.nojekyll`.
-- The dashboard does not require secrets, authentication, or a backend.
+- 合作夥伴能在 30 秒內理解鐵比倫目前的品牌狀態。
+- 合作夥伴不需要翻 repository 資料夾，就能找到品牌、商品、定位與分析資料。
+- 頁面清楚區分「已確認知識」與「缺漏 / 待確認事項」。
+- 儀表板提供可複製的「問代理人」prompt，支援常見後續任務。
+- 儀表板能透過 GitHub Pages 以靜態檔部署，並保留 `.nojekyll`。
+- 儀表板不需要 secret、登入驗證或後端服務。
 
-## Non-Goals
+## 非目標
 
-- Do not replace the future official Tiebilum website.
-- Do not expose private source files or credentials.
-- Do not allow GitHub Pages JavaScript to write directly back to the repository.
-- Do not present rough analysis as final public marketing claims.
-- Do not use exaggerated strategy language such as "command center" or generic hype terms.
+- 不取代未來正式的鐵比倫官網。
+- 不公開私密 source 檔案或憑證。
+- 不讓 GitHub Pages 上的 JavaScript 直接寫回 repository。
+- 不把粗略分析包裝成正式對外行銷主張。
+- 不使用浮誇術語，例如「戰略指揮中心」或沒有證據支撐的「高品質」。
 
-## Data Sources
+## 資料來源
 
-The dashboard data must be generated from maintained local knowledge files:
+儀表板資料必須由已維護的本地知識檔生成：
 
 - `knowledge/index.md`
 - `knowledge/log.md`
 - `knowledge/wiki/entities/*.md`
 - `knowledge/wiki/concepts/*.md`
 - `knowledge/wiki/analysis/*.md`
-- selected `knowledge/wiki/analysis/*.csv` summaries when the file is small enough and useful for dashboard cards
+- 選定的 `knowledge/wiki/analysis/*.csv` 摘要；只有檔案足夠小且對儀表板卡片有幫助時才納入。
 
-Raw files under `knowledge/sources/` remain source material and are not directly exposed in the dashboard unless a future spec approves a safe excerpt list.
+`knowledge/sources/` 下的原始檔仍然是 source material，不直接暴露在儀表板中。若未來需要公開原始資料摘錄，必須另有 spec 批准安全摘錄清單。
 
-## Required Files
+## 必要檔案
 
-- `knowledge/specs/tiebilum_knowledge_dashboard_spec.md`: this spec.
-- `tools/build_knowledge_dashboard_data.mjs`: data export script.
-- `knowledge/dashboard-data.json`: generated dashboard data consumed by the HTML page.
-- `index.html`: static dashboard UI for GitHub Pages.
-- `knowledge/wiki/analysis/tiebilum_knowledge_dashboard_audit.md`: audit trail for build and verification notes.
+- `knowledge/specs/tiebilum_knowledge_dashboard_spec.md`：本規格。
+- `tools/build_knowledge_dashboard_data.mjs`：資料匯出腳本。
+- `knowledge/dashboard-data.json`：供 HTML 頁面讀取的生成資料。
+- `index.html`：GitHub Pages 使用的靜態儀表板 UI。
+- `knowledge/wiki/analysis/tiebilum_knowledge_dashboard_audit.md`：建置與驗證紀錄。
 
-## Data Contract
+## 資料合約
 
-`knowledge/dashboard-data.json` must contain:
+`knowledge/dashboard-data.json` 必須包含：
 
 ```json
 {
@@ -109,105 +109,105 @@ Raw files under `knowledge/sources/` remain source material and are not directly
 }
 ```
 
-## UI Requirements
+## UI 需求
 
-### 1. Brand State Header
+### 1. 品牌現狀頁首
 
-Show:
+必須呈現：
 
-- Brand name.
-- One-line current state.
-- Audience note: for website, CIS, and marketing collaborators.
-- Last generated time.
-- Three concise status chips: brand, website/CIS, knowledge base.
+- 品牌名稱。
+- 一句話目前狀態。
+- 使用者說明：供官網、CIS 與行銷協作夥伴使用。
+- 最後生成時間。
+- 三個精簡狀態標籤：品牌、官網/CIS、知識庫。
 
-### 2. Progress Map
+### 2. 協作進度地圖
 
-Show four progress lanes:
+呈現四條進度線：
 
 - 官網建置
 - CIS 視覺
 - 行銷資料
 - AI 維護
 
-Each lane shows current status, short summary, and next items. It should be scannable and operational, not decorative.
+每條進度線顯示目前狀態、短摘要與下一步事項。它應該可掃描、可操作，而不是裝飾性區塊。
 
-### 3. Knowledge Library
+### 3. 知識資料庫
 
-Provide:
+必須提供：
 
-- Search input.
-- Category filter.
-- Status filter.
-- Cards for wiki-backed knowledge items.
-- Each card shows title, category, status, summary, tags, and source path.
+- 搜尋輸入框。
+- 分類篩選。
+- 狀態篩選。
+- 由 wiki 支撐的知識卡片。
+- 每張卡片顯示標題、分類、狀態、摘要、標籤與來源路徑。
 
-The UI can link to repository-relative paths, but static GitHub Pages cannot open local filesystem paths.
+UI 可以連到 repository-relative path，但靜態 GitHub Pages 不能開啟本機 filesystem path。
 
-### 4. Data Gaps
+### 4. 資料缺口
 
-Show missing or needs-review items clearly. Examples:
+清楚呈現缺漏或待確認項目，例如：
 
-- Missing product cost.
-- Missing visual assets.
-- Brand voice needing review.
-- Website copy needing approval.
+- 商品成本缺漏。
+- 視覺素材缺漏。
+- 品牌語氣待確認。
+- 官網文案待核准。
 
-### 5. Ask Agent Panel
+### 5. 問代理人面板
 
-Provide copyable prompts for common tasks:
+提供常見任務的可複製 prompt：
 
-- Generate homepage copy directions from current brand voice.
-- List assets still needed for website build.
-- Summarize product pages for marketing use.
-- Turn current data gaps into an action list.
-- Prepare questions for CIS partner review.
+- 根據目前品牌語氣產出首頁文案方向。
+- 列出官網建置仍缺哪些素材。
+- 摘要商品頁可用於行銷的內容。
+- 將目前資料缺口整理成行動清單。
+- 準備給 CIS 夥伴審閱的問題。
 
-Buttons copy prompt text to clipboard and show a visible copied state.
+按鈕會複製 prompt 文字到剪貼簿，並顯示可見的 copied 狀態。
 
-## Brand Voice and Visual Direction
+## 品牌語氣與視覺方向
 
-- Tone: grounded, practical, transparent, craft-oriented.
-- Avoid inflated words like "戰略指揮中心", "高品質" without evidence, or generic tech-marketing phrasing.
-- Visual style: quiet editorial workspace, not a landing-page hero.
-- Use restrained color, compact information hierarchy, and clear section labels.
-- Do not make nested cards.
-- Use stable responsive dimensions so filters, cards, and status chips do not jump.
+- 語氣：樸實、實用、透明、有職人感。
+- 避免浮誇詞彙，例如「戰略指揮中心」、沒有證據支撐的「高品質」，或通用科技行銷語。
+- 視覺風格：安靜的編輯型工作頁，而不是 landing page hero。
+- 使用克制的色彩、緊湊資訊層級與清楚 section label。
+- 不做卡片套卡片。
+- 使用穩定的 responsive 尺寸，避免篩選器、卡片與狀態標籤因內容改變而跳動。
 
-## Accessibility and Responsiveness
+## 可及性與響應式
 
-- Must work on desktop and mobile.
-- Text must not overlap at 375px mobile width.
-- Controls must have visible labels.
-- Keyboard users must be able to tab through search, filters, and prompt buttons.
-- Color cannot be the only status signal.
+- 必須支援桌面與手機。
+- 在 375px 手機寬度下，文字不得重疊。
+- 控制項必須有可見 label。
+- 鍵盤使用者必須能 tab 到搜尋、篩選與 prompt 按鈕。
+- 顏色不能是唯一的狀態提示。
 
-## Build Rules
+## 建置規則
 
-- The data generator must be deterministic for the same file contents except `generatedAt`.
-- The generator should tolerate missing wiki files and emit audit warnings instead of crashing when possible.
-- Generated dashboard data must not include full private source documents.
-- The page must work on GitHub Pages with no build service beyond committing the generated JSON and HTML.
+- 對同一組檔案內容，資料產生器的輸出必須可重現，除了 `generatedAt` 之外。
+- 資料產生器應容忍 wiki 檔案缺漏，並輸出 audit warning，而不是能處理時就直接中止。
+- 生成的 dashboard data 不得包含完整私密 source document。
+- 頁面必須能在 GitHub Pages 上運作，不依賴額外 build service；只需提交生成好的 JSON 與 HTML。
 
-## Verification
+## 驗證需求
 
-Required checks before claiming completion:
+宣稱完成前必須檢查：
 
-1. Run the data generator and confirm `knowledge/dashboard-data.json` is created.
-2. Run a local static server or equivalent file-serving check.
-3. Verify the page loads `dashboard-data.json`.
-4. Verify search and filters change visible library cards.
-5. Verify prompt copy buttons work or visibly fall back to selecting text.
-6. Check desktop and mobile layout screenshots or browser-rendered dimensions.
-7. Confirm `curl` or local request can load `index.html` and `knowledge/dashboard-data.json`.
+1. 執行資料產生器，確認 `knowledge/dashboard-data.json` 已建立。
+2. 執行本機靜態伺服器或等效的 file-serving 檢查。
+3. 確認頁面能載入 `dashboard-data.json`。
+4. 確認搜尋與篩選會改變可見的 library cards。
+5. 確認 prompt 複製按鈕可用，或在不能複製時有可見 fallback。
+6. 檢查 desktop 與 mobile layout 的 screenshot 或 browser-rendered dimensions。
+7. 確認 `curl` 或本機 request 可載入 `index.html` 與 `knowledge/dashboard-data.json`。
 
-## Audit Requirements
+## Audit 需求
 
-Every dashboard build/update must append an entry to `knowledge/wiki/analysis/tiebilum_knowledge_dashboard_audit.md` including:
+每次儀表板建置或更新，必須在 `knowledge/wiki/analysis/tiebilum_knowledge_dashboard_audit.md` 追加紀錄，包含：
 
-- Timestamp.
-- Files read.
-- Files generated.
-- Warnings or missing data.
-- Verification commands and results.
+- 時間戳。
+- 讀取的檔案。
+- 生成的檔案。
+- warning 或缺漏資料。
+- 驗證命令與結果。
 
