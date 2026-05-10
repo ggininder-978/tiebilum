@@ -197,7 +197,7 @@ function parseMarkdownTable(content, titleMatch) {
   return dataRows;
 }
 
-async function getSalesDiagnosis(rootDir) {
+export async function getSalesDiagnosis(rootDir) {
   const analysisPath = join(rootDir, 'knowledge/wiki/analysis/2025_financial_sales_analysis.md');
   const defaultData = {
     summary: { revenue: 0, contributionProfit: 0, contributionRate: '0%', operatingCosts: 0, netIncome: 0, source: 'knowledge/wiki/analysis/2025_financial_sales_analysis.md' },
@@ -374,7 +374,7 @@ export async function buildDashboardData(options = {}) {
     },
     progress: buildProgress(),
     library: buildLibrary(fileMap),
-    salesDiagnosis,
+    isSalesDiagnosisEncrypted: true,
     gaps: buildGaps(),
     agentPrompts: buildPrompts(),
     audit: {

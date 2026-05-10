@@ -560,16 +560,17 @@
     }
 
     .action-tag {
-      font-size: 0.72rem;
-      padding: 2px 6px;
+      font-size: 0.7rem;
+      padding: 3px 8px;
       border-radius: 4px;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
-    .action-tag.promote { background: var(--soft-green); color: var(--leaf); }
-    .action-tag.review { background: var(--soft-clay); color: var(--clay); }
-    .action-tag.keep { background: #eee; color: var(--muted); }
+    .action-tag.promote { background: #344e3e; color: #fff; }
+    .action-tag.review { background: #9c5f45; color: #fff; }
+    .action-tag.keep { background: var(--line); color: var(--ink); }
 
     .channel-bar-group {
       display: grid;
@@ -579,18 +580,23 @@
     .channel-item {
       display: grid;
       gap: 6px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
     }
 
     .channel-header {
       display: flex;
       justify-content: space-between;
       font-size: 0.88rem;
+      font-weight: 700;
     }
 
     .bar-container {
-      height: 8px;
+      height: 6px;
       background: var(--soft-gold);
-      border-radius: 4px;
+      border-radius: 3px;
       overflow: hidden;
       position: relative;
     }
@@ -598,50 +604,123 @@
     .bar-fill {
       height: 100%;
       background: var(--cane);
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
     .diagnosis-notes {
       grid-column: span 2;
-      background: var(--soft-gold);
+      background: #fdfaf3;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 16px;
+      padding: 20px;
+    }
+
+    .diagnosis-notes h3 {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .note-item {
       display: flex;
-      gap: 10px;
-      margin-bottom: 8px;
+      gap: 12px;
+      margin-bottom: 12px;
       font-size: 0.94rem;
+      align-items: start;
     }
 
     .note-item:last-child { margin-bottom: 0; }
 
     .note-icon {
       flex-shrink: 0;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 4px;
-      font-size: 0.7rem;
+      font-size: 0.75rem;
       font-weight: 900;
     }
 
-    .note-risk .note-icon { background: var(--clay); color: #fff; }
-    .note-observation .note-icon { background: var(--blue); color: #fff; }
-    .note-action .note-icon { background: var(--leaf); color: #fff; }
+    .note-risk .note-icon { background: #9c5f45; color: #fff; }
+    .note-observation .note-icon { background: #365f73; color: #fff; }
+    .note-action .note-icon { background: #42614d; color: #fff; }
 
     .source-trace-link {
       font-size: 0.7rem;
       color: var(--blue);
       text-decoration: none;
       opacity: 0.6;
+      border: 1px solid currentColor;
+      padding: 1px 4px;
+      border-radius: 3px;
+      margin-left: 4px;
     }
 
-    .source-trace-link:hover { opacity: 1; text-decoration: underline; }
+    .source-trace-link:hover { opacity: 1; background: var(--blue); color: #fff; }
+
+    .internal-label {
+      font-size: 0.65rem;
+      color: var(--muted);
+      font-weight: 400;
+      display: block;
+      margin-top: 2px;
+      opacity: 0.7;
+    }
+
+    /* Password Lock Styles */
+    .locked-panel {
+      background: #fdfaf3;
+      border: 1px dashed var(--line);
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lock-icon {
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .password-form {
+      display: flex;
+      gap: 8px;
+      max-width: 320px;
+      width: 100%;
+    }
+
+    .password-input {
+      flex: 1;
+      min-height: 40px;
+    }
+
+    .unlock-button {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      padding: 0 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: background 0.2s;
+    }
+
+    .unlock-button:hover {
+      background: var(--clay);
+    }
+
+    .unlock-error {
+      color: var(--clay);
+      font-size: 0.85rem;
+      min-height: 20px;
+    }
 
     @media (max-width: 768px) {
       .diagnosis-content { grid-template-columns: 1fr; }
@@ -887,11 +966,11 @@
         <div class="diagnosis-grid">
           <div class="key-figures">
             <div class="key-card highlight">
-              <dt>2025 營業額</dt>
+              <dt>2025 營業額 <span class="internal-label">內部管理口徑</span></dt>
               <dd>${formatCurrency(summary.revenue)}</dd>
             </div>
             <div class="key-card">
-              <dt>貢獻淨利 (CP)</dt>
+              <dt>貢獻淨利 (CP) <span class="internal-label">內部管理口徑</span></dt>
               <dd>${formatCurrency(summary.contributionProfit)}</dd>
             </div>
             <div class="key-card">
@@ -906,7 +985,7 @@
 
           <div class="diagnosis-content">
             <div class="signal-group">
-              <h3>Product Signals <a href="${summary.source}" class="source-trace-link">🔍 Trace</a></h3>
+              <h3>Product Signals <a href="${summary.source}" class="source-trace-link">Trace Source</a></h3>
               <div class="signal-list">
                 ${productSignals.map(s => `
                   <div class="signal-card">
@@ -917,7 +996,9 @@
                     <div class="signal-stats">
                       <span class="signal-value">${formatCurrency(s.profit)}</span>
                       <span class="action-tag ${s.action}">${s.action}</span>
-                      <a href="${s.source}" class="source-trace-link">Trace</a>
+                      <div style="margin-top: 4px;">
+                        <a href="${s.source}" class="source-trace-link">Trace</a>
+                      </div>
                     </div>
                   </div>
                 `).join('')}
@@ -936,7 +1017,9 @@
                     <div class="bar-container">
                       <div class="bar-fill" style="width: ${c.margin}"></div>
                     </div>
-                    <a href="${c.source}" class="source-trace-link">Trace</a>
+                    <div style="margin-top: 6px; text-align: right;">
+                      <a href="${c.source}" class="source-trace-link">Trace Source</a>
+                    </div>
                   </div>
                 `).join('')}
               </div>
@@ -950,7 +1033,7 @@
                     <div class="note-icon">${n.type === 'risk' ? '!' : (n.type === 'observation' ? 'i' : '→')}</div>
                     <div>
                       ${escapeHtml(n.text)} 
-                      <a href="${n.source}" class="source-trace-link">[Trace]</a>
+                      <a href="${n.source}" class="source-trace-link">Trace</a>
                     </div>
                   </div>
                 `).join('')}
@@ -1099,12 +1182,117 @@
       state.data = data;
       renderHeader(data);
       renderProgress(data.progress);
-      renderSalesDiagnosis(data.salesDiagnosis);
+      
+      // Handle Sales Diagnosis with Password Protection
+      if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
+        renderSalesDiagnosis(data.salesDiagnosis);
+      } else {
+        renderLockOverlay();
+      }
+
       renderFilterOptions(data);
       renderLibrary();
       renderGaps(data.gaps);
       renderPrompts(data.agentPrompts);
       bindControls();
+    }
+
+    function renderLockOverlay() {
+      els.salesDiagnosis.innerHTML = `
+        <div class="locked-panel">
+          <div class="lock-icon">🔒</div>
+          <div>
+            <h3>此區塊包含敏感財務數據</h3>
+            <p class="section-note">僅限核心決策團隊查看，請輸入授權密碼。</p>
+          </div>
+          <form class="password-form" onsubmit="handleUnlock(event)">
+            <input type="password" id="diagPassword" class="password-input" placeholder="請輸入密碼">
+            <button type="submit" class="unlock-button">解鎖查看</button>
+          </form>
+          <div id="unlockError" class="unlock-error"></div>
+        </div>
+      `;
+    }
+
+    async function handleUnlock(event) {
+      event.preventDefault();
+      const pwd = document.getElementById('diagPassword').value;
+      const errorEl = document.getElementById('unlockError');
+      const submitBtn = event.target.querySelector('button');
+      
+      try {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '解密中...';
+
+        // 1. Fetch the vault (On-demand)
+        const response = await fetch('knowledge/sales-diagnosis-vault.json');
+        if (!response.ok) throw new Error('無法取得加密保管庫文件。');
+        const vault = await response.json();
+
+        // 2. Perform Decryption
+        const decryptedData = await decryptVault(vault, pwd);
+        
+        // 3. Success
+        sessionStorage.setItem('dashboard_unlocked', 'true');
+        state.data.salesDiagnosis = decryptedData; // Store the decrypted data in state
+        renderSalesDiagnosis(decryptedData);
+      } catch (err) {
+        console.error('Decryption error:', err);
+        errorEl.textContent = '密碼不正確或解密失敗。';
+        setTimeout(() => { errorEl.textContent = ''; }, 3000);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '解鎖查看';
+      }
+    }
+
+    async function decryptVault(vault, password) {
+      const { salt, iv, tag, data, iterations } = vault;
+      const saltBuf = base64ToBuf(salt);
+      const ivBuf = base64ToBuf(iv);
+      const tagBuf = base64ToBuf(tag);
+      const dataBuf = base64ToBuf(data);
+      
+      // Web Crypto expects the tag to be appended to the ciphertext
+      const combinedBuf = new Uint8Array(dataBuf.length + tagBuf.length);
+      combinedBuf.set(dataBuf);
+      combinedBuf.set(tagBuf, dataBuf.length);
+
+      const encoder = new TextEncoder();
+      const pwdBuf = encoder.encode(password);
+
+      // Import base key material
+      const keyMaterial = await crypto.subtle.importKey(
+        'raw', pwdBuf, 'PBKDF2', false, ['deriveKey']
+      );
+
+      // Derive actual AES key
+      const key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt: saltBuf, iterations, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false, ['decrypt']
+      );
+
+      // Decrypt
+      const decryptedBuf = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: ivBuf },
+        key,
+        combinedBuf
+      );
+
+      const decoder = new TextDecoder();
+      return JSON.parse(decoder.decode(decryptedBuf));
+    }
+
+    function base64ToBuf(b64) {
+      const binStr = atob(b64);
+      const len = binStr.length;
+      const bytes = new Uint8Array(len);
+      for (let i = 0; i < len; i++) {
+        bytes[i] = binStr.charCodeAt(i);
+      }
+      return bytes;
     }
 
     function renderLoadError(error) {
