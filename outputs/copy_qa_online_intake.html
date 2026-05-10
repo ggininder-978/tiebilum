@@ -3,169 +3,205 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tiebilum Copy QA - 提出文案建議</title>
+  <title>Tiebilum Copy QA | 文案勘誤建議</title>
   <style>
     :root {
-      --ink: #2d3436;
-      --cane: #a58e6f;
-      --panel: #fdfaf3;
-      --line: #e0e0e0;
-      --muted: #636e72;
-      --risk: #d63031;
+      --paper: #fbfaf7;
+      --panel: #ffffff;
+      --ink: #25211d;
+      --muted: #6f6960;
+      --line: #ded8cd;
+      --cane: #b58b28;
+      --clay: #9c5f45;
+      --leaf: #42614d;
     }
 
+    * { box-sizing: border-box; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f5f5f5;
-      color: var(--ink);
       margin: 0;
-      padding: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
       line-height: 1.6;
     }
 
     .container {
-      max-width: 700px;
-      margin: 40px auto;
-      padding: 32px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      width: min(760px, calc(100% - 32px));
+      margin: 32px auto;
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
     }
 
-    .header {
-      border-bottom: 2px solid var(--line);
-      padding-bottom: 24px;
-      margin-bottom: 32px;
+    header {
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    h1 { color: var(--cane); margin: 0 0 8px 0; }
-    .note { font-size: 0.9rem; color: var(--muted); }
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.8rem;
+      letter-spacing: 0;
+    }
+
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
 
     .alert {
-      background: var(--panel);
-      border: 1px solid var(--cane);
-      padding: 16px;
+      background: #fff8e8;
+      border: 1px solid #e3cf9a;
       border-radius: 8px;
-      font-size: 0.85rem;
-      margin-bottom: 32px;
+      padding: 14px;
+      margin-bottom: 24px;
+      font-size: 0.92rem;
     }
 
-    .form-group { margin-bottom: 20px; }
-    label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 0.95rem; }
-    
+    .form-group { margin-bottom: 18px; }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
     input[type="text"],
     input[type="email"],
     select,
     textarea {
       width: 100%;
-      padding: 12px;
       border: 1px solid var(--line);
       border-radius: 6px;
-      font-size: 1rem;
+      padding: 10px 12px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
     }
 
-    textarea { min-height: 100px; }
+    textarea { min-height: 108px; resize: vertical; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
 
     .risk-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      background: #f9f9f9;
-      padding: 16px;
-      border-radius: 6px;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fffdf9;
     }
 
-    .risk-option { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; }
+    .risk-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.88rem;
+    }
 
     .submit-btn {
-      background: var(--ink);
-      color: #fff;
-      border: none;
-      padding: 16px 32px;
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid var(--leaf);
       border-radius: 6px;
+      background: var(--leaf);
+      color: #fff;
+      font: inherit;
       font-weight: 700;
       cursor: pointer;
-      width: 100%;
-      font-size: 1.1rem;
-      margin-top: 20px;
     }
 
-    .submit-btn:hover { filter: opacity(0.9); }
+    .submit-btn:hover { background: #344e3e; }
+
+    @media (max-width: 640px) {
+      .container { padding: 20px; }
+      .two-col,
+      .risk-group { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <h1>文案勘誤與建議提交</h1>
-      <p class="note">鐵比倫品牌資料室 - 外部協作入口</p>
+  <main class="container">
+    <header>
+      <h1>文案勘誤建議</h1>
+      <p class="note">鐵比倫 Tiebilum | 給 QDM、CIS 與行銷協作夥伴使用</p>
     </header>
 
     <div class="alert">
-      <strong>⚠️ 協作聲明：</strong><br>
-      此表單僅用於提交「建議」，提交後將由品牌業主進行審核，不會直接修改官網或資料庫。請勿在此提交任何機密資訊或 HTML 標籤。
+      <strong>請先知道：</strong>
+      此表單只提交修改建議，不會直接更新官網或資料庫。所有建議會先進入審核佇列，經品牌主確認後才會合併到正式文案。
     </div>
 
-    <!-- 建議將 action 替換為實際的 Google Form 或 Formspree URL -->
     <form action="YOUR_FORM_BACKEND_URL" method="POST">
       <div class="form-group">
-        <label for="name">您的姓名 / 提交者</label>
+        <label for="name">提交者姓名 / 團隊窗口</label>
         <input type="text" id="name" name="submitterName" placeholder="例如：王小明" required>
       </div>
 
       <div class="form-group">
         <label for="team">所屬團隊</label>
         <select id="team" name="submitterTeam" required>
-          <option value="QDM">QDM 官網團隊</option>
+          <option value="QDM">QDM 開店平台</option>
           <option value="CIS">CIS 視覺團隊</option>
-          <option value="Marketing">行銷夥伴</option>
-          <option value="Owner">業主</option>
+          <option value="Marketing">行銷團隊</option>
+          <option value="Owner">品牌主</option>
           <option value="Other">其他</option>
         </select>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+      <div class="two-col">
         <div class="form-group">
           <label for="page">頁面位置</label>
-          <input type="text" id="page" name="page" placeholder="例如：首頁" required>
+          <input type="text" id="page" name="page" placeholder="例如：首頁、商品頁" required>
         </div>
         <div class="form-group">
           <label for="slot">文案位置</label>
-          <input type="text" id="slot" name="slot" placeholder="例如：主標" required>
+          <input type="text" id="slot" name="slot" placeholder="例如：主標、副標、商品描述" required>
         </div>
       </div>
 
       <div class="form-group">
-        <label for="original">原文 (AI 產出版)</label>
-        <textarea id="original" name="originalText" placeholder="請貼上目前在 Dashboard 看到的文案"></textarea>
+        <label for="original">原文</label>
+        <textarea id="original" name="originalText" placeholder="貼上目前 dashboard 或官網上的原文"></textarea>
       </div>
 
       <div class="form-group">
-        <label for="suggested">建議修正版本</label>
-        <textarea id="suggested" name="suggestedRevision" placeholder="請輸入您建議的修改內容" required></textarea>
+        <label for="suggested">建議修正版</label>
+        <textarea id="suggested" name="suggestedRevision" placeholder="請填寫建議替換的完整文字" required></textarea>
       </div>
 
       <div class="form-group">
         <label for="reason">修改原因</label>
-        <textarea id="reason" name="reason" placeholder="為什麼需要修改？(例如：語氣太浮誇)" required></textarea>
+        <textarea id="reason" name="reason" placeholder="說明為什麼需要修改，例如語氣不符、來源不足、過度宣稱" required></textarea>
       </div>
 
       <div class="form-group">
         <label for="evidence">來源依據 / 參考資料</label>
-        <input type="text" id="evidence" name="sourceEvidence" placeholder="例如：wiki 品牌歷史頁面第 3 段">
+        <input type="text" id="evidence" name="sourceEvidence" placeholder="例如：wiki 頁面、照片檔名、訪談紀錄">
       </div>
 
       <div class="form-group">
-        <label>潛在風險標記 (可複選)</label>
+        <label>可能風險</label>
         <div class="risk-group">
-          <label class="risk-option"><input type="checkbox" name="risk" value="medical-risk"> 涉及療效暗示</label>
-          <label class="risk-option"><input type="checkbox" name="risk" value="marketing-fluff"> 語氣過於浮誇</label>
-          <label class="risk-option"><input type="checkbox" name="risk" value="unsupported-claim"> 缺乏來源依據</label>
-          <label class="risk-option"><input type="checkbox" name="risk" value="tone-mismatch"> 不符品牌語氣</label>
+          <label class="risk-option"><input type="checkbox" name="risk" value="medical-risk"> 療效或健康暗示</label>
+          <label class="risk-option"><input type="checkbox" name="risk" value="marketing-fluff"> 浮誇行銷語</label>
+          <label class="risk-option"><input type="checkbox" name="risk" value="unsupported-claim"> 缺少來源依據</label>
+          <label class="risk-option"><input type="checkbox" name="risk" value="tone-mismatch"> 品牌語氣不符</label>
         </div>
       </div>
 
       <button type="submit" class="submit-btn">提交建議</button>
     </form>
-  </div>
+  </main>
 </body>
 </html>

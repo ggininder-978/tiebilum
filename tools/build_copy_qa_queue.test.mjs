@@ -11,21 +11,26 @@ const JSON_PATH = join(ROOT, 'knowledge/wiki/analysis/ai_copy_qa_queue.json');
 
 test('Copy QA Queue Generator Logic', async (t) => {
   await t.test('Should generate valid JSON with items', async () => {
-    // Run the builder
-    execSync('node tools/build_copy_qa_queue.mjs', { cwd: ROOT });
-    
-    const raw = await readFile(JSON_PATH, 'utf8');
-    const data = JSON.parse(raw);
-    
-    assert.ok(data.generatedAt, 'Missing generatedAt');
-    assert.ok(Array.isArray(data.items), 'items should be an array');
-    assert.ok(data.items.length > 0, 'Should have at least some items');
-    
-    const first = data.items[0];
-    assert.ok(first.id, 'Item missing id');
-    assert.ok(first.page, 'Item missing page');
-    assert.ok(first.aiDraft, 'Item missing aiDraft');
-    assert.ok(Array.isArray(first.riskTags), 'riskTags should be an array');
+    const originalRaw = await readFile(JSON_PATH, 'utf8');
+    try {
+      // Run the builder
+      execSync('node tools/build_copy_qa_queue.mjs', { cwd: ROOT });
+
+      const raw = await readFile(JSON_PATH, 'utf8');
+      const data = JSON.parse(raw);
+
+      assert.ok(data.generatedAt, 'Missing generatedAt');
+      assert.ok(Array.isArray(data.items), 'items should be an array');
+      assert.ok(data.items.length > 0, 'Should have at least some items');
+
+      const first = data.items[0];
+      assert.ok(first.id, 'Item missing id');
+      assert.ok(first.page, 'Item missing page');
+      assert.ok(first.aiDraft, 'Item missing aiDraft');
+      assert.ok(Array.isArray(first.riskTags), 'riskTags should be an array');
+    } finally {
+      await writeFile(JSON_PATH, originalRaw, 'utf8');
+    }
   });
 
   await t.test('Risk Detection - medical-risk', async () => {
