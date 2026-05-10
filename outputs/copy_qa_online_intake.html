@@ -142,15 +142,15 @@
       此表單只提交修改建議，不會直接更新官網或資料庫。所有建議會先進入審核佇列，經品牌主確認後才會合併到正式文案。
     </div>
 
-    <form action="YOUR_FORM_BACKEND_URL" method="POST">
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSfyeou3ukgpNcMHNfMPMJ0RQLh41B7zJDqFM5RHnd7gRLCRxA/formResponse" method="POST">
       <div class="form-group">
         <label for="name">提交者姓名 / 團隊窗口</label>
-        <input type="text" id="name" name="submitterName" placeholder="例如：王小明" required>
+        <input type="text" id="name" name="entry.2123479839" placeholder="例如：王小明" required>
       </div>
 
       <div class="form-group">
         <label for="team">所屬團隊</label>
-        <select id="team" name="submitterTeam" required>
+        <select id="team" name="entry.646239155" required>
           <option value="QDM">QDM 開店平台</option>
           <option value="CIS">CIS 視覺團隊</option>
           <option value="Marketing">行銷團隊</option>
@@ -162,41 +162,41 @@
       <div class="two-col">
         <div class="form-group">
           <label for="page">頁面位置</label>
-          <input type="text" id="page" name="page" placeholder="例如：首頁、商品頁" required>
+          <input type="text" id="page" name="entry.1975926631" placeholder="例如：首頁、商品頁" required>
         </div>
         <div class="form-group">
           <label for="slot">文案位置</label>
-          <input type="text" id="slot" name="slot" placeholder="例如：主標、副標、商品描述" required>
+          <input type="text" id="slot" name="entry.2072243088" placeholder="例如：主標、副標、商品描述" required>
         </div>
       </div>
 
       <div class="form-group">
         <label for="original">原文</label>
-        <textarea id="original" name="originalText" placeholder="貼上目前 dashboard 或官網上的原文"></textarea>
+        <textarea id="original" name="entry.1748068185" placeholder="貼上目前 dashboard 或官網上的原文"></textarea>
       </div>
 
       <div class="form-group">
         <label for="suggested">建議修正版</label>
-        <textarea id="suggested" name="suggestedRevision" placeholder="請填寫建議替換的完整文字" required></textarea>
+        <textarea id="suggested" name="entry.20185533" placeholder="請填寫建議替換的完整文字" required></textarea>
       </div>
 
       <div class="form-group">
         <label for="reason">修改原因</label>
-        <textarea id="reason" name="reason" placeholder="說明為什麼需要修改，例如語氣不符、來源不足、過度宣稱" required></textarea>
+        <textarea id="reason" name="entry.723310763" placeholder="說明為什麼需要修改，例如語氣不符、來源不足、過度宣稱" required></textarea>
       </div>
 
       <div class="form-group">
         <label for="evidence">來源依據 / 參考資料</label>
-        <input type="text" id="evidence" name="sourceEvidence" placeholder="例如：wiki 頁面、照片檔名、訪談紀錄">
+        <input type="text" id="evidence" name="entry.1812378672" placeholder="例如：wiki 頁面、照片檔名、訪談紀錄">
       </div>
 
       <div class="form-group">
         <label>可能風險</label>
         <div class="risk-group">
-          <label class="risk-option"><input type="checkbox" name="risk" value="medical-risk"> 療效或健康暗示</label>
-          <label class="risk-option"><input type="checkbox" name="risk" value="marketing-fluff"> 浮誇行銷語</label>
-          <label class="risk-option"><input type="checkbox" name="risk" value="unsupported-claim"> 缺少來源依據</label>
-          <label class="risk-option"><input type="checkbox" name="risk" value="tone-mismatch"> 品牌語氣不符</label>
+          <label class="risk-option"><input type="checkbox" name="entry.116248035" value="medical-risk"> 療效或健康暗示</label>
+          <label class="risk-option"><input type="checkbox" name="entry.116248035" value="marketing-fluff"> 浮誇行銷語</label>
+          <label class="risk-option"><input type="checkbox" name="entry.116248035" value="unsupported-claim"> 缺少來源依據</label>
+          <label class="risk-option"><input type="checkbox" name="entry.116248035" value="tone-mismatch"> 品牌語氣不符</label>
         </div>
       </div>
 

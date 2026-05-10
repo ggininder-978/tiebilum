@@ -105,15 +105,22 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Serve static HTML if requested directly or fallback
-  if (req.url === '/' || req.url === '/index.html') {
+  // Serve static files from ROOT
+  const publicPaths = ['/index.html', '/outputs/copy_qa_online_intake.html', '/outputs/copy_qa_workbench.html'];
+  const requestedPath = req.url === '/' ? '/index.html' : req.url;
+
+  if (publicPaths.includes(requestedPath) || requestedPath.startsWith('/outputs/')) {
     try {
-      const html = await readFile(join(ROOT, 'outputs/copy_qa_workbench.html'), 'utf8');
-      res.writeHead(200, { 'Content-Type': 'text/html' });
-      res.end(html);
+      const filePath = join(ROOT, requestedPath);
+      const content = await readFile(filePath, 'utf8');
+      const ext = requestedPath.split('.').pop();
+      const contentType = ext === 'html' ? 'text/html' : (ext === 'json' ? 'application/json' : 'text/plain');
+      
+      res.writeHead(200, { 'Content-Type': contentType });
+      res.end(content);
     } catch (e) {
       res.writeHead(404);
-      res.end('Workbench HTML not found. Please run build first.');
+      res.end('File not found');
     }
     return;
   }
