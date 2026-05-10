@@ -104,6 +104,45 @@
       "prompt": "string"
     }
   ],
+  "salesDiagnosis": {
+    "summary": {
+      "revenue": "number",
+      "contributionProfit": "number",
+      "contributionRate": "string",
+      "operatingCosts": "number",
+      "netIncome": "number",
+      "source": "string"
+    },
+    "productSignals": [
+      {
+        "rank": "number",
+        "name": "string",
+        "revenue": "number",
+        "profit": "number",
+        "margin": "string",
+        "diagnosis": "string",
+        "action": "keep | promote | review",
+        "source": "string"
+      }
+    ],
+    "channelSignals": [
+      {
+        "name": "string",
+        "revenue": "number",
+        "profit": "number",
+        "margin": "string",
+        "diagnosis": "string",
+        "source": "string"
+      }
+    ],
+    "notes": [
+      {
+        "type": "observation | risk | action",
+        "text": "string",
+        "source": "string"
+      }
+    ]
+  },
   "audit": {
     "latestLogEntries": ["string"],
     "warnings": ["string"]
@@ -133,6 +172,16 @@
 - 品牌資料維護
 
 每條進度線顯示目前狀態、短摘要與下一步事項。它應該可掃描、可操作，而不是裝飾性區塊。
+
+### 3. 銷售診斷 (Sales Diagnosis)
+
+位於進度地圖與知識庫之間，作為決策支援核心：
+
+- **關鍵數字 (Key Figures)**：呈現營收、貢獻淨利、淨利率與營業成本。
+- **產品訊號 (Product Signals)**：以列表或卡片呈現 Top 5 產品的獲利表現與診斷建議（保留/推廣/審閱）。
+- **通路訊號 (Channel Signals)**：呈現各通路營收占比與獲利率對比。
+- **診斷筆記 (Diagnosis Notes)**：將複雜的財務分析轉化為具體的觀察、風險與下一步行動。
+- **來源追溯**：所有數據點必須能連結回對應的 Markdown 分析或 CSV 原始檔。
 
 ### 3. 知識資料庫
 

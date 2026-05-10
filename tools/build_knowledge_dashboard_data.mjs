@@ -1,5 +1,5 @@
 import { appendFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
-import path from 'node:path';
+import path, { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -177,6 +177,89 @@ function buildLibrary(fileMap) {
   });
 }
 
+function parseMarkdownTable(content, titleMatch) {
+  const lines = content.split('\n');
+  const titleIndex = lines.findIndex(l => l.includes(titleMatch));
+  if (titleIndex === -1) return [];
+
+  const tableStartIndex = lines.findIndex((l, i) => i > titleIndex && l.includes('|') && !l.includes(':---'));
+  if (tableStartIndex === -1) return [];
+
+  const dataRows = [];
+  for (let i = tableStartIndex + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line.includes('|')) break;
+    if (line.includes(':---')) continue;
+    
+    const cells = line.split('|').filter(c => c.trim() !== '').map(c => c.trim());
+    dataRows.push(cells);
+  }
+  return dataRows;
+}
+
+async function getSalesDiagnosis(rootDir) {
+  const analysisPath = join(rootDir, 'knowledge/wiki/analysis/2025_financial_sales_analysis.md');
+  const defaultData = {
+    summary: { revenue: 0, contributionProfit: 0, contributionRate: '0%', operatingCosts: 0, netIncome: 0, source: 'knowledge/wiki/analysis/2025_financial_sales_analysis.md' },
+    productSignals: [],
+    channelSignals: [],
+    notes: []
+  };
+
+  try {
+    const content = await readFile(analysisPath, 'utf8');
+    
+    const revenue = parseFloat(content.match(/營業額：NT\$([\d,]+)/)?.[1].replace(/,/g, '') || 0);
+    const profit = parseFloat(content.match(/貢獻淨利：NT\$([\d,]+)/)?.[1].replace(/,/g, '') || 0);
+    const rate = content.match(/貢獻淨利率：([\d.]+%)/)?.[1] || '0%';
+    const costs = parseFloat(content.match(/已確認年度營業費用：NT\$([\d,]+)/)?.[1].replace(/,/g, '') || 0);
+    const net = parseFloat(content.match(/管理可用淨利.*?NT\$([\d,-]+)/)?.[1].replace(/,/g, '') || 0);
+
+    const productRows = parseMarkdownTable(content, '商品銷售排名：營收 Top 5');
+    const productSignals = productRows.slice(0, 5).map(row => ({
+      rank: parseInt(row[0]) || 0,
+      name: row[1] || '',
+      revenue: parseInt(row[2].replace(/,/g, '')) || 0,
+      profit: parseInt(row[4].replace(/,/g, '')) || 0,
+      margin: row[5] || '',
+      diagnosis: row[6] || '',
+      action: row[6].includes('主力') ? 'promote' : (row[6].includes('待補') ? 'review' : 'keep'),
+      source: 'knowledge/wiki/analysis/2025_product_sales_ranking.csv'
+    }));
+
+    const channelRows = parseMarkdownTable(content, '通路概況');
+    const channelSignals = channelRows.map(row => ({
+      name: row[0] || '',
+      revenue: parseInt(row[1].replace(/,/g, '')) || 0,
+      profit: parseInt(row[2].replace(/,/g, '')) || 0,
+      margin: row[3] || '',
+      diagnosis: row[4] || '',
+      source: 'knowledge/wiki/analysis/2025_channel_financials.csv'
+    }));
+
+    const notesMatch = content.match(/## 注意事項\n\n([\s\S]*?)(?:\n##|$)/);
+    const notes = (notesMatch?.[1] || '').split('\n')
+      .filter(line => line.startsWith('- '))
+      .map(line => {
+        const text = line.replace('- ', '').trim();
+        return {
+          type: text.includes('確認') || text.includes('缺') ? 'risk' : (text.includes('移除') ? 'observation' : 'action'),
+          text,
+          source: 'knowledge/wiki/analysis/2025_financial_sales_analysis.md'
+        };
+      });
+
+    return {
+      summary: { revenue, contributionProfit: profit, contributionRate: rate, operatingCosts: costs, netIncome: net, source: 'knowledge/wiki/analysis/2025_financial_sales_analysis.md' },
+      productSignals,
+      channelSignals,
+      notes
+    };
+  } catch (err) {
+    return { ...defaultData, warnings: [`Failed to parse sales analysis: ${err.message}`] };
+  }
+}
+
 function buildProgress() {
   return [
     {
@@ -278,6 +361,8 @@ export async function buildDashboardData(options = {}) {
   const fileMap = new Map(fileInfos.map((fileInfo) => [fileInfo.relativePath, fileInfo]));
   const log = fileMap.get('knowledge/log.md')?.content ?? '';
 
+  const salesDiagnosis = await getSalesDiagnosis(rootDir);
+
   return {
     generatedAt,
     brand: {
@@ -289,11 +374,12 @@ export async function buildDashboardData(options = {}) {
     },
     progress: buildProgress(),
     library: buildLibrary(fileMap),
+    salesDiagnosis,
     gaps: buildGaps(),
     agentPrompts: buildPrompts(),
     audit: {
       latestLogEntries: latestLogEntries(log),
-      warnings,
+      warnings: [...warnings, ...(salesDiagnosis.warnings || [])],
     },
   };
 }

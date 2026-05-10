@@ -465,6 +465,189 @@
       border-radius: 8px;
     }
 
+    /* Sales Diagnosis Styles */
+    .diagnosis-grid {
+      display: grid;
+      gap: 20px;
+    }
+
+    .key-figures {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+    }
+
+    .key-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .key-card dt {
+      color: var(--muted);
+      font-size: 0.78rem;
+      margin-bottom: 4px;
+    }
+
+    .key-card dd {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .key-card.highlight dd {
+      color: var(--cane);
+    }
+
+    .diagnosis-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .signal-group h3 {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .signal-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .signal-info {
+      display: grid;
+      gap: 2px;
+    }
+
+    .signal-name {
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .signal-meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .signal-stats {
+      text-align: right;
+      display: grid;
+      gap: 2px;
+    }
+
+    .signal-value {
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .action-tag {
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .action-tag.promote { background: var(--soft-green); color: var(--leaf); }
+    .action-tag.review { background: var(--soft-clay); color: var(--clay); }
+    .action-tag.keep { background: #eee; color: var(--muted); }
+
+    .channel-bar-group {
+      display: grid;
+      gap: 14px;
+    }
+
+    .channel-item {
+      display: grid;
+      gap: 6px;
+    }
+
+    .channel-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+    }
+
+    .bar-container {
+      height: 8px;
+      background: var(--soft-gold);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: var(--cane);
+      border-radius: 4px;
+    }
+
+    .diagnosis-notes {
+      grid-column: span 2;
+      background: var(--soft-gold);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .note-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.94rem;
+    }
+
+    .note-item:last-child { margin-bottom: 0; }
+
+    .note-icon {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 900;
+    }
+
+    .note-risk .note-icon { background: var(--clay); color: #fff; }
+    .note-observation .note-icon { background: var(--blue); color: #fff; }
+    .note-action .note-icon { background: var(--leaf); color: #fff; }
+
+    .source-trace-link {
+      font-size: 0.7rem;
+      color: var(--blue);
+      text-decoration: none;
+      opacity: 0.6;
+    }
+
+    .source-trace-link:hover { opacity: 1; text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .diagnosis-content { grid-template-columns: 1fr; }
+      .diagnosis-notes { grid-column: span 1; }
+    }
+
     @media (max-width: 920px) {
       .header-inner,
       .content {
@@ -567,6 +750,16 @@
           <div class="progress-grid" id="progressGrid"></div>
         </section>
 
+        <section id="diagnosis" aria-labelledby="diagnosisTitle">
+          <div class="section-heading">
+            <div>
+              <h2 id="diagnosisTitle">2025 銷售診斷 (Sales Diagnosis)</h2>
+              <p class="section-note">由財務與銷售數據萃取的決策訊號，導引利潤優化方向。</p>
+            </div>
+          </div>
+          <div id="salesDiagnosis"></div>
+        </section>
+
         <section id="library" aria-labelledby="libraryTitle">
           <div class="section-heading">
             <div>
@@ -641,6 +834,7 @@
       brandPositioning: document.getElementById('brandPositioning'),
       generatedAt: document.getElementById('generatedAt'),
       progressGrid: document.getElementById('progressGrid'),
+      salesDiagnosis: document.getElementById('salesDiagnosis'),
       libraryGrid: document.getElementById('libraryGrid'),
       gapsList: document.getElementById('gapsList'),
       promptsList: document.getElementById('promptsList'),
@@ -682,6 +876,89 @@
       els.brandStage.textContent = data.brand.stage;
       els.brandPositioning.textContent = data.brand.positioning;
       els.generatedAt.textContent = formatDate(data.generatedAt);
+    }
+
+    function renderSalesDiagnosis(diagnosis) {
+      if (!diagnosis) return;
+      const { summary, productSignals, channelSignals, notes } = diagnosis;
+      const formatCurrency = (val) => new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(val);
+
+      els.salesDiagnosis.innerHTML = `
+        <div class="diagnosis-grid">
+          <div class="key-figures">
+            <div class="key-card highlight">
+              <dt>2025 營業額</dt>
+              <dd>${formatCurrency(summary.revenue)}</dd>
+            </div>
+            <div class="key-card">
+              <dt>貢獻淨利 (CP)</dt>
+              <dd>${formatCurrency(summary.contributionProfit)}</dd>
+            </div>
+            <div class="key-card">
+              <dt>貢獻淨利率</dt>
+              <dd>${summary.contributionRate}</dd>
+            </div>
+            <div class="key-card">
+              <dt>已確認營業費用</dt>
+              <dd>${formatCurrency(summary.operatingCosts)}</dd>
+            </div>
+          </div>
+
+          <div class="diagnosis-content">
+            <div class="signal-group">
+              <h3>Product Signals <a href="${summary.source}" class="source-trace-link">🔍 Trace</a></h3>
+              <div class="signal-list">
+                ${productSignals.map(s => `
+                  <div class="signal-card">
+                    <div class="signal-info">
+                      <span class="signal-name">#${s.rank} ${escapeHtml(s.name)}</span>
+                      <span class="signal-meta">${escapeHtml(s.diagnosis)}</span>
+                    </div>
+                    <div class="signal-stats">
+                      <span class="signal-value">${formatCurrency(s.profit)}</span>
+                      <span class="action-tag ${s.action}">${s.action}</span>
+                      <a href="${s.source}" class="source-trace-link">Trace</a>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="signal-group">
+              <h3>Channel Signals</h3>
+              <div class="channel-bar-group">
+                ${channelSignals.map(c => `
+                  <div class="channel-item">
+                    <div class="channel-header">
+                      <span>${escapeHtml(c.name)} (${c.margin})</span>
+                      <span>${formatCurrency(c.revenue)}</span>
+                    </div>
+                    <div class="bar-container">
+                      <div class="bar-fill" style="width: ${c.margin}"></div>
+                    </div>
+                    <a href="${c.source}" class="source-trace-link">Trace</a>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="diagnosis-notes">
+              <h3>Diagnosis Notes & Actions</h3>
+              <div class="notes-list">
+                ${notes.map(n => `
+                  <div class="note-item note-${n.type}">
+                    <div class="note-icon">${n.type === 'risk' ? '!' : (n.type === 'observation' ? 'i' : '→')}</div>
+                    <div>
+                      ${escapeHtml(n.text)} 
+                      <a href="${n.source}" class="source-trace-link">[Trace]</a>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     function renderProgress(progress) {
@@ -822,6 +1099,7 @@
       state.data = data;
       renderHeader(data);
       renderProgress(data.progress);
+      renderSalesDiagnosis(data.salesDiagnosis);
       renderFilterOptions(data);
       renderLibrary();
       renderGaps(data.gaps);

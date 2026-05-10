@@ -27,6 +27,16 @@ describe('buildDashboardData', () => {
     assert.ok(data.gaps.some((gap) => /素材|文案/.test(gap.title + gap.nextAction)));
     assert.ok(data.agentPrompts.some((prompt) => /QDM/.test(prompt.prompt)));
     assert.ok(data.agentPrompts.every((prompt) => prompt.title && prompt.intent && prompt.prompt));
+    
+    // Sales Diagnosis Verification
+    assert.ok(data.salesDiagnosis.summary.revenue > 1000000);
+    assert.ok(data.salesDiagnosis.productSignals.length >= 5);
+    assert.ok(data.salesDiagnosis.productSignals.every(s => s.source && s.action));
+    assert.ok(data.salesDiagnosis.channelSignals.length >= 3);
+    assert.ok(data.salesDiagnosis.channelSignals.every(c => c.source));
+    assert.ok(data.salesDiagnosis.notes.length >= 3);
+    assert.ok(data.salesDiagnosis.notes.every(n => n.source && n.type));
+
     assert.ok(Array.isArray(data.audit.latestLogEntries));
 
     const serialized = JSON.stringify(data);
