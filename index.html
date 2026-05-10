@@ -1311,6 +1311,10 @@
       const { homepage, products, assetGaps, guardrails } = readiness;
 
       els.qdmReadiness.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <h2 style="margin: 0; color: var(--cane);">QDM Page Readiness</h2>
+          <a href="outputs/copy_qa_online_intake.html" class="source-trace-link" style="padding: 8px 16px; background: var(--ink); color: #fff; border-radius: 6px; text-decoration: none;">提出文案勘誤建議</a>
+        </div>
         <div class="qdm-grid">
           <div class="bundle-card">
             <h3>Homepage Bundle</h3>

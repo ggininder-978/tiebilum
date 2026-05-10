@@ -1,0 +1,3 @@
+Timestamp,Name,Team,Page,Slot,Original,Suggested,Reason,Evidence,Risk
+2026-05-10T10:00:00Z,TestUser,CIS,首頁,主標,Old Text,New Text,Better tone,Brand Spec,tone-mismatch
+2026-05-10T10:05:00Z,RiskUser,QDM,商品頁,用途,AI Text,治感冒首選,Medical claim,,medical-risk

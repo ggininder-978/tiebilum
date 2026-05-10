@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-05-10T14:01:44.888Z",
+  "items": [
+    {
+      "intakeId": "95e8a711",
+      "submittedAt": "2026-05-10T10:00:00Z",
+      "submitterName": "TestUser",
+      "submitterTeam": "CIS",
+      "targetCopyId": "unknown",
+      "page": "首頁",
+      "slot": "主標",
+      "originalText": "Old Text",
+      "suggestedRevision": "New Text",
+      "reason": "Better tone",
+      "sourceEvidence": "Brand Spec",
+      "riskTags": [
+        "tone-mismatch"
+      ],
+      "intakeStatus": "new",
+      "ownerNote": "",
+      "source": "imported",
+      "updatedAt": "2026-05-10T14:01:44.888Z"
+    },
+    {
+      "intakeId": "33eb176d",
+      "submittedAt": "2026-05-10T10:05:00Z",
+      "submitterName": "RiskUser",
+      "submitterTeam": "QDM",
+      "targetCopyId": "unknown",
+      "page": "商品頁",
+      "slot": "用途",
+      "originalText": "AI Text",
+      "suggestedRevision": "治感冒首選",
+      "reason": "Medical claim",
+      "sourceEvidence": "",
+      "riskTags": [
+        "medical-risk",
+        "needs-source"
+      ],
+      "intakeStatus": "new",
+      "ownerNote": "",
+      "source": "imported",
+      "updatedAt": "2026-05-10T14:01:44.888Z"
+    }
+  ]
+}
