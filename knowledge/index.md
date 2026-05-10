@@ -44,6 +44,7 @@ Key figures: 2025 revenue NT$1,523,247; product contribution profit NT$233,288; 
 - [[superpowers_workflow]]: 標準開發工作流。
 - [[superpowers_skills_index]]: 技能集索引。
 - [[html_effectiveness]]: 利用 HTML 提升資訊傳達密度的核心技能。
+- [[markdown_to_html_synthesis]]: 將靜態知識轉化為動態介面的合成技術。
 
 
 ## 🧠 Karpathy Thinking (宗師開發思維)
