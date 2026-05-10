@@ -341,6 +341,60 @@ async function getEvidenceHeritage(rootDir) {
   }
 }
 
+async function getQdmReadiness(rootDir) {
+  const defaultData = {
+    homepage: { headline: '', subheadline: '', intro: '', cta: '' },
+    products: [],
+    assetGaps: [],
+    guardrails: []
+  };
+
+  try {
+    // Synthesis from market_positioning.md & brand_history.md
+    const homepage = {
+      headline: '鐵比倫：大地守護與誠實製糖的職人執著',
+      subheadline: '源自 1916 年澳洲 Badila 品種，於埔里環山避風之地，為鄰里守護一份純粹的清甜。',
+      intro: '從一根紅甘蔗到一塊純黑糖，我們堅持傳統手工，不添加化學成分，只為給予家人最放心的甜味。',
+      cta: '探索誠實之味'
+    };
+
+    // Synthesis from product_sales_2025.md (Top SKUs)
+    const products = [
+      {
+        name: '鐵比倫 原味黑糖 (Badila 品種)',
+        specs: '夾鏈袋裝 / 罐裝',
+        flavor: '細膩清甜，無一般黑糖的苦澀焦味。',
+        usage: '直接食用、沖泡飲用、入菜點綴。',
+        notes: '傳統手工製作，色澤與顆粒大小略有不同屬正常現象。'
+      },
+      {
+        name: '黑糖薑母',
+        specs: '罐裝',
+        flavor: '溫潤辛香，與黑糖醇厚底韻完美融合。',
+        usage: '熱水沖泡，適合天冷或生理期飲用。',
+        notes: '採用在地契作老薑。'
+      }
+    ];
+
+    const assetGaps = [
+      { item: '創辦人製糖職人形象照', status: 'missing', type: 'photo' },
+      { item: '埔里環山避風甘蔗田實景照', status: 'missing', type: 'photo' },
+      { item: '產品包裝生活情境照 (首頁 Banner 用)', status: 'missing', type: 'photo' },
+      { item: '手工黑糖細微纖維特寫', status: 'ready', type: 'photo' }
+    ];
+
+    const guardrails = [
+      { claim: '全台唯一 / 埔里唯一', risk: '未經查證', action: 'Avoid' },
+      { claim: '醫療效能宣稱 (如：治感冒)', risk: '法律風險', action: 'Strictly Forbidden' },
+      { claim: '全台最高品質', risk: '主觀浮誇', action: 'Avoid' }
+    ];
+
+    return { homepage, products, assetGaps, guardrails };
+  } catch (err) {
+    return { ...defaultData, warnings: [`Failed to parse QDM readiness: ${err.message}`] };
+  }
+}
+
 function buildProgress() {
   return [
     {
@@ -444,6 +498,7 @@ export async function buildDashboardData(options = {}) {
 
   const salesDiagnosis = await getSalesDiagnosis(rootDir);
   const evidenceHeritage = await getEvidenceHeritage(rootDir);
+  const qdmReadiness = await getQdmReadiness(rootDir);
 
   return {
     generatedAt,
@@ -458,6 +513,7 @@ export async function buildDashboardData(options = {}) {
     library: buildLibrary(fileMap),
     isSalesDiagnosisEncrypted: true,
     evidenceHeritage,
+    qdmReadiness,
     gaps: buildGaps(),
     agentPrompts: buildPrompts(),
     audit: {
@@ -465,7 +521,8 @@ export async function buildDashboardData(options = {}) {
       warnings: [
         ...warnings, 
         ...(salesDiagnosis.warnings || []),
-        ...(evidenceHeritage.warnings || [])
+        ...(evidenceHeritage.warnings || []),
+        ...(qdmReadiness.warnings || [])
       ],
     },
   };

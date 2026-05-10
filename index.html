@@ -766,6 +766,88 @@
       .forbidden-area { grid-column: span 1; }
     }
 
+    /* QDM Readiness Styles */
+    .qdm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .bundle-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .bundle-field {
+      margin-bottom: 20px;
+    }
+
+    .bundle-field label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .copyable-text {
+      font-size: 1.1rem;
+      color: var(--ink);
+      line-height: 1.6;
+      border-left: 3px solid var(--cane);
+      padding-left: 12px;
+    }
+
+    .asset-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .asset-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--panel);
+      border-radius: 6px;
+      border: 1px solid var(--line);
+    }
+
+    .asset-meta {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .product-grid {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .product-card h4 {
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+      color: var(--cane);
+    }
+
+    @media (max-width: 920px) {
+      .qdm-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr; }
+    }
+
     /* Password Lock Styles */
     .locked-panel {
       background: #fdfaf3;
@@ -944,6 +1026,16 @@
           <div id="evidenceHeritage"></div>
         </section>
 
+        <section id="qdm" aria-labelledby="qdmTitle">
+          <div class="section-heading">
+            <div>
+              <h2 id="qdmTitle">QDM 頁面交付清單 (QDM Page Readiness)</h2>
+              <p class="section-note">專為官網、CIS 與行銷夥伴設計的頁面交付狀態與可用素材。</p>
+            </div>
+          </div>
+          <div id="qdmReadiness"></div>
+        </section>
+
         <section id="library" aria-labelledby="libraryTitle">
           <div class="section-heading">
             <div>
@@ -1020,6 +1112,7 @@
       progressGrid: document.getElementById('progressGrid'),
       salesDiagnosis: document.getElementById('salesDiagnosis'),
       evidenceHeritage: document.getElementById('evidenceHeritage'),
+      qdmReadiness: document.getElementById('qdmReadiness'),
       libraryGrid: document.getElementById('libraryGrid'),
       gapsList: document.getElementById('gapsList'),
       promptsList: document.getElementById('promptsList'),
@@ -1212,6 +1305,92 @@
       `;
     }
 
+
+    function renderQdmReadiness(readiness) {
+      if (!readiness) return;
+      const { homepage, products, assetGaps, guardrails } = readiness;
+
+      els.qdmReadiness.innerHTML = `
+        <div class="qdm-grid">
+          <div class="bundle-card">
+            <h3>Homepage Bundle</h3>
+            <div class="bundle-field">
+              <label>Headline (主標)</label>
+              <div class="copyable-text">${escapeHtml(homepage.headline)}</div>
+            </div>
+            <div class="bundle-field">
+              <label>Subheadline (副標)</label>
+              <div class="copyable-text" style="font-size: 1rem;">${escapeHtml(homepage.subheadline)}</div>
+            </div>
+            <div class="bundle-field">
+              <label>Intro (簡介)</label>
+              <div class="copyable-text" style="font-size: 0.95rem;">${escapeHtml(homepage.intro)}</div>
+            </div>
+            <div class="bundle-field">
+              <label>CTA Button</label>
+              <div class="copyable-text" style="font-size: 0.9rem; font-weight: 700;">${escapeHtml(homepage.cta)}</div>
+            </div>
+          </div>
+
+          <div class="asset-list-group">
+            <h3>Visual Asset Checklist</h3>
+            <div class="asset-list">
+              ${assetGaps.map(a => `
+                <div class="asset-item">
+                  <div class="asset-meta">
+                    <span class="chip">${escapeHtml(a.type)}</span>
+                    <span>${escapeHtml(a.item)}</span>
+                  </div>
+                  <span class="status ${a.status}">${a.status === 'ready' ? '可用' : '缺漏'}</span>
+                </div>
+              `).join('')}
+            </div>
+            
+            <div class="forbidden-area" style="margin-top: 24px; grid-column: span 1;">
+              <h3 style="color: #d63031;">QDM Guardrails</h3>
+              <div style="margin-top: 12px;">
+                ${guardrails.map(g => `
+                  <div class="forbidden-item" style="border-bottom: 1px solid #fab1a0; padding-bottom: 8px;">
+                    <div style="flex: 1;">
+                      <div class="forbidden-text" style="font-weight: 700;">${escapeHtml(g.claim)}</div>
+                      <div style="font-size: 0.75rem; color: #636e72;">風險：${escapeHtml(g.risk)} | 建議：${escapeHtml(g.action)}</div>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <div class="product-grid">
+            <h3>Top SKU Detail Cards</h3>
+            <div class="product-grid">
+              ${products.map(p => `
+                <div class="product-card">
+                  <h4>${escapeHtml(p.name)}</h4>
+                  <div class="bundle-field">
+                    <label>規格</label>
+                    <div style="font-size: 0.9rem;">${escapeHtml(p.specs)}</div>
+                  </div>
+                  <div class="bundle-field">
+                    <label>風味描述</label>
+                    <div style="font-size: 0.9rem; font-style: italic;">${escapeHtml(p.flavor)}</div>
+                  </div>
+                  <div class="bundle-field">
+                    <label>使用情境</label>
+                    <div style="font-size: 0.9rem;">${escapeHtml(p.usage)}</div>
+                  </div>
+                  <div class="bundle-field">
+                    <label>注意事項</label>
+                    <div style="font-size: 0.85rem; color: var(--muted);">${escapeHtml(p.notes)}</div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     function renderProgress(progress) {
       els.progressGrid.innerHTML = progress.map((item) => `
         <article class="panel">
@@ -1359,6 +1538,7 @@
       }
 
       renderEvidenceHeritage(data.evidenceHeritage);
+      renderQdmReadiness(data.qdmReadiness);
 
       renderFilterOptions(data);
       renderLibrary();

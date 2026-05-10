@@ -7,6 +7,7 @@
 1.  **Spec-First**: 涉及業務邏輯或數據結構的變更，必須先在 `knowledge/specs/` 建立規格。
 2.  **Incremental Synthesis**: 每次任務產出的洞察，必須回填至 `knowledge/wiki/` 相應頁面。
 3.  **Audit Visibility**: 所有自動化處理必須產出 Audit 日誌。
+4.  **Strict Instruction Adherence**: 在製作規格 (Spec) 時，必須嚴格依據使用者指令執行，禁止在未經要求的情況下自行提供建議或發散開發方向。 (Update: 2026-05-10)
 
 ## 知識庫結構 (Knowledge Structure)
 - `knowledge/sources/`: 原始素材（不可變）。

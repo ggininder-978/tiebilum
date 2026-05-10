@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-10T08:20:01.585Z",
+  "generatedAt": "2026-05-10T13:09:23.306Z",
   "brand": {
     "name": "鐵比倫 Tiebilum",
     "stage": "QDM 開店平台、CIS 視覺與行銷素材整理中",
@@ -251,6 +251,69 @@
         "reason": "缺乏第三方客觀評比數據，且不符合「樸實」語氣。",
         "action": "Avoid",
         "source": "knowledge/wiki/concepts/market_positioning.md"
+      }
+    ]
+  },
+  "qdmReadiness": {
+    "homepage": {
+      "headline": "鐵比倫：大地守護與誠實製糖的職人執著",
+      "subheadline": "源自 1916 年澳洲 Badila 品種，於埔里環山避風之地，為鄰里守護一份純粹的清甜。",
+      "intro": "從一根紅甘蔗到一塊純黑糖，我們堅持傳統手工，不添加化學成分，只為給予家人最放心的甜味。",
+      "cta": "探索誠實之味"
+    },
+    "products": [
+      {
+        "name": "鐵比倫 原味黑糖 (Badila 品種)",
+        "specs": "夾鏈袋裝 / 罐裝",
+        "flavor": "細膩清甜，無一般黑糖的苦澀焦味。",
+        "usage": "直接食用、沖泡飲用、入菜點綴。",
+        "notes": "傳統手工製作，色澤與顆粒大小略有不同屬正常現象。"
+      },
+      {
+        "name": "黑糖薑母",
+        "specs": "罐裝",
+        "flavor": "溫潤辛香，與黑糖醇厚底韻完美融合。",
+        "usage": "熱水沖泡，適合天冷或生理期飲用。",
+        "notes": "採用在地契作老薑。"
+      }
+    ],
+    "assetGaps": [
+      {
+        "item": "創辦人製糖職人形象照",
+        "status": "missing",
+        "type": "photo"
+      },
+      {
+        "item": "埔里環山避風甘蔗田實景照",
+        "status": "missing",
+        "type": "photo"
+      },
+      {
+        "item": "產品包裝生活情境照 (首頁 Banner 用)",
+        "status": "missing",
+        "type": "photo"
+      },
+      {
+        "item": "手工黑糖細微纖維特寫",
+        "status": "ready",
+        "type": "photo"
+      }
+    ],
+    "guardrails": [
+      {
+        "claim": "全台唯一 / 埔里唯一",
+        "risk": "未經查證",
+        "action": "Avoid"
+      },
+      {
+        "claim": "醫療效能宣稱 (如：治感冒)",
+        "risk": "法律風險",
+        "action": "Strictly Forbidden"
+      },
+      {
+        "claim": "全台最高品質",
+        "risk": "主觀浮誇",
+        "action": "Avoid"
       }
     ]
   },
