@@ -1,59 +1,23 @@
-# LLM Wiki + HTML Artifacts
+# 知識合成哲學：LLM Wiki + HTML Artifacts
 
-## Core Method
+## 1. 定義 (Definition)
+這是一套旨在最大化「人類與 AI 代理人溝通效率」的工作流系統。它將資料分為兩層：
+- **存儲層 (The Wiki)**：以 Markdown 格式儲存，負責精確、結構化、可長期保存的事實與數據。
+- **視圖層 (The Artifacts)**：以 HTML/JS 格式呈現，負責空間化展示、互動式篩選與即時操作。
 
-LLM Wiki stores durable synthesis in markdown, while HTML Artifacts provide an interactive view and control layer for humans. The artifact should not become the source of truth. It should read from the wiki, help a person explore or decide, then emit a query, work order, or patch proposal that an agent can apply back to the wiki.
+## 2. 核心原理 (The First Principles)
+### A. 空間資訊化 (Spatial Information)
+Markdown 會將資訊「扁平化」為垂直流，這會導致資訊密度下降。HTML 透過 Grid、Tabs、Side-by-side 呈現，讓人類的大腦能更直覺地捕捉資訊間的空間關係。
 
-The loop is:
+### B. 活的文檔 (Living Documentation)
+透過數據管道（Data Pipeline），Wiki 的任何更動都能自動反映到 HTML 儀表板上。文檔不再是死板的記錄，而是具備生命力的營運工具。
 
-1. Raw sources stay immutable in `knowledge/sources/`.
-2. The agent compiles source material into maintained wiki pages.
-3. A build step exports selected wiki metadata and summaries into JSON.
-4. A self-contained HTML artifact renders filters, charts, comparisons, and drill-down views.
-5. User actions create structured requests for the agent.
-6. Agent updates wiki pages and audit logs, then the artifact refreshes from the next export.
+### C. 閉環互動 (Closed-loop Interaction)
+Artifact 不僅是展示工具，更應具備「反饋」功能。透過在 HTML 中加入「回傳 Agent」的按鈕或導出功能，實現人類決策後的即時執行。
 
-## Implementation Details
+## 3. 在鐵比倫專案中的應用
+- **品牌事實庫**：所有的歷史考據（Markdown）將自動渲染為美觀的「官網素材展示頁」（HTML）。
+- **營運儀表板**：複雜的銷售數據（CSV/Markdown）將轉化為具備趨勢圖表的「決策中心」（HTML）。
 
-For GitHub Pages or other static hosting:
-
-- Generate `artifact-data.json` from wiki markdown.
-- Build a single `index.html` or dashboard HTML that fetches the JSON.
-- Keep all UI logic client-side: search, tags, filters, sorting, charting, and selected-context bundles.
-- For "ask agent" actions, generate a copyable prompt or write a local queue file in a local environment. Static Pages cannot safely write back to the repo without a backend or token.
-
-For Claude Artifacts or a local agent workspace:
-
-- The HTML artifact can call Claude-powered artifact APIs or MCP-enabled tools when available.
-- Buttons should send structured payloads: selected page IDs, source citations, user question, desired output type, and write constraints.
-- The agent should return either a direct answer, a proposed wiki patch, or a task spec for later execution.
-
-## Tiebilum Fit
-
-Tiebilum already has the three required layers:
-
-- Raw sources: `knowledge/sources/`
-- Wiki: `knowledge/wiki/`
-- Schema and rules: `AGENTS.md` and `knowledge/specs/`
-
-The next useful step is an "operations cockpit" artifact that reads the wiki and shows:
-
-- Product and channel pages
-- Financial analysis summaries
-- Source freshness and audit status
-- Open data gaps
-- Buttons for generating follow-up questions, ingest tasks, or dashboard updates
-
-## Risks
-
-- Do not let generated HTML become the canonical data store.
-- Do not expose private source content or write tokens in public GitHub Pages.
-- Every agent-triggered update should leave an audit entry.
-- Wiki summaries are lossy, so high-stakes claims still need source references.
-
-## Sources
-
-- Karpathy LLM Wiki gist: https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f
-- Claude Artifacts help: https://support.claude.com/en/articles/9487310-what-are-artifacts-and-how-do-i-use-them
-- LLM Wiki structure reference: https://llmwikis.org/llm-wiki-structure/
-- llmwiki implementation reference: https://github.com/lucasastorian/llmwiki
+---
+*來源參考：thariqs (HTML Effectiveness), omarsar0 (Wiki+Artifacts Workflow)*
