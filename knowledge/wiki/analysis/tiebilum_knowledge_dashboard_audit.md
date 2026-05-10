@@ -144,3 +144,10 @@
 - Files read: 10
 - Library cards: 9
 - Warnings: none
+
+## 2026-05-10 Dashboard Data Build
+
+- Generated: `knowledge/dashboard-data.json`
+- Files read: 10
+- Library cards: 9
+- Warnings: none

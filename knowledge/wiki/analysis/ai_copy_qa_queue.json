@@ -1,0 +1,105 @@
+{
+  "generatedAt": "2026-05-10T13:45:12.958Z",
+  "items": [
+    {
+      "id": "hp-headline-001",
+      "page": "首頁",
+      "slot": "主標",
+      "aiDraft": "鐵比倫：大地守護與誠實製糖的職人執著",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [],
+      "reviewStatus": "approved",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    },
+    {
+      "id": "hp-subheadline-001",
+      "page": "首頁",
+      "slot": "副標",
+      "aiDraft": "源自 1916 年澳洲 Badila 品種，於埔里環山避風之地，守護一份純粹的清甜。",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [],
+      "reviewStatus": "approved",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    },
+    {
+      "id": "hp-intro-001",
+      "page": "首頁",
+      "slot": "簡介",
+      "aiDraft": "[審核中] 從一根紅甘蔗到一塊純黑糖，堅持傳統手工，無人工添加物。",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [
+        "tone-mismatch"
+      ],
+      "reviewStatus": "pending",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    },
+    {
+      "id": "hp-cta-001",
+      "page": "首頁",
+      "slot": "CTA",
+      "aiDraft": "探索誠實之味",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [],
+      "reviewStatus": "approved",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    },
+    {
+      "id": "prod-1-name",
+      "page": "商品頁",
+      "slot": "品名",
+      "aiDraft": "鐵比倫 原味黑糖 (Badila 品種)",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [],
+      "reviewStatus": "approved",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    },
+    {
+      "id": "prod-1-flavor",
+      "page": "商品頁",
+      "slot": "風味",
+      "aiDraft": "細膩清甜，無一般黑糖的苦澀焦味。",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [],
+      "reviewStatus": "approved",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    },
+    {
+      "id": "prod-1-usage",
+      "page": "商品頁",
+      "slot": "用途",
+      "aiDraft": "直接食用、沖泡飲用、入菜點綴。",
+      "source": [
+        "knowledge/dashboard-data.json"
+      ],
+      "riskTags": [],
+      "reviewStatus": "approved",
+      "humanRevision": "",
+      "reviewNote": "",
+      "updatedAt": "2026-05-10T13:45:12.958Z"
+    }
+  ]
+}
