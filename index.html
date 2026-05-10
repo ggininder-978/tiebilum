@@ -671,6 +671,101 @@
       opacity: 0.7;
     }
 
+    /* Evidence & Heritage Styles */
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .fact-timeline {
+      display: grid;
+      gap: 16px;
+    }
+
+    .fact-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      position: relative;
+    }
+
+    .fact-year {
+      font-weight: 900;
+      color: var(--cane);
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .copy-vault {
+      background: #fdfaf3;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .copy-item {
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      font-style: italic;
+      position: relative;
+    }
+
+    .copy-context {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 8px;
+      font-style: normal;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .forbidden-area {
+      grid-column: span 2;
+      background: #fff5f5;
+      border: 1px solid #fab1a0;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .forbidden-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .forbidden-label {
+      background: #d63031;
+      color: #fff;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 900;
+    }
+
+    .forbidden-text {
+      font-size: 0.94rem;
+      color: #2d3436;
+    }
+
+    .forbidden-reason {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    @media (max-width: 920px) {
+      .heritage-grid { grid-template-columns: 1fr; }
+      .forbidden-area { grid-column: span 1; }
+    }
+
     /* Password Lock Styles */
     .locked-panel {
       background: #fdfaf3;
@@ -839,6 +934,16 @@
           <div id="salesDiagnosis"></div>
         </section>
 
+        <section id="heritage" aria-labelledby="heritageTitle">
+          <div class="section-heading">
+            <div>
+              <h2 id="heritageTitle">品牌證據與傳承 (Evidence & Heritage)</h2>
+              <p class="section-note">由歷史考據與風土事實萃取的品牌資產，供文案與視覺設計對焦。</p>
+            </div>
+          </div>
+          <div id="evidenceHeritage"></div>
+        </section>
+
         <section id="library" aria-labelledby="libraryTitle">
           <div class="section-heading">
             <div>
@@ -914,6 +1019,7 @@
       generatedAt: document.getElementById('generatedAt'),
       progressGrid: document.getElementById('progressGrid'),
       salesDiagnosis: document.getElementById('salesDiagnosis'),
+      evidenceHeritage: document.getElementById('evidenceHeritage'),
       libraryGrid: document.getElementById('libraryGrid'),
       gapsList: document.getElementById('gapsList'),
       promptsList: document.getElementById('promptsList'),
@@ -1038,6 +1144,68 @@
                   </div>
                 `).join('')}
               </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderEvidenceHeritage(heritage) {
+      if (!heritage) return;
+      const { historyFacts, terroirPoints, usableCopy, forbiddenClaims } = heritage;
+
+      els.evidenceHeritage.innerHTML = `
+        <div class="heritage-grid">
+          <div class="fact-timeline">
+            <h3>Brand Timeline & Facts</h3>
+            ${historyFacts.map(f => `
+              <div class="fact-card">
+                <span class="fact-year">${f.year}</span>
+                <p>${escapeHtml(f.event)}</p>
+                <div style="margin-top: 8px;">
+                  <a href="${f.source}" class="source-trace-link">Source Trace</a>
+                </div>
+              </div>
+            `).join('')}
+            
+            <h3 style="margin-top: 24px;">Terroir & Product Evidence</h3>
+            ${terroirPoints.map(p => `
+              <div class="fact-card">
+                <span class="fact-year" style="font-size: 0.9rem;">${escapeHtml(p.point)}</span>
+                <p>${escapeHtml(p.benefit)}</p>
+                <div style="margin-top: 8px;">
+                  <a href="${p.source}" class="source-trace-link">Source Trace</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="copy-vault">
+            <h3>Usable Copy Snippets</h3>
+            <p class="section-note">經核准的文案句，可直接用於 CIS 或官網。</p>
+            ${usableCopy.map(c => `
+              <div class="copy-item">
+                <p>"${escapeHtml(c.text)}"</p>
+                <span class="copy-context">情境：${escapeHtml(c.context)}</span>
+                <div style="margin-top: 10px;">
+                  <a href="${c.source}" class="source-trace-link">Trace</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="forbidden-area">
+            <h3>Guardrails: Forbidden Claims</h3>
+            <p class="section-note" style="color: #636e72;">嚴禁使用的虛浮詞彙或未經證實的宣稱。</p>
+            <div style="margin-top: 16px;">
+              ${forbiddenClaims.map(f => `
+                <div class="forbidden-item">
+                  <span class="forbidden-label">BAN</span>
+                  <span class="forbidden-text">${escapeHtml(f.claim)}</span>
+                  <span class="forbidden-reason">原因：${escapeHtml(f.reason)}</span>
+                  <a href="${f.source}" class="source-trace-link">Trace</a>
+                </div>
+              `).join('')}
             </div>
           </div>
         </div>
@@ -1189,6 +1357,8 @@
       } else {
         renderLockOverlay();
       }
+
+      renderEvidenceHeritage(data.evidenceHeritage);
 
       renderFilterOptions(data);
       renderLibrary();

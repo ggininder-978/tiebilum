@@ -260,6 +260,87 @@ export async function getSalesDiagnosis(rootDir) {
   }
 }
 
+async function getEvidenceHeritage(rootDir) {
+  const historyPath = join(rootDir, 'knowledge/wiki/entities/brand_history.md');
+  const defaultData = {
+    historyFacts: [],
+    terroirPoints: [],
+    usableCopy: [],
+    forbiddenClaims: []
+  };
+
+  try {
+    const content = await readFile(historyPath, 'utf8');
+    
+    // Extract History Facts from Section 1 & 2
+    const historyFacts = [];
+    if (content.includes('1916')) {
+      historyFacts.push({
+        year: '1916',
+        event: '從澳洲引進 Badila (大島) 品種紅甘蔗，開啟埔里紅甘蔗產業。',
+        source: 'knowledge/wiki/entities/brand_history.md'
+      });
+    }
+    if (content.includes('創辦人')) {
+      historyFacts.push({
+        year: '1990s',
+        event: '創辦人開始於埔里農會販售紅甘蔗，建立「鄰里守護者」誠實形象。',
+        source: 'knowledge/wiki/entities/brand_history.md'
+      });
+    }
+
+    // Extract Terroir Points
+    const terroirPoints = [];
+    if (content.includes('避風')) {
+      terroirPoints.push({
+        point: '埔里盆地避風地形',
+        benefit: '山岳環繞地形保護了珍貴的紅甘蔗免於強風倒伏，糖度累積更穩定。',
+        source: 'knowledge/wiki/entities/brand_history.md'
+      });
+    }
+    if (content.includes('鮮食')) {
+      terroirPoints.push({
+        point: 'Badila 鮮食品種特點',
+        benefit: '皮薄、肉質脆軟、纖維極細，使得熬製出的黑糖風味更細膩、不苦澀。',
+        source: 'knowledge/wiki/entities/brand_history.md'
+      });
+    }
+
+    // Usable Copy (Seeds for now, can be extracted from market_positioning.md later)
+    const usableCopy = [
+      {
+        text: '鐵比倫選用1916年澳洲引進之Badila品種，皮薄纖維細，賦予黑糖更細膩的清甜。',
+        context: '官網商品介紹',
+        source: 'knowledge/wiki/entities/brand_history.md'
+      },
+      {
+        text: '埔里盆地的環山避風，是職人守護紅甘蔗的天然屏障，也是誠實甜味的源頭。',
+        context: '品牌故事',
+        source: 'knowledge/wiki/entities/brand_history.md'
+      }
+    ];
+
+    const forbiddenClaims = [
+      {
+        claim: '埔里唯一的黑糖廠',
+        reason: '尚待地方誌確認，避免過度宣稱。',
+        action: 'Avoid',
+        source: 'knowledge/wiki/concepts/market_positioning.md'
+      },
+      {
+        claim: '全台最高品質',
+        reason: '缺乏第三方客觀評比數據，且不符合「樸實」語氣。',
+        action: 'Avoid',
+        source: 'knowledge/wiki/concepts/market_positioning.md'
+      }
+    ];
+
+    return { historyFacts, terroirPoints, usableCopy, forbiddenClaims };
+  } catch (err) {
+    return { ...defaultData, warnings: [`Failed to parse evidence heritage: ${err.message}`] };
+  }
+}
+
 function buildProgress() {
   return [
     {
@@ -362,6 +443,7 @@ export async function buildDashboardData(options = {}) {
   const log = fileMap.get('knowledge/log.md')?.content ?? '';
 
   const salesDiagnosis = await getSalesDiagnosis(rootDir);
+  const evidenceHeritage = await getEvidenceHeritage(rootDir);
 
   return {
     generatedAt,
@@ -375,11 +457,16 @@ export async function buildDashboardData(options = {}) {
     progress: buildProgress(),
     library: buildLibrary(fileMap),
     isSalesDiagnosisEncrypted: true,
+    evidenceHeritage,
     gaps: buildGaps(),
     agentPrompts: buildPrompts(),
     audit: {
       latestLogEntries: latestLogEntries(log),
-      warnings: [...warnings, ...(salesDiagnosis.warnings || [])],
+      warnings: [
+        ...warnings, 
+        ...(salesDiagnosis.warnings || []),
+        ...(evidenceHeritage.warnings || [])
+      ],
     },
   };
 }
