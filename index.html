@@ -1336,12 +1336,22 @@
             <h3>Visual Asset Checklist</h3>
             <div class="asset-list">
               ${assetGaps.map(a => `
-                <div class="asset-item">
-                  <div class="asset-meta">
-                    <span class="chip">${escapeHtml(a.type)}</span>
-                    <span>${escapeHtml(a.item)}</span>
+                <div class="asset-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
+                  <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                    <div class="asset-meta">
+                      <span class="chip">${escapeHtml(a.type)}</span>
+                      <strong style="font-size: 0.95rem;">${escapeHtml(a.item)}</strong>
+                    </div>
+                    <span class="status ${a.status}">${a.status === 'ready' ? '可用' : (a.status === 'missing' ? '缺漏' : '待確認')}</span>
                   </div>
-                  <span class="status ${a.status}">${a.status === 'ready' ? '可用' : '缺漏'}</span>
+                  <div style="font-size: 0.8rem; color: var(--muted); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%;">
+                    <span><strong>負責人:</strong> ${escapeHtml(a.owner)}</span>
+                    <span><strong>用途:</strong> ${escapeHtml(a.purpose)}</span>
+                  </div>
+                  <div style="font-size: 0.75rem; background: rgba(0,0,0,0.03); padding: 6px; border-radius: 4px; width: 100%;">
+                    <strong>標準:</strong> ${escapeHtml(a.standard)}<br>
+                    <strong style="color: var(--cane);">下一步:</strong> ${escapeHtml(a.nextStep)}
+                  </div>
                 </div>
               `).join('')}
             </div>
