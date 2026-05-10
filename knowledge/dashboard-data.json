@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-10T13:22:03.298Z",
+  "generatedAt": "2026-05-10T13:22:34.099Z",
   "brand": {
     "name": "鐵比倫 Tiebilum",
     "stage": "QDM 開店平台、CIS 視覺與行銷素材整理中",
@@ -256,16 +256,83 @@
   },
   "qdmReadiness": {
     "homepage": {
-      "headline": "",
-      "subheadline": "",
-      "intro": "",
-      "cta": ""
+      "headline": "鐵比倫：大地守護與誠實製糖的職人執著",
+      "subheadline": "源自 1916 年澳洲 Badila 品種，於埔里環山避風之地，守護一份純粹的清甜。",
+      "intro": "[審核中] 從一根紅甘蔗到一塊純黑糖，堅持傳統手工，無人工添加物。",
+      "cta": "探索誠實之味"
     },
-    "products": [],
-    "assetGaps": [],
-    "guardrails": [],
-    "warnings": [
-      "Failed to parse QDM dynamic readiness: ENOENT: no such file or directory, open 'C:\\Users\\user\\.gemini\\antigravity\\scratch\\tiebilum\\knowledge\\wiki\\analysis\\qdm_asset_progress.md'"
+    "products": [
+      {
+        "name": "鐵比倫 原味黑糖 (Badila 品種)",
+        "specs": "夾鏈袋裝 / 罐裝",
+        "flavor": "細膩清甜，無一般黑糖的苦澀焦味。",
+        "usage": "直接食用、沖泡飲用、入菜點綴。",
+        "notes": "傳統手工製作，色澤與顆粒大小略有不同屬正常現象。"
+      }
+    ],
+    "assetGaps": [
+      {
+        "page": "首頁 / 風土",
+        "item": "埔里甘蔗田實景照",
+        "type": "photo",
+        "status": "missing",
+        "owner": "攝影組",
+        "purpose": "傳遞埔里地理脈絡",
+        "standard": "需呈現環山避風地貌, 晴天",
+        "nextStep": "尋找適合的甘蔗田點位"
+      },
+      {
+        "page": "首頁",
+        "item": "Banner 產品情境照",
+        "type": "photo",
+        "status": "missing",
+        "owner": "設計/攝影",
+        "purpose": "首頁視覺重點",
+        "standard": "符合 1920x800, 具職人感光影",
+        "nextStep": "準備產品樣品進行棚拍"
+      },
+      {
+        "page": "頁面位置",
+        "item": "素材名稱",
+        "type": "類型",
+        "status": "needs-review",
+        "owner": "負責人/來源",
+        "purpose": "用途",
+        "standard": "最低可交付標準",
+        "nextStep": "下一步"
+      },
+      {
+        "page": "商品頁",
+        "item": "手工黑糖細微纖維特寫",
+        "type": "photo",
+        "status": "ready",
+        "owner": "既有素材",
+        "purpose": "產品力證明",
+        "standard": "清晰可見纖維質地",
+        "nextStep": "進行尺寸裁切"
+      },
+      {
+        "page": "商品頁",
+        "item": "產品夾鏈袋/罐裝去背照",
+        "type": "photo",
+        "status": "needs-review",
+        "owner": "設計組",
+        "purpose": "選單/購物車使用",
+        "standard": "純白背景, 邊緣銳利",
+        "nextStep": "確認是否補拍罐裝新樣式"
+      }
+    ],
+    "guardrails": [
+      {
+        "claim": "醫療效能宣稱",
+        "risk": "法律風險",
+        "action": "Strictly Forbidden"
+      },
+      {
+        "claim": "全台唯一 / 埔里唯一",
+        "risk": "未經查證",
+        "action": "Avoid"
+      }
     ]
   },
   "gaps": [
@@ -323,8 +390,6 @@
       "[2026-05-09] Ingest | 補入新版成本結構 Excel",
       "[2026-05-09] Analysis | 2025 商品銷售與財務資料更新"
     ],
-    "warnings": [
-      "Failed to parse QDM dynamic readiness: ENOENT: no such file or directory, open 'C:\\Users\\user\\.gemini\\antigravity\\scratch\\tiebilum\\knowledge\\wiki\\analysis\\qdm_asset_progress.md'"
-    ]
+    "warnings": []
   }
 }
