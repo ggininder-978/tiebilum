@@ -1,5 +1,10 @@
 # Tiebilum OS Operation Log
 
+## [2026-05-10] 📈 Feature | 實作 Dashboard 來源追溯 (Source Traceability)
+- **Spec**: 更新 JSON contract，為知識卡片加入 `whyItMatters` 與 `nextAction`。
+- **Logic**: 強化 `build_knowledge_dashboard_data.mjs`，在產生資料時注入策略意圖。
+- **UI**: 將知識卡片升級為決策節點，顯示來源路徑、最後更新時間與下一步行動，使 Dashboard 成為真正的專案管理樞紐。
+
 ## [2026-05-09] Synthesis | LLM Wiki + HTML Artifacts
 - **Source Review**: Reviewed user-provided X thread summary and cross-checked public references for Claude Artifacts, Karpathy's LLM Wiki pattern, LLM Wiki structure, and an MCP-backed implementation.
 - **Synthesis**: Added `knowledge/wiki/concepts/llm_wiki_html_artifacts.md`.

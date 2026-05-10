@@ -17,6 +17,9 @@ describe('index dashboard UI', () => {
     assert.match(html, /QDM 開店平台/);
     assert.match(html, /品牌資料維護/);
     assert.match(html, /copyPrompt/);
+    assert.match(html, /whyItMatters/);
+    assert.match(html, /nextAction/);
+    assert.match(html, /updatedHint/);
     assert.doesNotMatch(html, /AI 維護/);
     assert.doesNotMatch(html, /網站架構/);
   });

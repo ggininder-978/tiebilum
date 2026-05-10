@@ -351,12 +351,47 @@
     }
 
     .path {
-      display: block;
-      margin-top: 12px;
       color: var(--blue);
-      font-size: 0.78rem;
       overflow-wrap: anywhere;
       text-decoration: none;
+    }
+
+    .traceability-details {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--line);
+      display: grid;
+      gap: 12px;
+    }
+
+    .traceability-details dl {
+      margin: 0;
+      display: grid;
+      gap: 2px;
+      font-size: 0.9rem;
+    }
+
+    .traceability-details dt {
+      color: var(--clay);
+      font-weight: 700;
+      font-size: 0.82rem;
+    }
+
+    .traceability-details dd {
+      margin: 0;
+      color: var(--ink);
+    }
+    
+    .trace-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+      font-size: 0.78rem;
+    }
+    
+    .updated-hint {
+      color: var(--muted);
     }
 
     .empty-state {
@@ -704,7 +739,17 @@
             <span class="chip">${escapeHtml(item.category)}</span>
             ${(item.tags || []).map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join('')}
           </div>
-          <a class="path" href="${escapeHtml(item.path)}">${escapeHtml(item.path)}</a>
+          
+          ${(item.whyItMatters || item.nextAction) ? `
+          <div class="traceability-details">
+            ${item.whyItMatters ? `<dl><dt>為什麼重要</dt><dd>${escapeHtml(item.whyItMatters)}</dd></dl>` : ''}
+            ${item.nextAction ? `<dl><dt>下一步行動</dt><dd>${escapeHtml(item.nextAction)}</dd></dl>` : ''}
+          </div>` : ''}
+          
+          <div class="trace-meta">
+            <a class="path" href="${escapeHtml(item.path)}">${escapeHtml(item.path)}</a>
+            <span class="updated-hint">更新於 ${escapeHtml(item.updatedHint)}</span>
+          </div>
         </article>
       `).join('');
     }

@@ -1,77 +1,77 @@
-source_row,action,product,raw_route,revenue_source,profit_source,quality_flags,notes
-3,subtotal_only,,ODM/貼牌,reported,reported,category_subtotal,"Kept for reconciliation, excluded from SKU ranking."
-4,excluded,原味黑糖,"批發-台糖
-(單顆包裝夾鏈袋260g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-5,excluded,薑汁黑糖,"批發-台糖
-(單顆包裝夾鏈袋260g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-6,excluded,桂圓黑糖,"批發-台糖
-(單顆包裝夾鏈袋260g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-7,excluded,玫瑰四物黑糖,"批發-台糖
-(單顆包裝夾鏈袋260g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-8,included_sales_row,桂圓紅棗薑黑糖,"批發-台糖
-(單顆包裝夾鏈袋260g)",reported,reported,,
-9,included_sales_row,冬瓜,"批發-台糖
-(單顆包裝夾鏈袋260g)",reported,reported,,
-10,included_sales_row,原味黑糖,"批發-台糖
-(手切夾鏈袋380g)",reported,reported,,
-11,included_sales_row,薑汁黑糖,"批發-台糖
-(手切夾鏈袋380g)",reported,reported,,
-12,included_sales_row,桂圓黑糖,"批發-台糖
-(手切夾鏈袋380g)",reported,reported,,
-13,included_sales_row,玫瑰四物黑糖,"批發-台糖
-(手切夾鏈袋380g)",reported,reported,,
-14,included_sales_row,原味黑糖,"批發-農會
-(手切夾鏈袋380g)",reported,reported,,
-15,included_sales_row,薑汁黑糖,"批發-農會
-(手切夾鏈袋380g)",reported,reported,,
-16,included_sales_row,桂圓黑糖,"批發-農會
-(手切夾鏈袋380g)",reported,reported,,
-17,included_sales_row,玫瑰四物黑糖,"批發-農會
-(手切夾鏈袋380g)",reported,reported,,
-18,included_sales_row,原味黑糖,"貼牌客戶-埔里農會
-(手切夾鏈袋380g)",reported,reported,,
-19,included_sales_row,薑汁黑糖,"貼牌客戶-埔里農會
-(手切夾鏈袋380g)",reported,reported,,
-20,included_sales_row,桂圓黑糖,"貼牌客戶-埔里農會
-(手切夾鏈袋380g)",reported,reported,,
-21,included_sales_row,玫瑰四物黑糖,"貼牌客戶-埔里農會
-(手切夾鏈袋380g)",reported,reported,,
-22,excluded,原味黑糖,"批發-
-(手切夾鏈袋380g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-23,excluded,薑汁黑糖,"批發-
-(手切夾鏈袋380g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-24,excluded,桂圓黑糖,"批發-
-(手切夾鏈袋380g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-25,excluded,玫瑰四物黑糖,"批發-
-(手切夾鏈袋380g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-26,included_sales_row,原味黑糖,手切(每台斤),reported,reported,,
-27,included_sales_row,薑汁黑糖,手切(每台斤),reported,reported,,
-28,included_sales_row,桂圓黑糖,手切(每台斤),reported,reported,,
-29,included_sales_row,玫瑰四物黑糖,手切(每台斤),reported,reported,,
-30,excluded,原味黑糖,單顆包(每台斤）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-31,excluded,薑汁黑糖,單顆包(每台斤）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-32,excluded,桂圓黑糖,單顆包(每台斤）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-33,excluded,玫瑰四物黑糖,單顆包(每台斤）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-34,excluded,桂圓紅棗薑,單顆包(每台斤）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-35,excluded,冬瓜,單顆包(每台斤）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-36,included_sales_row,黑糖蜜,蜜類-350ml,reported,reported,,
-37,included_sales_row,黑糖檸檬,蜜類-150ml,reported,reported,negative_profit,
-38,included_sales_row,百香果黑糖,蜜類-150ml,reported,reported,,
-39,included_sales_row,梅精黑糖,蜜類-150ml,reported,reported,,
-40,included_sales_row,黑糖蜜,蜜類-1890ml,missing,missing,missing_price;missing_cost;zero_reported_revenue,
-41,included_sales_row,梅精黑糖,蜜類-1890ml,missing,missing,missing_price;missing_cost;zero_reported_revenue,
-42,subtotal_only,,通路上架,reported,reported,category_subtotal,"Kept for reconciliation, excluded from SKU ranking."
-43,excluded,原味黑糖,日月町罐裝(160g）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-44,excluded,薑汁黑糖,日月町罐裝(160g）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-45,excluded,桂圓黑糖,日月町罐裝(160g）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-46,excluded,玫瑰四物黑糖,日月町罐裝(160g）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-47,excluded,桂圓紅棗薑,日月町罐裝(160g）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-48,excluded,冬瓜,日月町罐裝(160g）,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-49,excluded,2入任搭組合,日月町禮盒組,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
-50,section_marker,,OEM：客戶提供產品規格、設計圖、配方，我們依照客戶需求生產。,,,oem_section_starts,Following rows are parsed as OEM unless another route rule applies.
-51,included_sales_row,黑糖薑母茶,科技中藥廠,reported,reported,,
+﻿source_row,action,product,raw_route,revenue_source,profit_source,quality_flags,notes
+3,subtotal_only,,ODM/鞎潛?,reported,reported,category_subtotal,"Kept for reconciliation, excluded from SKU ranking."
+4,excluded,?暺?,"?寧-?啁?
+(?桅???憭暸?鋡?60g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+5,excluded,??暺?,"?寧-?啁?
+(?桅???憭暸?鋡?60g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+6,excluded,獢?暺?,"?寧-?啁?
+(?桅???憭暸?鋡?60g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+7,excluded,?怎?暺?,"?寧-?啁?
+(?桅???憭暸?鋡?60g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+8,included_sales_row,獢?蝝???蝟?"?寧-?啁?
+(?桅???憭暸?鋡?60g)",reported,reported,,
+9,included_sales_row,?祉?,"?寧-?啁?
+(?桅???憭暸?鋡?60g)",reported,reported,,
+10,included_sales_row,?暺?,"?寧-?啁?
+(??憭暸?鋡?80g)",reported,reported,,
+11,included_sales_row,??暺?,"?寧-?啁?
+(??憭暸?鋡?80g)",reported,reported,,
+12,included_sales_row,獢?暺?,"?寧-?啁?
+(??憭暸?鋡?80g)",reported,reported,,
+13,included_sales_row,?怎?暺?,"?寧-?啁?
+(??憭暸?鋡?80g)",reported,reported,,
+14,included_sales_row,?暺?,"?寧-颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+15,included_sales_row,??暺?,"?寧-颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+16,included_sales_row,獢?暺?,"?寧-颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+17,included_sales_row,?怎?暺?,"?寧-颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+18,included_sales_row,?暺?,"鞎潛?摰Ｘ-??颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+19,included_sales_row,??暺?,"鞎潛?摰Ｘ-??颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+20,included_sales_row,獢?暺?,"鞎潛?摰Ｘ-??颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+21,included_sales_row,?怎?暺?,"鞎潛?摰Ｘ-??颲脫?
+(??憭暸?鋡?80g)",reported,reported,,
+22,excluded,?暺?,"?寧-
+(??憭暸?鋡?80g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+23,excluded,??暺?,"?寧-
+(??憭暸?鋡?80g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+24,excluded,獢?暺?,"?寧-
+(??憭暸?鋡?80g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+25,excluded,?怎?暺?,"?寧-
+(??憭暸?鋡?80g)",,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+26,included_sales_row,?暺?,??(瘥??,reported,reported,,
+27,included_sales_row,??暺?,??(瘥??,reported,reported,,
+28,included_sales_row,獢?暺?,??(瘥??,reported,reported,,
+29,included_sales_row,?怎?暺?,??(瘥??,reported,reported,,
+30,excluded,?暺?,?桅???瘥?歹?,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+31,excluded,??暺?,?桅???瘥?歹?,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+32,excluded,獢?暺?,?桅???瘥?歹?,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+33,excluded,?怎?暺?,?桅???瘥?歹?,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+34,excluded,獢?蝝????桅???瘥?歹?,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+35,excluded,?祉?,?桅???瘥?歹?,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+36,included_sales_row,暺?????-350ml,reported,reported,,
+37,included_sales_row,暺?瑼豢狀,??-150ml,reported,reported,negative_profit,
+38,included_sales_row,?暸???蝟???-150ml,reported,reported,,
+39,included_sales_row,璇移暺?,??-150ml,reported,reported,,
+40,included_sales_row,暺?????-1890ml,missing,missing,missing_price;missing_cost;zero_reported_revenue,
+41,included_sales_row,璇移暺?,??-1890ml,missing,missing,missing_price;missing_cost;zero_reported_revenue,
+42,subtotal_only,,?楝銝,reported,reported,category_subtotal,"Kept for reconciliation, excluded from SKU ranking."
+43,excluded,?暺?,?交??箇?鋆?160g嚗?,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+44,excluded,??暺?,?交??箇?鋆?160g嚗?,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+45,excluded,獢?暺?,?交??箇?鋆?160g嚗?,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+46,excluded,?怎?暺?,?交??箇?鋆?160g嚗?,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+47,excluded,獢?蝝????交??箇?鋆?160g嚗?,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+48,excluded,?祉?,?交??箇?鋆?160g嚗?,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+49,excluded,2?乩遙?剔????交??箇旨??,,,no_2025_quantity,Cost catalog row without positive 2025 quantity.
+50,section_marker,,OEM嚗恥?嗆?靘???潦身閮????對????批恥?園?瘙??Ｕ?,,oem_section_starts,Following rows are parsed as OEM unless another route rule applies.
+51,included_sales_row,暺?????蝘?銝剛撱?reported,reported,,
 108,exclude_competitor_section,,,,,competitor_section_starts,"Rows after this marker are competitor reference rows, not Tiebilum 2025 sales."
-109,excluded,海陸奢華霸王組8~10人 贈玫瑰鹽一罐(市價89元),,,,competitor_reference,Excluded by competitor section rule.
-110,excluded,五星級海陸烤肉組(5-8人份),,,,competitor_reference,Excluded by competitor section rule.
-111,excluded,超值燒肉烤肉組,,,,competitor_reference,Excluded by competitor section rule.
-112,excluded,中秋烤肉海陸豪華14件組(約5-7人/份),,,,competitor_reference,Excluded by competitor section rule.
+109,excluded,瘚琿憟Ｚ?貊?蝯?~10鈭?韐?圈厭銝蝵?撣89??,,,,competitor_reference,Excluded by competitor section rule.
+110,excluded,鈭?蝝絲?貊??(5-8鈭箔遢),,,,competitor_reference,Excluded by competitor section rule.
+111,excluded,頞潛????,,,,competitor_reference,Excluded by competitor section rule.
+112,excluded,銝剔??方?瘚琿鞊芾14隞嗥?(蝝?-7鈭?隞?,,,,competitor_reference,Excluded by competitor section rule.

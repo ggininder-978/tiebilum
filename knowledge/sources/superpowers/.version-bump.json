@@ -1,4 +1,4 @@
-{
+﻿{
   "files": [
     { "path": "package.json", "field": "version" },
     { "path": ".claude-plugin/plugin.json", "field": "version" },

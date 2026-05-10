@@ -1,7 +1,7 @@
-Product_Core,Spec,Weight_g,Wholesale_Price,COGS,Price_Per_100g,Profit_Per_100g,Efficiency_Level
-原味黑糖,手切夾鏈袋,380,117,22,30.8,25.0,Tier 1 (Premium)
-原味黑糖,手切(每台斤),600,100,21,16.7,13.2,Tier 3 (Bulk/Low Efficiency)
-薑汁黑糖,手切夾鏈袋,380,117,25,30.8,24.2,Tier 1 (Premium)
-薑汁黑糖,手切(每台斤),600,110,27,18.3,13.8,Tier 3 (Bulk/Low Efficiency)
-薑汁黑糖,單顆包(每台斤),600,130,40,21.7,15.0,Tier 2 (Functional)
-桂圓紅棗薑,手切夾鏈袋,380,200,31,52.6,44.5,Tier 1+ (Ultra Premium)
+﻿Product_Core,Spec,Weight_g,Wholesale_Price,COGS,Price_Per_100g,Profit_Per_100g,Efficiency_Level
+?暺?,??憭暸?鋡?380,117,22,30.8,25.0,Tier 1 (Premium)
+?暺?,??(瘥??,600,100,21,16.7,13.2,Tier 3 (Bulk/Low Efficiency)
+??暺?,??憭暸?鋡?380,117,25,30.8,24.2,Tier 1 (Premium)
+??暺?,??(瘥??,600,110,27,18.3,13.8,Tier 3 (Bulk/Low Efficiency)
+??暺?,?桅???瘥??,600,130,40,21.7,15.0,Tier 2 (Functional)
+獢?蝝?????憭暸?鋡?380,200,31,52.6,44.5,Tier 1+ (Ultra Premium)

@@ -84,7 +84,9 @@
       "summary": "string",
       "path": "repository-relative path",
       "tags": ["string"],
-      "updatedHint": "string"
+      "updatedHint": "string",
+      "whyItMatters": "string",
+      "nextAction": "string"
     }
   ],
   "gaps": [
@@ -140,7 +142,7 @@
 - 分類篩選。
 - 狀態篩選。
 - 由 wiki 支撐的知識卡片。
-- 每張卡片顯示標題、分類、狀態、摘要、標籤與來源路徑。
+- 每張卡片顯示標題、分類、狀態、摘要、標籤、來源路徑 (`path`)、最後更新 (`updatedHint`)、為什麼重要 (`whyItMatters`) 與下一步行動 (`nextAction`)。
 
 UI 可以連到 repository-relative path，但靜態 GitHub Pages 不能開啟本機 filesystem path。
 

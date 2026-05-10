@@ -22,7 +22,7 @@ describe('buildDashboardData', () => {
     assert.ok(data.library.some((item) => item.category === '品牌脈絡'));
     assert.ok(data.library.some((item) => item.category === '官網素材與文案'));
     assert.ok(data.library.some((item) => item.category === '品牌資料維護'));
-    assert.ok(data.library.every((item) => item.id && item.title && item.summary && item.path));
+    assert.ok(data.library.every((item) => item.id && item.title && item.summary && item.path && item.whyItMatters && item.nextAction && item.updatedHint !== undefined));
 
     assert.ok(data.gaps.some((gap) => /素材|文案/.test(gap.title + gap.nextAction)));
     assert.ok(data.agentPrompts.some((prompt) => /QDM/.test(prompt.prompt)));

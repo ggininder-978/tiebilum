@@ -26,6 +26,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/wiki/entities/brand_tiebilum.md',
     tags: ['品牌', '現狀', '合作夥伴'],
     summary: '鐵比倫目前需要把品牌故事、產品事實與 QDM 頁面素材整理成合作夥伴可快速使用的資料室。',
+    whyItMatters: '這是所有對外溝通的源頭，定調品牌的「職人」與「誠實」屬性。',
+    nextAction: '持續根據銷售數據與市場回饋，精煉核心價值的論述。'
   },
   {
     id: 'brand-history',
@@ -35,6 +37,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/wiki/entities/brand_history.md',
     tags: ['埔里', '故事', '職人感'],
     summary: '保存品牌來源、地方脈絡與可延伸為官網關於頁、品牌介紹、CIS 語言的敘事素材。',
+    whyItMatters: '支撐「風土 (Terroir)」主張，讓品牌不再是無根的電商商品。',
+    nextAction: '產出 1916 Badila 紅甘蔗的歷史考據，補齊原物料的歷史厚度。'
   },
   {
     id: 'market-positioning',
@@ -44,6 +48,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/wiki/concepts/market_positioning.md',
     tags: ['定位', '受眾', '行銷'],
     summary: '整理鐵比倫應如何被理解、如何避免浮誇語氣，以及行銷團隊可使用的定位句型。',
+    whyItMatters: '防止合作夥伴將品牌過度包裝或偏離「誠實鄰里」的基調。',
+    nextAction: '根據產品利潤結構，微調主打受眾的溝通優先級。'
   },
   {
     id: 'qdm-copy-assets',
@@ -53,6 +59,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/specs/tiebilum_knowledge_dashboard_spec.md',
     tags: ['QDM', '文案', '素材缺口'],
     summary: 'QDM 開店平台頁面需要品牌脈絡、商品介紹、首頁文案方向、視覺素材與缺漏狀態。',
+    whyItMatters: '直接影響銷售轉換率與新客的第一印象。',
+    nextAction: '整理首頁與商品頁的實際素材缺口清單交給設計團隊。'
   },
   {
     id: 'cis-visual-inputs',
@@ -62,6 +70,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/specs/tiebilum_knowledge_dashboard_spec.md',
     tags: ['CIS', '視覺', '品牌語氣'],
     summary: 'CIS 夥伴需要品牌故事、語氣、定位、視覺線索與商品脈絡，目前仍需整理可交付素材。',
+    whyItMatters: '決定了品牌未來在所有通路的視覺一致性與質感。',
+    nextAction: '將品牌語氣轉化為設計團隊可回答的視覺提問清單。'
   },
   {
     id: 'product-sales-2025',
@@ -71,6 +81,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/wiki/entities/product_sales_2025.md',
     tags: ['商品', '銷售', '2025'],
     summary: '提供商品營收、貢獻淨利與行銷優先順序的分析入口，適合作為商品頁與活動主題參考。',
+    whyItMatters: '指出哪些產品是「帶路雞」，哪些是「高毛利護城河」。',
+    nextAction: '將此摘要擴充為高密度的銷售診斷模組 (Sales Diagnosis)。'
   },
   {
     id: 'financial-analysis-2025',
@@ -80,6 +92,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/wiki/analysis/2025_financial_sales_analysis.md',
     tags: ['財務', '通路', '待確認'],
     summary: '彙整銷售、成本與通路資訊；部分成本缺漏仍需確認，不應直接當作正式對外財務說法。',
+    whyItMatters: '避免盲目投放行銷資源在負毛利的通路上。',
+    nextAction: '釐清缺漏的成本項目，並將結論提煉給行銷團隊。'
   },
   {
     id: 'dashboard-maintenance',
@@ -89,6 +103,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/specs/tiebilum_knowledge_dashboard_spec.md',
     tags: ['規格', 'audit', '資料維護'],
     summary: '定義資料來源、儀表板資料合約、驗證方式與 audit 規則，確保資料室可持續維護。',
+    whyItMatters: '保證儀表板不會隨時間腐化，確保資料可信度。',
+    nextAction: '嚴格遵守 Spec-First，任何架構改動前先更新規格。'
   },
   {
     id: 'llm-wiki-artifacts',
@@ -98,6 +114,8 @@ const LIBRARY_SEEDS = [
     path: 'knowledge/wiki/concepts/llm_wiki_html_artifacts.md',
     tags: ['知識庫', 'HTML', '工作流'],
     summary: '說明以 Markdown wiki 作為長期記憶、HTML 儀表板作為互動視圖與資料維護入口的方法。',
+    whyItMatters: '這是整個 Tiebilum OS 協作效率的底層邏輯。',
+    nextAction: '讓所有新加入的 Agent 模型都能先閱讀此文件以了解脈絡。'
   },
 ];
 
