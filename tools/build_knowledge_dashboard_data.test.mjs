@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { buildDashboardData } from './build_knowledge_dashboard_data.mjs';
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
+import { buildDashboardData, ROOT } from './build_knowledge_dashboard_data.mjs';
 
 describe('buildDashboardData', () => {
   it('builds the required dashboard data contract with QDM and brand maintenance wording', async () => {
@@ -28,14 +30,16 @@ describe('buildDashboardData', () => {
     assert.ok(data.agentPrompts.some((prompt) => /QDM/.test(prompt.prompt)));
     assert.ok(data.agentPrompts.every((prompt) => prompt.title && prompt.intent && prompt.prompt));
     
-    // Sales Diagnosis Verification
-    assert.ok(data.salesDiagnosis.summary.revenue > 1000000);
-    assert.ok(data.salesDiagnosis.productSignals.length >= 5);
-    assert.ok(data.salesDiagnosis.productSignals.every(s => s.source && s.action));
-    assert.ok(data.salesDiagnosis.channelSignals.length >= 3);
-    assert.ok(data.salesDiagnosis.channelSignals.every(c => c.source));
-    assert.ok(data.salesDiagnosis.notes.length >= 3);
-    assert.ok(data.salesDiagnosis.notes.every(n => n.source && n.type));
+    // Security Contract Verification
+    assert.strictEqual(data.salesDiagnosis, undefined, 'Cleartext salesDiagnosis MUST NOT be in public JSON');
+    assert.strictEqual(data.isSalesDiagnosisEncrypted, true, 'Main JSON must flag encrypted status');
+
+    // Vault File Verification
+    const vaultPath = join(ROOT, 'knowledge/sales-diagnosis-vault.json');
+    const vaultRaw = await readFile(vaultPath, 'utf8');
+    const vault = JSON.parse(vaultRaw);
+    assert.ok(vault.data && vault.iv && vault.tag, 'Vault must contain encrypted components');
+    assert.strictEqual(vault.algo, 'aes-256-gcm');
 
     assert.ok(Array.isArray(data.audit.latestLogEntries));
 

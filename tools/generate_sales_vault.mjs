@@ -7,7 +7,15 @@ import { getSalesDiagnosis } from './build_knowledge_dashboard_data.mjs';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = join(__dirname, '..');
 
-async function generateVault(password = 'tiebilum2025') {
+async function generateVault(password) {
+  if (!password) {
+    password = process.env.TIEBILUM_VAULT_PWD || process.argv[2];
+  }
+
+  if (!password) {
+    throw new Error('Encryption password required. Provide via TIEBILUM_VAULT_PWD env var or as CLI argument.');
+  }
+
   console.log('--- Generating Encrypted Sales Vault ---');
   
   // 1. Get raw data

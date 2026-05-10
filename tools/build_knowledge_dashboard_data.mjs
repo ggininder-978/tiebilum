@@ -2,7 +2,7 @@ import { appendFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path, { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 const KNOWLEDGE_FILES = [
   'knowledge/index.md',
