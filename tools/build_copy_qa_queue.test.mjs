@@ -40,23 +40,28 @@ test('Copy QA Queue Generator Logic', async (t) => {
   });
 
   await t.test('Persistence - should keep human revisions', async () => {
+    const originalRaw = await readFile(JSON_PATH, 'utf8');
+
     // 1. Manually update an item in JSON
-    const raw = await readFile(JSON_PATH, 'utf8');
-    const data = JSON.parse(raw);
-    const target = data.items[0];
-    target.humanRevision = 'TEST_REVISION';
-    target.reviewStatus = 'revised';
-    await writeFile(JSON_PATH, JSON.stringify(data, null, 2), 'utf8');
+    try {
+      const data = JSON.parse(originalRaw);
+      const target = data.items[0];
+      target.humanRevision = 'TEST_REVISION';
+      target.reviewStatus = 'revised';
+      await writeFile(JSON_PATH, JSON.stringify(data, null, 2), 'utf8');
 
-    // 2. Run builder again
-    execSync('node tools/build_copy_qa_queue.mjs', { cwd: ROOT });
+      // 2. Run builder again
+      execSync('node tools/build_copy_qa_queue.mjs', { cwd: ROOT });
 
-    // 3. Check if revision still exists
-    const newRaw = await readFile(JSON_PATH, 'utf8');
-    const newData = JSON.parse(newRaw);
-    const newTarget = newData.items.find(i => i.id === target.id);
-    
-    assert.strictEqual(newTarget.humanRevision, 'TEST_REVISION', 'Human revision should be persisted');
-    assert.strictEqual(newTarget.reviewStatus, 'revised', 'Review status should be persisted');
+      // 3. Check if revision still exists
+      const newRaw = await readFile(JSON_PATH, 'utf8');
+      const newData = JSON.parse(newRaw);
+      const newTarget = newData.items.find(i => i.id === target.id);
+
+      assert.strictEqual(newTarget.humanRevision, 'TEST_REVISION', 'Human revision should be persisted');
+      assert.strictEqual(newTarget.reviewStatus, 'revised', 'Review status should be persisted');
+    } finally {
+      await writeFile(JSON_PATH, originalRaw, 'utf8');
+    }
   });
 });
