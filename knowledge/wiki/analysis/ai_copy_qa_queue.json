@@ -38,12 +38,12 @@
         "knowledge/dashboard-data.json"
       ],
       "riskTags": [
-        "tone-mismatch"
+        "unsupported-claim"
       ],
-      "reviewStatus": "pending",
+      "reviewStatus": "rejected",
       "humanRevision": "",
-      "reviewNote": "",
-      "updatedAt": "2026-05-10T13:45:12.958Z"
+      "reviewNote": "2026-05-11 使用者修正：鐵比倫為還原製成，非手工；無人工添加物需來源確認後才可作公開宣稱。",
+      "updatedAt": "2026-05-11T00:00:00+08:00"
     },
     {
       "id": "hp-cta-001",

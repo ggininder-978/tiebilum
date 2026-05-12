@@ -20,6 +20,7 @@ Key figures: 2025 revenue NT$1,523,247; product contribution profit NT$233,288; 
 - [[channel_master]]: 銷售通路索引。
 
 ### Concepts (概念與模型)
+- [[brand_core_messages]]: 正式品牌核心訊息與五大溝通支柱。
 - [[pricing_model]]: 定價與毛利計算公式。
 - [[market_positioning]]: 誠實挑戰者戰略與客群 Persona。
 - [[brand_voice]]: 品牌語調與文案規範。
@@ -31,6 +32,7 @@ Key figures: 2025 revenue NT$1,523,247; product contribution profit NT$233,288; 
 ## 🛠 Specs (規格與規則)
 - [[sales_cleaning_spec]]: 銷售數據清洗標準規格。
 - [[sales_mapping_rules]]: 原始欄位映射規則表。
+- [[brand_fact_correction_2026-05-11]]: 製程與原料來源事實修正，禁止手工與契作宣稱。
 
 ## 📁 Sources (原始素材)
 - `2025 營收銷量(原始檔案).csv`

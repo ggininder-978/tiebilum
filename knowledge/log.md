@@ -1,5 +1,16 @@
 # Tiebilum OS Operation Log
 
+## [2026-05-11] 🖋️ Synthesis | 正式寫入品牌核心訊息
+- **New Concept**: 建立 `knowledge/wiki/concepts/brand_core_messages.md`。
+- **Alignment**: 整合使用者提供的最新版文案，確立「一句話品牌文案」與「五大核心訊息（攤商初心、避風盆地、21年固執、紅甘蔗榮光、鄰里誠信）」之標準規格。
+- **Updates**: 更新 `strategy/02_brand_positioning_record.md` 與 `knowledge/index.md`，將其設定為行銷執行的單一事實來源 (SSOT)。
+
+## [2026-05-11] Audit | 修正品牌製程與原料來源宣稱
+- **Spec**: 新增 `knowledge/specs/brand_fact_correction_2026-05-11.md`。
+- **Correction**: 使用者確認鐵比倫為還原製成，非手工製程；原料不可宣稱契作。
+- **Updates**: 修正品牌核心頁、產品護城河、市場受眾、埔里紅甘蔗史、AI Copy QA 佇列與 Dashboard 資料中的手工/契作敘述。
+- **Guardrail**: `無人工添加物` 暫不列為核准公開文案，需來源文件確認後才可恢復。
+
 ## [2026-05-10] 📈 Feature | 實作 Dashboard 來源追溯 (Source Traceability)
 - **Spec**: 更新 JSON contract，為知識卡片加入 `whyItMatters` 與 `nextAction`。
 - **Logic**: 強化 `build_knowledge_dashboard_data.mjs`，在產生資料時注入策略意圖。
