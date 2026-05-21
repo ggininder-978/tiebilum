@@ -1,1683 +1,582 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>鐵比倫 Tiebilum | 品牌資料室</title>
-  <style>
-    :root {
-      --paper: #fbfaf7;
-      --panel: #ffffff;
-      --ink: #25211d;
-      --muted: #6f6960;
-      --line: #ded8cd;
-      --cane: #b58b28;
-      --leaf: #42614d;
-      --clay: #9c5f45;
-      --blue: #365f73;
-      --soft-gold: #f3ead2;
-      --soft-green: #e8efe8;
-      --soft-clay: #f4e7df;
-      --shadow: 0 16px 40px rgba(49, 42, 34, 0.08);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--paper);
-      color: var(--ink);
-      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-    .shell {
-      min-height: 100vh;
-    }
-
-    .topbar {
-      border-bottom: 1px solid var(--line);
-      background: rgba(251, 250, 247, 0.95);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .topbar-inner,
-    .header-inner,
-    .content {
-      width: min(1180px, calc(100% - 32px));
-      margin: 0 auto;
-    }
-
-    .topbar-inner {
-      min-height: 58px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .brand-mark {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      min-width: 150px;
-    }
-
-    .brand-mark strong {
-      font-size: 1rem;
-      letter-spacing: 0;
-    }
-
-    .brand-mark span {
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .top-links {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .text-link {
-      color: var(--muted);
-      font-size: 0.9rem;
-      text-decoration: none;
-      padding: 6px 8px;
-      border-radius: 6px;
-    }
-
-    .text-link:hover,
-    .text-link:focus {
-      color: var(--ink);
-      background: var(--soft-gold);
-      outline: none;
-    }
-
-    .header {
-      padding: 44px 0 28px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #fffdf8 0%, var(--paper) 100%);
-    }
-
-    .header-inner {
-      display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(280px, 0.8fr);
-      gap: 30px;
-      align-items: end;
-    }
-
-    .eyebrow {
-      margin: 0 0 10px;
-      color: var(--clay);
-      font-size: 0.88rem;
-      font-weight: 700;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    .summary {
-      margin: 16px 0 0;
-      max-width: 760px;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-
-    .meta-panel {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .meta-panel dl {
-      display: grid;
-      gap: 12px;
-      margin: 0;
-    }
-
-    .meta-panel div {
-      display: grid;
-      gap: 2px;
-    }
-
-    .meta-panel dt {
-      color: var(--muted);
-      font-size: 0.78rem;
-    }
-
-    .meta-panel dd {
-      margin: 0;
-      font-weight: 700;
-    }
-
-    .chips {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    .chip,
-    .status {
-      display: inline-flex;
-      align-items: center;
-      min-height: 28px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      padding: 3px 10px;
-      color: var(--muted);
-      background: #fff;
-      font-size: 0.82rem;
-      white-space: nowrap;
-    }
-
-    .status.ready,
-    .status.confirmed {
-      color: var(--leaf);
-      background: var(--soft-green);
-      border-color: #c4d5c7;
-    }
-
-    .status.in-progress,
-    .status.draft {
-      color: var(--blue);
-      background: #e3edf1;
-      border-color: #bfd1da;
-    }
-
-    .status.needs-review,
-    .status.missing {
-      color: var(--clay);
-      background: var(--soft-clay);
-      border-color: #e4c6b6;
-    }
-
-    .content {
-      display: grid;
-      grid-template-columns: minmax(0, 1.6fr) minmax(300px, 0.8fr);
-      gap: 26px;
-      padding: 30px 0 56px;
-    }
-
-    section {
-      margin-bottom: 26px;
-    }
-
-    .section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 1.22rem;
-      letter-spacing: 0;
-    }
-
-    .section-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .progress-grid,
-    .library-grid,
-    .gaps-list,
-    .prompts-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .progress-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .panel,
-    .item-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .panel-header,
-    .item-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: start;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    h3 {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0;
-    }
-
-    .panel p,
-    .item-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .item-list {
-      margin: 14px 0 0;
-      padding: 0;
-      list-style: none;
-      display: grid;
-      gap: 8px;
-    }
-
-    .item-list li {
-      border-left: 3px solid var(--cane);
-      padding-left: 10px;
-      color: var(--ink);
-      font-size: 0.9rem;
-    }
-
-    .filters {
-      display: grid;
-      grid-template-columns: minmax(220px, 1fr) 180px 180px;
-      gap: 10px;
-      margin-bottom: 12px;
-    }
-
-    .field {
-      display: grid;
-      gap: 4px;
-    }
-
-    label {
-      color: var(--muted);
-      font-size: 0.78rem;
-      font-weight: 700;
-    }
-
-    input,
-    select {
-      width: 100%;
-      min-height: 42px;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      background: #fff;
-      color: var(--ink);
-      padding: 8px 10px;
-    }
-
-    input:focus,
-    select:focus,
-    button:focus {
-      outline: 2px solid rgba(181, 139, 40, 0.35);
-      outline-offset: 2px;
-    }
-
-    .library-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 12px;
-    }
-
-    .path {
-      color: var(--blue);
-      overflow-wrap: anywhere;
-      text-decoration: none;
-    }
-
-    .traceability-details {
-      margin-top: 16px;
-      padding-top: 16px;
-      border-top: 1px dashed var(--line);
-      display: grid;
-      gap: 12px;
-    }
-
-    .traceability-details dl {
-      margin: 0;
-      display: grid;
-      gap: 2px;
-      font-size: 0.9rem;
-    }
-
-    .traceability-details dt {
-      color: var(--clay);
-      font-weight: 700;
-      font-size: 0.82rem;
-    }
-
-    .traceability-details dd {
-      margin: 0;
-      color: var(--ink);
-    }
-    
-    .trace-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 16px;
-      font-size: 0.78rem;
-    }
-    
-    .updated-hint {
-      color: var(--muted);
-    }
-
-    .empty-state {
-      border: 1px dashed var(--line);
-      border-radius: 8px;
-      padding: 20px;
-      color: var(--muted);
-      background: #fff;
-    }
-
-    .side {
-      align-self: start;
-      position: sticky;
-      top: 82px;
-    }
-
-    .gap-card {
-      border-left: 4px solid var(--clay);
-    }
-
-    .prompt-card {
-      display: grid;
-      gap: 12px;
-    }
-
-    .prompt-card textarea {
-      width: 100%;
-      min-height: 136px;
-      resize: vertical;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 10px;
-      color: var(--ink);
-      background: #fffdf9;
-      font: inherit;
-      font-size: 0.88rem;
-    }
-
-    .button-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .copy-button {
-      min-height: 36px;
-      border: 1px solid var(--leaf);
-      border-radius: 6px;
-      background: var(--leaf);
-      color: #fff;
-      padding: 6px 12px;
-      cursor: pointer;
-    }
-
-    .copy-button:hover {
-      background: #344e3e;
-    }
-
-    .copy-state {
-      min-height: 20px;
-      color: var(--leaf);
-      font-size: 0.82rem;
-    }
-
-    .error {
-      border: 1px solid #d8a094;
-      background: #fff3f0;
-      color: #773829;
-      padding: 14px;
-      border-radius: 8px;
-    }
-
-    /* Sales Diagnosis Styles */
-    .diagnosis-grid {
-      display: grid;
-      gap: 20px;
-    }
-
-    .key-figures {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 12px;
-    }
-
-    .key-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-
-    .key-card dt {
-      color: var(--muted);
-      font-size: 0.78rem;
-      margin-bottom: 4px;
-    }
-
-    .key-card dd {
-      margin: 0;
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .key-card.highlight dd {
-      color: var(--cane);
-    }
-
-    .diagnosis-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .signal-group h3 {
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .signal-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .signal-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .signal-info {
-      display: grid;
-      gap: 2px;
-    }
-
-    .signal-name {
-      font-weight: 700;
-      font-size: 0.94rem;
-    }
-
-    .signal-meta {
-      font-size: 0.82rem;
-      color: var(--muted);
-    }
-
-    .signal-stats {
-      text-align: right;
-      display: grid;
-      gap: 2px;
-    }
-
-    .signal-value {
-      font-weight: 700;
-      font-size: 0.94rem;
-    }
-
-    .action-tag {
-      font-size: 0.7rem;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .action-tag.promote { background: #344e3e; color: #fff; }
-    .action-tag.review { background: #9c5f45; color: #fff; }
-    .action-tag.keep { background: var(--line); color: var(--ink); }
-
-    .channel-bar-group {
-      display: grid;
-      gap: 14px;
-    }
-
-    .channel-item {
-      display: grid;
-      gap: 6px;
-      padding: 10px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-    }
-
-    .channel-header {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.88rem;
-      font-weight: 700;
-    }
-
-    .bar-container {
-      height: 6px;
-      background: var(--soft-gold);
-      border-radius: 3px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bar-fill {
-      height: 100%;
-      background: var(--cane);
-      border-radius: 3px;
-    }
-
-    .diagnosis-notes {
-      grid-column: span 2;
-      background: #fdfaf3;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .diagnosis-notes h3 {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .note-item {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 0.94rem;
-      align-items: start;
-    }
-
-    .note-item:last-child { margin-bottom: 0; }
-
-    .note-icon {
-      flex-shrink: 0;
-      width: 22px;
-      height: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 900;
-    }
-
-    .note-risk .note-icon { background: #9c5f45; color: #fff; }
-    .note-observation .note-icon { background: #365f73; color: #fff; }
-    .note-action .note-icon { background: #42614d; color: #fff; }
-
-    .source-trace-link {
-      font-size: 0.7rem;
-      color: var(--blue);
-      text-decoration: none;
-      opacity: 0.6;
-      border: 1px solid currentColor;
-      padding: 1px 4px;
-      border-radius: 3px;
-      margin-left: 4px;
-    }
-
-    .source-trace-link:hover { opacity: 1; background: var(--blue); color: #fff; }
-
-    .internal-label {
-      font-size: 0.65rem;
-      color: var(--muted);
-      font-weight: 400;
-      display: block;
-      margin-top: 2px;
-      opacity: 0.7;
-    }
-
-    /* Evidence & Heritage Styles */
-    .heritage-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 20px;
-    }
-
-    .fact-timeline {
-      display: grid;
-      gap: 16px;
-    }
-
-    .fact-card {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      position: relative;
-    }
-
-    .fact-year {
-      font-weight: 900;
-      color: var(--cane);
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-      display: block;
-    }
-
-    .copy-vault {
-      background: #fdfaf3;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .copy-item {
-      padding: 12px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      margin-bottom: 12px;
-      font-style: italic;
-      position: relative;
-    }
-
-    .copy-context {
-      display: block;
-      font-size: 0.7rem;
-      color: var(--muted);
-      margin-top: 8px;
-      font-style: normal;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .forbidden-area {
-      grid-column: span 2;
-      background: #fff5f5;
-      border: 1px solid #fab1a0;
-      border-radius: 8px;
-      padding: 16px;
-    }
-
-    .forbidden-item {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 10px;
-      align-items: center;
-    }
-
-    .forbidden-label {
-      background: #d63031;
-      color: #fff;
-      font-size: 0.65rem;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 900;
-    }
-
-    .forbidden-text {
-      font-size: 0.94rem;
-      color: #2d3436;
-    }
-
-    .forbidden-reason {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-left: auto;
-    }
-
-    @media (max-width: 920px) {
-      .heritage-grid { grid-template-columns: 1fr; }
-      .forbidden-area { grid-column: span 1; }
-    }
-
-    /* QDM Readiness Styles */
-    .qdm-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .bundle-card {
-      background: #fff;
-      border: 2px solid var(--line);
-      border-radius: 12px;
-      padding: 24px;
-    }
-
-    .bundle-field {
-      margin-bottom: 20px;
-    }
-
-    .bundle-field label {
-      display: block;
-      font-size: 0.75rem;
-      color: var(--muted);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-
-    .copyable-text {
-      font-size: 1.1rem;
-      color: var(--ink);
-      line-height: 1.6;
-      border-left: 3px solid var(--cane);
-      padding-left: 12px;
-    }
-
-    .asset-list {
-      display: grid;
-      gap: 12px;
-    }
-
-    .asset-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px;
-      background: var(--panel);
-      border-radius: 6px;
-      border: 1px solid var(--line);
-    }
-
-    .asset-meta {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .product-grid {
-      grid-column: span 2;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 16px;
-    }
-
-    .product-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-    }
-
-    .product-card h4 {
-      margin-bottom: 12px;
-      border-bottom: 1px solid var(--line);
-      padding-bottom: 8px;
-      color: var(--cane);
-    }
-
-    @media (max-width: 920px) {
-      .qdm-grid { grid-template-columns: 1fr; }
-      .product-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Password Lock Styles */
-    .locked-panel {
-      background: #fdfaf3;
-      border: 1px dashed var(--line);
-      border-radius: 12px;
-      padding: 40px 20px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .lock-icon {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-
-    .password-form {
-      display: flex;
-      gap: 8px;
-      max-width: 320px;
-      width: 100%;
-    }
-
-    .password-input {
-      flex: 1;
-      min-height: 40px;
-    }
-
-    .unlock-button {
-      background: var(--ink);
-      color: #fff;
-      border: none;
-      padding: 0 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background 0.2s;
-    }
-
-    .unlock-button:hover {
-      background: var(--clay);
-    }
-
-    .unlock-error {
-      color: var(--clay);
-      font-size: 0.85rem;
-      min-height: 20px;
-    }
-
-    @media (max-width: 768px) {
-      .diagnosis-content { grid-template-columns: 1fr; }
-      .diagnosis-notes { grid-column: span 1; }
-    }
-
-    @media (max-width: 920px) {
-      .header-inner,
-      .content {
-        grid-template-columns: 1fr;
-      }
-
-      .side {
-        position: static;
-      }
-    }
-
-    @media (max-width: 700px) {
-      .topbar-inner {
-        align-items: start;
-        flex-direction: column;
-        padding: 12px 0;
-      }
-
-      .top-links {
-        justify-content: start;
-      }
-
-      .header {
-        padding-top: 28px;
-      }
-
-      .progress-grid,
-      .library-grid,
-      .filters {
-        grid-template-columns: 1fr;
-      }
-
-      .section-heading,
-      .panel-header,
-      .item-header,
-      .button-row {
-        align-items: start;
-        flex-direction: column;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐵比倫 — 首頁設計稿（設計師溝通用）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#1a1410;
+  --warm:#2e1f0a;
+  --brown:#5a3a1a;
+  --gold:#8b6020;
+  --gold-light:#b8893c;
+  --sand:#c9ad80;
+  --cream:#f5efe3;
+  --cream-light:#faf6ef;
+  --cream-mid:#ede3cf;
+  --white:#fdfaf5;
+  --gray:#888070;
+  --serif:'Noto Serif TC',serif;
+  --sans:'Noto Sans TC',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;}
+
+.anno{
+  position:absolute;top:12px;right:12px;
+  background:#1a6bff;color:#fff;
+  font-size:10px;font-family:monospace;letter-spacing:.04em;
+  padding:3px 8px;border-radius:2px;z-index:10;
+  pointer-events:none;
+}
+.section-wrap{position:relative;}
+.img-placeholder{
+  background:var(--cream-mid);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--sand);font-size:12px;letter-spacing:.08em;
+  font-family:monospace;text-align:center;line-height:1.6;
+}
+
+.legend{
+  background:#f0f4ff;border:1px solid #c5d3f5;
+  padding:1.2rem 1.5rem;margin-bottom:0;
+  font-family:monospace;font-size:12px;
+}
+.legend h2{font-size:13px;font-weight:600;color:#1a6bff;margin-bottom:.6rem;letter-spacing:.06em;}
+.legend ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:4px 2rem;}
+.legend li{color:#334;}
+.legend span{color:#1a6bff;font-weight:600;margin-right:.4rem;}
+
+nav{
+  position:relative;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 2.5rem;
+  border-bottom:1px solid var(--cream-mid);
+  background:var(--white);
+}
+.nav-logo{
+  font-family:var(--serif);font-size:1.25rem;font-weight:600;
+  color:var(--warm);letter-spacing:.06em;
+}
+.nav-logo span{font-size:.7rem;display:block;font-weight:300;color:var(--gold);letter-spacing:.18em;margin-top:1px;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.8rem;color:var(--brown);text-decoration:none;letter-spacing:.06em;}
+.nav-links a:hover{color:var(--gold);}
+.nav-right{display:flex;align-items:center;gap:1.2rem;}
+.nav-right a{font-size:.78rem;color:var(--brown);text-decoration:none;}
+.cart-icon{width:20px;height:20px;border:1.5px solid var(--brown);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--brown);}
+
+.hero{
+  position:relative;
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:580px;
+}
+.hero-text{
+  padding:5rem 3rem 4rem 2.5rem;
+  display:flex;flex-direction:column;justify-content:center;
+  border-right:1px solid var(--cream-mid);
+}
+.hero-eyebrow{
+  font-size:.68rem;letter-spacing:.22em;color:var(--gold);
+  margin-bottom:1.5rem;text-transform:uppercase;
+}
+.hero-title{
+  font-family:var(--serif);font-size:3.2rem;font-weight:500;
+  color:var(--warm);line-height:1.1;margin-bottom:1.2rem;
+}
+.hero-title em{font-style:normal;font-weight:300;font-size:2rem;display:block;margin-top:.3rem;}
+.hero-sub{
+  font-size:.9rem;color:var(--brown);line-height:2;
+  max-width:300px;margin-bottom:2.5rem;
+}
+.hero-cta{
+  display:inline-block;padding:.7rem 2rem;
+  background:var(--warm);color:var(--cream);
+  font-size:.8rem;letter-spacing:.1em;text-decoration:none;
+  font-family:var(--sans);
+}
+.hero-cta:hover{background:var(--gold);}
+.hero-img{position:relative;overflow:hidden;}
+.hero-img .img-placeholder{height:100%;font-size:11px;flex-direction:column;gap:.5rem;}
+.hero-img-note{font-size:10px;color:var(--sand);max-width:140px;text-align:center;}
+
+.tagline-bar{
+  padding:1.8rem 2.5rem;
+  text-align:center;
+  border-bottom:1px solid var(--cream-mid);
+  background:var(--cream-light);
+}
+.tagline-bar p{
+  font-family:var(--serif);font-size:1.05rem;font-weight:400;
+  color:var(--warm);letter-spacing:.1em;
+}
+.tagline-bar span{color:var(--gold-light);}
+
+.products-section{padding:4rem 2.5rem;border-bottom:1px solid var(--cream-mid);}
+.section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2.5rem;}
+.section-label{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;}
+.section-link{font-size:.78rem;color:var(--brown);text-decoration:none;border-bottom:1px solid var(--cream-mid);}
+.product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--cream-mid);}
+.product-card{background:var(--white);padding:0;}
+.product-img.img-placeholder{height:220px;flex-direction:column;gap:.4rem;font-size:10px;}
+.product-info{padding:1.2rem 1rem 1.5rem;}
+.product-series{font-size:.65rem;letter-spacing:.16em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.4rem;}
+.product-name{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--warm);margin-bottom:.5rem;}
+.product-desc{font-size:.78rem;color:var(--brown);line-height:1.8;margin-bottom:.9rem;}
+.product-btn{font-size:.72rem;color:var(--gold);letter-spacing:.08em;text-decoration:none;border-bottom:1px solid var(--sand);}
+
+.story-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:460px;border-bottom:1px solid var(--cream-mid);
+}
+.story-img.img-placeholder{height:100%;flex-direction:column;gap:.4rem;font-size:10px;}
+.story-text{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;}
+.story-text .section-label{margin-bottom:1.5rem;}
+.story-title{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--warm);line-height:1.5;margin-bottom:1.2rem;}
+.story-body{font-size:.85rem;color:var(--brown);line-height:2.1;margin-bottom:1.8rem;}
+.story-body p+p{margin-top:.9rem;}
+.story-quote{border-left:2px solid var(--sand);padding:.7rem 1rem;margin-bottom:1.8rem;}
+.story-quote p{font-family:var(--serif);font-size:.88rem;color:var(--warm);line-height:1.9;font-style:italic;}
+.text-link{font-size:.78rem;color:var(--gold);letter-spacing:.08em;text-decoration:none;border-bottom:1px solid var(--sand);}
+
+.fudo-section{
+  padding:4.5rem 2.5rem;
+  background:var(--cream);
+  border-bottom:1px solid var(--cream-mid);
+  text-align:center;
+}
+.fudo-title{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--warm);margin-bottom:1rem;line-height:1.5;}
+.fudo-sub{font-size:.85rem;color:var(--brown);max-width:440px;margin:0 auto 3rem;line-height:2;}
+.fudo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;text-align:left;}
+.fudo-item{background:var(--white);padding:1.5rem 1.3rem;border:1px solid var(--cream-mid);}
+.fudo-year{font-size:.65rem;letter-spacing:.16em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.6rem;}
+.fudo-item-title{font-family:var(--serif);font-size:.95rem;color:var(--warm);font-weight:500;margin-bottom:.5rem;line-height:1.5;}
+.fudo-item-text{font-size:.78rem;color:var(--brown);line-height:1.85;}
+
+.usage-section{padding:4rem 2.5rem;border-bottom:1px solid var(--cream-mid);}
+.usage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.usage-cell{background:var(--white);padding:1.3rem 1.1rem;}
+.usage-img.img-placeholder{height:100px;font-size:9px;margin-bottom:.8rem;}
+.usage-tag{font-size:.62rem;letter-spacing:.14em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.35rem;}
+.usage-name{font-family:var(--serif);font-size:.9rem;color:var(--warm);font-weight:500;margin-bottom:.3rem;}
+.usage-desc{font-size:.75rem;color:var(--brown);line-height:1.75;}
+
+/* TRUST / 第三方見證 */
+.trust-section{
+  padding:4.5rem 2.5rem;
+  border-bottom:1px solid var(--cream-mid);
+  background:var(--white);
+}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.trust-card{background:var(--white);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1rem;}
+.trust-badge{
+  display:inline-block;align-self:flex-start;
+  font-size:.62rem;letter-spacing:.14em;color:var(--gold);
+  border:1px solid var(--sand);padding:3px 10px;text-transform:uppercase;
+}
+.trust-card-img.img-placeholder{height:120px;font-size:9px;flex-direction:column;gap:.3rem;}
+.trust-card-title{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--warm);line-height:1.5;}
+.trust-card-desc{font-size:.78rem;color:var(--brown);line-height:1.85;}
+.trust-card-note{font-size:.7rem;color:var(--sand);font-family:monospace;}
+
+/* SOCIAL WALL */
+.social-section{
+  padding:4rem 2.5rem;
+  border-bottom:1px solid var(--cream-mid);
+  background:var(--cream-light);
+}
+.social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.social-cell.img-placeholder{height:160px;flex-direction:column;gap:.3rem;font-size:9px;}
+
+.b2b-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--cream-mid);
+}
+.b2b-cell{padding:3.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;}
+.b2b-cell:first-child{border-right:1px solid var(--cream-mid);}
+.b2b-cell:last-child{background:var(--cream);}
+.b2b-label{font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
+.b2b-title{font-family:var(--serif);font-size:1.3rem;color:var(--warm);font-weight:500;margin-bottom:.8rem;line-height:1.5;}
+.b2b-desc{font-size:.82rem;color:var(--brown);line-height:1.9;margin-bottom:1.5rem;}
+.b2b-btn{
+  display:inline-block;padding:.6rem 1.6rem;
+  border:1px solid var(--brown);color:var(--brown);
+  font-size:.75rem;letter-spacing:.08em;text-decoration:none;
+  align-self:flex-start;
+}
+.b2b-btn:hover{background:var(--warm);color:var(--cream);border-color:var(--warm);}
+
+footer{
+  background:var(--warm);color:var(--sand);
+  padding:3rem 2.5rem 2rem;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:2rem;margin-bottom:2.5rem;}
+.footer-brand .footer-logo{font-family:var(--serif);font-size:1.1rem;color:var(--cream-light);margin-bottom:.6rem;}
+.footer-brand p{font-size:.75rem;color:var(--sand);line-height:1.85;max-width:200px;}
+.footer-col h4{font-size:.65rem;letter-spacing:.16em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.9rem;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:.4rem;}
+.footer-col ul li a{font-size:.75rem;color:var(--sand);text-decoration:none;}
+.footer-col ul li a:hover{color:var(--cream-light);}
+.footer-bottom{border-top:1px solid #4a3520;padding-top:1.2rem;display:flex;justify-content:space-between;align-items:center;}
+.footer-bottom p{font-size:.7rem;color:#7a6040;}
+.social-links{display:flex;gap:1rem;}
+.social-links a{font-size:.7rem;color:var(--sand);text-decoration:none;letter-spacing:.06em;}
+</style>
 </head>
 <body>
-  <div class="shell">
-    <nav class="topbar" aria-label="頁面導覽">
-      <div class="topbar-inner">
-        <div class="brand-mark">
-          <strong>鐵比倫 Tiebilum</strong>
-          <span>品牌資料室</span>
-        </div>
-        <div class="top-links">
-          <a class="text-link" href="#progress">協作進度</a>
-          <a class="text-link" href="#library">知識資料庫</a>
-          <a class="text-link" href="#gaps">資料缺口</a>
-          <a class="text-link" href="#prompts">品牌資料維護 Prompt</a>
-        </div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <h2>[ DESIGN SPEC — 設計師溝通用稿 · 鐵比倫首頁 · v1.1 · 2026-05-22 ]</h2>
+  <ul>
+    <li><span>[NAV]</span> 導覽列</li>
+    <li><span>[HERO]</span> 主視覺區</li>
+    <li><span>[TAGLINE]</span> 品牌核心句</li>
+    <li><span>[PRODUCTS]</span> 產品系列入口</li>
+    <li><span>[STORY]</span> 品牌故事摘要</li>
+    <li><span>[FUDO]</span> 風土與產地</li>
+    <li><span>[USAGE]</span> 日常使用情境</li>
+    <li><span>[TRUST]</span> 第三方見證（新增）</li>
+    <li><span>[SOCIAL]</span> 社群牆 UGC（新增）</li>
+    <li><span>[B2B]</span> 伴手禮 / 企業採購入口</li>
+    <li><span>[FOOTER]</span> 頁尾</li>
+    <li><span>灰色區塊</span> = 圖片佔位（需品牌提供實拍）</li>
+  </ul>
+</div>
+
+<!-- 01 NAV -->
+<div class="section-wrap">
+  <span class="anno">[NAV] 01 · 導覽列 — sticky</span>
+  <nav>
+    <div class="nav-logo">
+      鐵比倫
+      <span>TIEBILUN · 埔里黑糖</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">品牌故事</a></li>
+      <li><a href="#">黑糖蜜系列</a></li>
+      <li><a href="#">黑糖磚系列</a></li>
+      <li><a href="#">埔里伴手禮</a></li>
+      <li><a href="#">企業採購</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#">購物須知</a>
+      <a href="#">實體據點</a>
+      <div class="cart-icon">0</div>
+    </div>
+  </nav>
+</div>
+
+<!-- 02 HERO -->
+<div class="section-wrap">
+  <span class="anno">[HERO] 02 · 主視覺 — 左文右圖</span>
+  <div class="hero">
+    <div class="hero-text">
+      <div class="hero-eyebrow">南投 · 埔里 · 純淨黑糖</div>
+      <h1 class="hero-title">
+        鐵比倫
+        <em>來自埔里山林的純淨黑糖</em>
+      </h1>
+      <p class="hero-sub">
+        從擺攤到自己生產把關，<br>
+        二十幾年只做一件事：<br>
+        讓每一批黑糖都值得信任。
+      </p>
+      <a href="#" class="hero-cta">選購產品 →</a>
+    </div>
+    <div class="hero-img">
+      <div class="img-placeholder" style="height:100%;flex-direction:column;gap:.5rem;">
+        <div>[ 主視覺圖片 ]</div>
+        <div class="hero-img-note">建議：黑糖蜜產品實拍<br>或埔里山林風景<br>比例 1:1 以上<br>暖色調自然光</div>
       </div>
-    </nav>
-
-    <header class="header">
-      <div class="header-inner">
-        <div>
-          <p class="eyebrow">供 QDM 開店平台、CIS 視覺與行銷協作使用</p>
-          <h1 id="brandName">鐵比倫品牌資料室</h1>
-          <p class="summary" id="brandSummary">載入品牌資料中。</p>
-          <div class="chips" aria-label="資料狀態">
-            <span class="chip">品牌：整理中</span>
-            <span class="chip">素材/CIS：待確認</span>
-            <span class="chip">品牌資料維護：可用</span>
-          </div>
-        </div>
-        <aside class="meta-panel" aria-label="品牌狀態摘要">
-          <dl>
-            <div>
-              <dt>目前階段</dt>
-              <dd id="brandStage">讀取中</dd>
-            </div>
-            <div>
-              <dt>品牌定位</dt>
-              <dd id="brandPositioning">讀取中</dd>
-            </div>
-            <div>
-              <dt>最後生成</dt>
-              <dd id="generatedAt">讀取中</dd>
-            </div>
-          </dl>
-        </aside>
-      </div>
-    </header>
-
-    <main class="content">
-      <div>
-        <section id="progress" aria-labelledby="progressTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="progressTitle">協作進度</h2>
-              <p class="section-note">聚焦素材缺口、文案、品牌脈絡與資料維護。</p>
-            </div>
-          </div>
-          <div class="progress-grid" id="progressGrid"></div>
-        </section>
-
-        <section id="diagnosis" aria-labelledby="diagnosisTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="diagnosisTitle">2025 銷售診斷 (Sales Diagnosis)</h2>
-              <p class="section-note">由財務與銷售數據萃取的決策訊號，導引利潤優化方向。</p>
-            </div>
-          </div>
-          <div id="salesDiagnosis"></div>
-        </section>
-
-        <section id="heritage" aria-labelledby="heritageTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="heritageTitle">品牌證據與傳承 (Evidence & Heritage)</h2>
-              <p class="section-note">由歷史考據與風土事實萃取的品牌資產，供文案與視覺設計對焦。</p>
-            </div>
-          </div>
-          <div id="evidenceHeritage"></div>
-        </section>
-
-        <section id="qdm" aria-labelledby="qdmTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="qdmTitle">QDM 頁面交付清單 (QDM Page Readiness)</h2>
-              <p class="section-note">專為官網、CIS 與行銷夥伴設計的頁面交付狀態與可用素材。</p>
-            </div>
-          </div>
-          <div id="qdmReadiness"></div>
-        </section>
-
-        <section id="library" aria-labelledby="libraryTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="libraryTitle">知識資料庫</h2>
-              <p class="section-note">從 wiki 摘要而來，保留來源路徑方便回查。</p>
-            </div>
-          </div>
-          <div class="filters" aria-label="知識資料庫篩選">
-            <div class="field">
-              <label for="searchInput">搜尋</label>
-              <input id="searchInput" type="search" placeholder="輸入品牌、QDM、商品、CIS">
-            </div>
-            <div class="field">
-              <label for="categoryFilter">分類</label>
-              <select id="categoryFilter"></select>
-            </div>
-            <div class="field">
-              <label for="statusFilter">狀態</label>
-              <select id="statusFilter"></select>
-            </div>
-          </div>
-          <div class="library-grid" id="libraryGrid"></div>
-          <div class="empty-state" id="emptyLibrary" hidden>沒有符合條件的資料。</div>
-        </section>
-      </div>
-
-      <aside class="side">
-        <section id="gaps" aria-labelledby="gapsTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="gapsTitle">資料缺口</h2>
-              <p class="section-note">需要補齊或確認的素材與說法。</p>
-            </div>
-          </div>
-          <div class="gaps-list" id="gapsList"></div>
-        </section>
-
-        <section id="prompts" aria-labelledby="promptsTitle">
-          <div class="section-heading">
-            <div>
-              <h2 id="promptsTitle">資料維護 Prompt</h2>
-              <p class="section-note">複製後交給代理人整理下一步。</p>
-            </div>
-          </div>
-          <div class="prompts-list" id="promptsList"></div>
-        </section>
-      </aside>
-    </main>
+    </div>
   </div>
+</div>
 
-  <script>
-    const state = {
-      data: null,
-      query: '',
-      category: 'all',
-      status: 'all',
-    };
+<!-- 03 TAGLINE BAR -->
+<div class="section-wrap">
+  <span class="anno">[TAGLINE] 03 · 品牌核心句</span>
+  <div class="tagline-bar">
+    <p>鐵比倫：來自埔里山林的純淨黑糖。<span>創辦人把關 · 每批穩定 · 埔里風土</span></p>
+  </div>
+</div>
 
-    const statusText = {
-      ready: '可用',
-      'in-progress': '整理中',
-      'needs-review': '待確認',
-      missing: '缺漏',
-      confirmed: '已確認',
-      draft: '草稿',
-    };
-
-    const els = {
-      brandName: document.getElementById('brandName'),
-      brandSummary: document.getElementById('brandSummary'),
-      brandStage: document.getElementById('brandStage'),
-      brandPositioning: document.getElementById('brandPositioning'),
-      generatedAt: document.getElementById('generatedAt'),
-      progressGrid: document.getElementById('progressGrid'),
-      salesDiagnosis: document.getElementById('salesDiagnosis'),
-      evidenceHeritage: document.getElementById('evidenceHeritage'),
-      qdmReadiness: document.getElementById('qdmReadiness'),
-      libraryGrid: document.getElementById('libraryGrid'),
-      gapsList: document.getElementById('gapsList'),
-      promptsList: document.getElementById('promptsList'),
-      searchInput: document.getElementById('searchInput'),
-      categoryFilter: document.getElementById('categoryFilter'),
-      statusFilter: document.getElementById('statusFilter'),
-      emptyLibrary: document.getElementById('emptyLibrary'),
-    };
-
-    function escapeHtml(value) {
-      return String(value ?? '')
-        .replaceAll('&', '&amp;')
-        .replaceAll('<', '&lt;')
-        .replaceAll('>', '&gt;')
-        .replaceAll('"', '&quot;')
-        .replaceAll("'", '&#039;');
-    }
-
-    function formatDate(value) {
-      if (!value) return '未提供';
-      const date = new Date(value);
-      if (Number.isNaN(date.valueOf())) return value;
-      return date.toLocaleString('zh-TW', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-      });
-    }
-
-    function statusBadge(status) {
-      return `<span class="status ${escapeHtml(status)}">${escapeHtml(statusText[status] || status)}</span>`;
-    }
-
-    function renderHeader(data) {
-      els.brandName.textContent = data.brand.name;
-      els.brandSummary.textContent = data.brand.oneLine;
-      els.brandStage.textContent = data.brand.stage;
-      els.brandPositioning.textContent = data.brand.positioning;
-      els.generatedAt.textContent = formatDate(data.generatedAt);
-    }
-
-    function renderSalesDiagnosis(diagnosis) {
-      if (!diagnosis) return;
-      const { summary, productSignals, channelSignals, notes } = diagnosis;
-      const formatCurrency = (val) => new Intl.NumberFormat('zh-TW', { style: 'currency', currency: 'TWD', maximumFractionDigits: 0 }).format(val);
-
-      els.salesDiagnosis.innerHTML = `
-        <div class="diagnosis-grid">
-          <div class="key-figures">
-            <div class="key-card highlight">
-              <dt>2025 營業額 <span class="internal-label">內部管理口徑</span></dt>
-              <dd>${formatCurrency(summary.revenue)}</dd>
-            </div>
-            <div class="key-card">
-              <dt>貢獻淨利 (CP) <span class="internal-label">內部管理口徑</span></dt>
-              <dd>${formatCurrency(summary.contributionProfit)}</dd>
-            </div>
-            <div class="key-card">
-              <dt>貢獻淨利率</dt>
-              <dd>${summary.contributionRate}</dd>
-            </div>
-            <div class="key-card">
-              <dt>已確認營業費用</dt>
-              <dd>${formatCurrency(summary.operatingCosts)}</dd>
-            </div>
-          </div>
-
-          <div class="diagnosis-content">
-            <div class="signal-group">
-              <h3>Product Signals <a href="${summary.source}" class="source-trace-link">Trace Source</a></h3>
-              <div class="signal-list">
-                ${productSignals.map(s => `
-                  <div class="signal-card">
-                    <div class="signal-info">
-                      <span class="signal-name">#${s.rank} ${escapeHtml(s.name)}</span>
-                      <span class="signal-meta">${escapeHtml(s.diagnosis)}</span>
-                    </div>
-                    <div class="signal-stats">
-                      <span class="signal-value">${formatCurrency(s.profit)}</span>
-                      <span class="action-tag ${s.action}">${s.action}</span>
-                      <div style="margin-top: 4px;">
-                        <a href="${s.source}" class="source-trace-link">Trace</a>
-                      </div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="signal-group">
-              <h3>Channel Signals</h3>
-              <div class="channel-bar-group">
-                ${channelSignals.map(c => `
-                  <div class="channel-item">
-                    <div class="channel-header">
-                      <span>${escapeHtml(c.name)} (${c.margin})</span>
-                      <span>${formatCurrency(c.revenue)}</span>
-                    </div>
-                    <div class="bar-container">
-                      <div class="bar-fill" style="width: ${c.margin}"></div>
-                    </div>
-                    <div style="margin-top: 6px; text-align: right;">
-                      <a href="${c.source}" class="source-trace-link">Trace Source</a>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-
-            <div class="diagnosis-notes">
-              <h3>Diagnosis Notes & Actions</h3>
-              <div class="notes-list">
-                ${notes.map(n => `
-                  <div class="note-item note-${n.type}">
-                    <div class="note-icon">${n.type === 'risk' ? '!' : (n.type === 'observation' ? 'i' : '→')}</div>
-                    <div>
-                      ${escapeHtml(n.text)} 
-                      <a href="${n.source}" class="source-trace-link">Trace</a>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          </div>
+<!-- 04 PRODUCTS -->
+<div class="section-wrap">
+  <span class="anno">[PRODUCTS] 04 · 產品系列入口 — 三欄格線</span>
+  <div class="products-section">
+    <div class="section-header">
+      <span class="section-label">產品系列</span>
+      <a href="#" class="section-link">查看全部 →</a>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-img img-placeholder">
+          <div>[ 黑糖蜜產品圖 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：白底俯拍 or 使用情境</div>
         </div>
-      `;
-    }
-
-    function renderEvidenceHeritage(heritage) {
-      if (!heritage) return;
-      const { historyFacts, terroirPoints, usableCopy, forbiddenClaims } = heritage;
-
-      els.evidenceHeritage.innerHTML = `
-        <div class="heritage-grid">
-          <div class="fact-timeline">
-            <h3>Brand Timeline & Facts</h3>
-            ${historyFacts.map(f => `
-              <div class="fact-card">
-                <span class="fact-year">${f.year}</span>
-                <p>${escapeHtml(f.event)}</p>
-                <div style="margin-top: 8px;">
-                  <a href="${f.source}" class="source-trace-link">Source Trace</a>
-                </div>
-              </div>
-            `).join('')}
-            
-            <h3 style="margin-top: 24px;">Terroir & Product Evidence</h3>
-            ${terroirPoints.map(p => `
-              <div class="fact-card">
-                <span class="fact-year" style="font-size: 0.9rem;">${escapeHtml(p.point)}</span>
-                <p>${escapeHtml(p.benefit)}</p>
-                <div style="margin-top: 8px;">
-                  <a href="${p.source}" class="source-trace-link">Source Trace</a>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="copy-vault">
-            <h3>Usable Copy Snippets</h3>
-            <p class="section-note">經核准的文案句，可直接用於 CIS 或官網。</p>
-            ${usableCopy.map(c => `
-              <div class="copy-item">
-                <p>"${escapeHtml(c.text)}"</p>
-                <span class="copy-context">情境：${escapeHtml(c.context)}</span>
-                <div style="margin-top: 10px;">
-                  <a href="${c.source}" class="source-trace-link">Trace</a>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-
-          <div class="forbidden-area">
-            <h3>Guardrails: Forbidden Claims</h3>
-            <p class="section-note" style="color: #636e72;">嚴禁使用的虛浮詞彙或未經證實的宣稱。</p>
-            <div style="margin-top: 16px;">
-              ${forbiddenClaims.map(f => `
-                <div class="forbidden-item">
-                  <span class="forbidden-label">BAN</span>
-                  <span class="forbidden-text">${escapeHtml(f.claim)}</span>
-                  <span class="forbidden-reason">原因：${escapeHtml(f.reason)}</span>
-                  <a href="${f.source}" class="source-trace-link">Trace</a>
-                </div>
-              `).join('')}
-            </div>
-          </div>
+        <div class="product-info">
+          <div class="product-series">黑糖蜜系列</div>
+          <div class="product-name">鐵比倫黑糖蜜</div>
+          <p class="product-desc">溫潤甘甜，適合淋在優格、燕麥或加進飲品。日常早餐的自然甜味。</p>
+          <a href="#" class="product-btn">了解更多 →</a>
         </div>
-      `;
-    }
-
-
-    function renderQdmReadiness(readiness) {
-      if (!readiness) return;
-      const { homepage, products, assetGaps, guardrails } = readiness;
-
-      els.qdmReadiness.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-          <h2 style="margin: 0; color: var(--cane);">QDM Page Readiness</h2>
-          <a href="outputs/copy_qa_online_intake.html" class="source-trace-link" style="padding: 8px 16px; background: var(--ink); color: #fff; border-radius: 6px; text-decoration: none;">提出文案勘誤建議</a>
+      </div>
+      <div class="product-card">
+        <div class="product-img img-placeholder">
+          <div>[ 黑糖磚產品圖 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：質地特寫 or 手持</div>
         </div>
-        <div class="qdm-grid">
-          <div class="bundle-card">
-            <h3>Homepage Bundle</h3>
-            <div class="bundle-field">
-              <label>Headline (主標)</label>
-              <div class="copyable-text">${escapeHtml(homepage.headline)}</div>
-            </div>
-            <div class="bundle-field">
-              <label>Subheadline (副標)</label>
-              <div class="copyable-text" style="font-size: 1rem;">${escapeHtml(homepage.subheadline)}</div>
-            </div>
-            <div class="bundle-field">
-              <label>Intro (簡介)</label>
-              <div class="copyable-text" style="font-size: 0.95rem;">${escapeHtml(homepage.intro)}</div>
-            </div>
-            <div class="bundle-field">
-              <label>CTA Button</label>
-              <div class="copyable-text" style="font-size: 0.9rem; font-weight: 700;">${escapeHtml(homepage.cta)}</div>
-            </div>
-          </div>
-
-          <div class="asset-list-group">
-            <h3>Visual Asset Checklist</h3>
-            <div class="asset-list">
-              ${assetGaps.map(a => `
-                <div class="asset-item" style="flex-direction: column; align-items: flex-start; gap: 8px;">
-                  <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
-                    <div class="asset-meta">
-                      <span class="chip">${escapeHtml(a.type)}</span>
-                      <strong style="font-size: 0.95rem;">${escapeHtml(a.item)}</strong>
-                    </div>
-                    <span class="status ${a.status}">${a.status === 'ready' ? '可用' : (a.status === 'missing' ? '缺漏' : '待確認')}</span>
-                  </div>
-                  <div style="font-size: 0.8rem; color: var(--muted); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%;">
-                    <span><strong>負責人:</strong> ${escapeHtml(a.owner)}</span>
-                    <span><strong>用途:</strong> ${escapeHtml(a.purpose)}</span>
-                  </div>
-                  <div style="font-size: 0.75rem; background: rgba(0,0,0,0.03); padding: 6px; border-radius: 4px; width: 100%;">
-                    <strong>標準:</strong> ${escapeHtml(a.standard)}<br>
-                    <strong style="color: var(--cane);">下一步:</strong> ${escapeHtml(a.nextStep)}
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-            
-            <div class="forbidden-area" style="margin-top: 24px; grid-column: span 1;">
-              <h3 style="color: #d63031;">QDM Guardrails</h3>
-              <div style="margin-top: 12px;">
-                ${guardrails.map(g => `
-                  <div class="forbidden-item" style="border-bottom: 1px solid #fab1a0; padding-bottom: 8px;">
-                    <div style="flex: 1;">
-                      <div class="forbidden-text" style="font-weight: 700;">${escapeHtml(g.claim)}</div>
-                      <div style="font-size: 0.75rem; color: #636e72;">風險：${escapeHtml(g.risk)} | 建議：${escapeHtml(g.action)}</div>
-                    </div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-
-          <div class="product-grid">
-            <h3>Top SKU Detail Cards</h3>
-            <div class="product-grid">
-              ${products.map(p => `
-                <div class="product-card">
-                  <h4>${escapeHtml(p.name)}</h4>
-                  <div class="bundle-field">
-                    <label>規格</label>
-                    <div style="font-size: 0.9rem;">${escapeHtml(p.specs)}</div>
-                  </div>
-                  <div class="bundle-field">
-                    <label>風味描述</label>
-                    <div style="font-size: 0.9rem; font-style: italic;">${escapeHtml(p.flavor)}</div>
-                  </div>
-                  <div class="bundle-field">
-                    <label>使用情境</label>
-                    <div style="font-size: 0.9rem;">${escapeHtml(p.usage)}</div>
-                  </div>
-                  <div class="bundle-field">
-                    <label>注意事項</label>
-                    <div style="font-size: 0.85rem; color: var(--muted);">${escapeHtml(p.notes)}</div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
+        <div class="product-info">
+          <div class="product-series">黑糖磚系列</div>
+          <div class="product-name">鐵比倫黑糖磚</div>
+          <p class="product-desc">熬煮凝固成塊，可直接含食或溶入熱飲。隨身攜帶的日常甜味。</p>
+          <a href="#" class="product-btn">了解更多 →</a>
         </div>
-      `;
-    }
-
-    function renderProgress(progress) {
-      els.progressGrid.innerHTML = progress.map((item) => `
-        <article class="panel">
-          <div class="panel-header">
-            <h3>${escapeHtml(item.area)}</h3>
-            ${statusBadge(item.status)}
-          </div>
-          <p>${escapeHtml(item.summary)}</p>
-          <ul class="item-list">
-            ${item.items.map((entry) => `<li>${escapeHtml(entry)}</li>`).join('')}
-          </ul>
-        </article>
-      `).join('');
-    }
-
-    function renderFilterOptions(data) {
-      const categories = ['all', ...new Set(data.library.map((item) => item.category))];
-      const statuses = ['all', ...new Set(data.library.map((item) => item.status))];
-      els.categoryFilter.innerHTML = categories.map((category) => (
-        `<option value="${escapeHtml(category)}">${category === 'all' ? '全部分類' : escapeHtml(category)}</option>`
-      )).join('');
-      els.statusFilter.innerHTML = statuses.map((status) => (
-        `<option value="${escapeHtml(status)}">${status === 'all' ? '全部狀態' : escapeHtml(statusText[status] || status)}</option>`
-      )).join('');
-    }
-
-    function matchesLibraryItem(item) {
-      const haystack = [
-        item.title,
-        item.category,
-        item.status,
-        item.summary,
-        item.path,
-        ...(item.tags || []),
-      ].join(' ').toLowerCase();
-      const queryOk = !state.query || haystack.includes(state.query.toLowerCase());
-      const categoryOk = state.category === 'all' || item.category === state.category;
-      const statusOk = state.status === 'all' || item.status === state.status;
-      return queryOk && categoryOk && statusOk;
-    }
-
-    function renderLibrary() {
-      const items = state.data.library.filter(matchesLibraryItem);
-      els.emptyLibrary.hidden = items.length !== 0;
-      els.libraryGrid.innerHTML = items.map((item) => `
-        <article class="item-card">
-          <div class="item-header">
-            <h3>${escapeHtml(item.title)}</h3>
-            ${statusBadge(item.status)}
-          </div>
-          <p>${escapeHtml(item.summary)}</p>
-          <div class="tags">
-            <span class="chip">${escapeHtml(item.category)}</span>
-            ${(item.tags || []).map((tag) => `<span class="chip">${escapeHtml(tag)}</span>`).join('')}
-          </div>
-          
-          ${(item.whyItMatters || item.nextAction) ? `
-          <div class="traceability-details">
-            ${item.whyItMatters ? `<dl><dt>為什麼重要</dt><dd>${escapeHtml(item.whyItMatters)}</dd></dl>` : ''}
-            ${item.nextAction ? `<dl><dt>下一步行動</dt><dd>${escapeHtml(item.nextAction)}</dd></dl>` : ''}
-          </div>` : ''}
-          
-          <div class="trace-meta">
-            <a class="path" href="${escapeHtml(item.path)}">${escapeHtml(item.path)}</a>
-            <span class="updated-hint">更新於 ${escapeHtml(item.updatedHint)}</span>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    function renderGaps(gaps) {
-      els.gapsList.innerHTML = gaps.map((gap) => `
-        <article class="item-card gap-card">
-          <div class="item-header">
-            <h3>${escapeHtml(gap.title)}</h3>
-            <span class="chip">${escapeHtml(gap.area)}</span>
-          </div>
-          <p>${escapeHtml(gap.whyItMatters)}</p>
-          <ul class="item-list">
-            <li>${escapeHtml(gap.nextAction)}</li>
-          </ul>
-        </article>
-      `).join('');
-    }
-
-    function renderPrompts(prompts) {
-      els.promptsList.innerHTML = prompts.map((prompt, index) => `
-        <article class="item-card prompt-card">
-          <div>
-            <h3>${escapeHtml(prompt.title)}</h3>
-            <p>${escapeHtml(prompt.intent)}</p>
-          </div>
-          <label for="prompt-${index}">Prompt 內容</label>
-          <textarea id="prompt-${index}" readonly>${escapeHtml(prompt.prompt)}</textarea>
-          <div class="button-row">
-            <button class="copy-button" type="button" data-prompt-index="${index}" onclick="copyPrompt(${index})">複製</button>
-            <span class="copy-state" id="copy-state-${index}" aria-live="polite"></span>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    async function copyPrompt(index) {
-      const textarea = document.getElementById(`prompt-${index}`);
-      const message = document.getElementById(`copy-state-${index}`);
-      textarea.focus();
-      textarea.select();
-      try {
-        await navigator.clipboard.writeText(textarea.value);
-        message.textContent = '已複製';
-      } catch (error) {
-        document.execCommand('copy');
-        message.textContent = '已選取文字';
-      }
-      setTimeout(() => {
-        message.textContent = '';
-      }, 1800);
-    }
-
-    function bindControls() {
-      els.searchInput.addEventListener('input', (event) => {
-        state.query = event.target.value.trim();
-        renderLibrary();
-      });
-      els.categoryFilter.addEventListener('change', (event) => {
-        state.category = event.target.value;
-        renderLibrary();
-      });
-      els.statusFilter.addEventListener('change', (event) => {
-        state.status = event.target.value;
-        renderLibrary();
-      });
-    }
-
-    function renderDashboard(data) {
-      state.data = data;
-      renderHeader(data);
-      renderProgress(data.progress);
-      
-      // Handle Sales Diagnosis with Password Protection
-      if (sessionStorage.getItem('dashboard_unlocked') === 'true') {
-        renderSalesDiagnosis(data.salesDiagnosis);
-      } else {
-        renderLockOverlay();
-      }
-
-      renderEvidenceHeritage(data.evidenceHeritage);
-      renderQdmReadiness(data.qdmReadiness);
-
-      renderFilterOptions(data);
-      renderLibrary();
-      renderGaps(data.gaps);
-      renderPrompts(data.agentPrompts);
-      bindControls();
-    }
-
-    function renderLockOverlay() {
-      els.salesDiagnosis.innerHTML = `
-        <div class="locked-panel">
-          <div class="lock-icon">🔒</div>
-          <div>
-            <h3>此區塊包含敏感財務數據</h3>
-            <p class="section-note">僅限核心決策團隊查看，請輸入授權密碼。</p>
-          </div>
-          <form class="password-form" onsubmit="handleUnlock(event)">
-            <input type="password" id="diagPassword" class="password-input" placeholder="請輸入密碼">
-            <button type="submit" class="unlock-button">解鎖查看</button>
-          </form>
-          <div id="unlockError" class="unlock-error"></div>
+      </div>
+      <div class="product-card">
+        <div class="product-img img-placeholder">
+          <div>[ 伴手禮禮盒圖 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：整組禮盒平拍</div>
         </div>
-      `;
-    }
-
-    async function handleUnlock(event) {
-      event.preventDefault();
-      const pwd = document.getElementById('diagPassword').value;
-      const errorEl = document.getElementById('unlockError');
-      const submitBtn = event.target.querySelector('button');
-      
-      try {
-        submitBtn.disabled = true;
-        submitBtn.textContent = '解密中...';
-
-        // 1. Fetch the vault (On-demand)
-        const response = await fetch('knowledge/sales-diagnosis-vault.json');
-        if (!response.ok) throw new Error('無法取得加密保管庫文件。');
-        const vault = await response.json();
-
-        // 2. Perform Decryption
-        const decryptedData = await decryptVault(vault, pwd);
-        
-        // 3. Success
-        sessionStorage.setItem('dashboard_unlocked', 'true');
-        state.data.salesDiagnosis = decryptedData; // Store the decrypted data in state
-        renderSalesDiagnosis(decryptedData);
-      } catch (err) {
-        console.error('Decryption error:', err);
-        errorEl.textContent = '密碼不正確或解密失敗。';
-        setTimeout(() => { errorEl.textContent = ''; }, 3000);
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = '解鎖查看';
-      }
-    }
-
-    async function decryptVault(vault, password) {
-      const { salt, iv, tag, data, iterations } = vault;
-      const saltBuf = base64ToBuf(salt);
-      const ivBuf = base64ToBuf(iv);
-      const tagBuf = base64ToBuf(tag);
-      const dataBuf = base64ToBuf(data);
-      
-      // Web Crypto expects the tag to be appended to the ciphertext
-      const combinedBuf = new Uint8Array(dataBuf.length + tagBuf.length);
-      combinedBuf.set(dataBuf);
-      combinedBuf.set(tagBuf, dataBuf.length);
-
-      const encoder = new TextEncoder();
-      const pwdBuf = encoder.encode(password);
-
-      // Import base key material
-      const keyMaterial = await crypto.subtle.importKey(
-        'raw', pwdBuf, 'PBKDF2', false, ['deriveKey']
-      );
-
-      // Derive actual AES key
-      const key = await crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt: saltBuf, iterations, hash: 'SHA-256' },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false, ['decrypt']
-      );
-
-      // Decrypt
-      const decryptedBuf = await crypto.subtle.decrypt(
-        { name: 'AES-GCM', iv: ivBuf },
-        key,
-        combinedBuf
-      );
-
-      const decoder = new TextDecoder();
-      return JSON.parse(decoder.decode(decryptedBuf));
-    }
-
-    function base64ToBuf(b64) {
-      const binStr = atob(b64);
-      const len = binStr.length;
-      const bytes = new Uint8Array(len);
-      for (let i = 0; i < len; i++) {
-        bytes[i] = binStr.charCodeAt(i);
-      }
-      return bytes;
-    }
-
-    function renderLoadError(error) {
-      document.querySelector('.content').innerHTML = `
-        <div class="error">
-          <strong>資料載入失敗</strong>
-          <p>請確認 knowledge/dashboard-data.json 已生成並與 index.html 一起部署。</p>
-          <p>${escapeHtml(error.message || error)}</p>
+        <div class="product-info">
+          <div class="product-series">埔里伴手禮</div>
+          <div class="product-name">埔里伴手禮組</div>
+          <p class="product-desc">適合旅遊伴手、節慶送禮與公司採購。來自埔里的在地風土記憶。</p>
+          <a href="#" class="product-btn">了解更多 →</a>
         </div>
-      `;
-    }
+      </div>
+    </div>
+  </div>
+</div>
 
-    fetch('knowledge/dashboard-data.json')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(renderDashboard)
-      .catch(renderLoadError);
-  </script>
+<!-- 05 STORY -->
+<div class="section-wrap">
+  <span class="anno">[STORY] 05 · 品牌故事摘要 — 左圖右文</span>
+  <div class="story-section">
+    <div class="story-img img-placeholder">
+      <div>[ 品牌故事圖片 ]</div>
+      <div style="font-size:10px;color:#b8a080;text-align:center;max-width:130px;">建議：創辦人或<br>埔里在地場景<br>直式 / 暖調</div>
+    </div>
+    <div class="story-text">
+      <div class="section-label">品牌故事</div>
+      <h2 class="story-title">從擺攤二十年<br>到自己生產把關</h2>
+      <div class="story-body">
+        <p>鐵比倫的創辦人從台糖販售部的攤商做起，二十幾年來長期面對鄰居與老客人。見過品質不穩的原料，也記得每一個信任自己的人，所以後來選擇自己生產、自己把關。</p>
+        <p>帖比倫溪流過埔里盆地。那條溪的名字，成了這個品牌的名字。我們不把黑糖說得複雜，只把該做好的地方做好。</p>
+      </div>
+      <div class="story-quote">
+        <p>自己敢吃，才敢賣給別人。</p>
+      </div>
+      <a href="#" class="text-link">閱讀完整故事 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- 06 FUDO -->
+<div class="section-wrap">
+  <span class="anno">[FUDO] 06 · 風土與產地 — 米色底 · 三欄卡片</span>
+  <div class="fudo-section">
+    <h2 class="fudo-title">埔里的風土記憶</h2>
+    <p class="fudo-sub">環山避風的盆地地形，帖比倫溪的水氣與土壤，以及二十幾年在地深耕的農會夥伴——這些是鐵比倫黑糖風味的底層。</p>
+    <div class="fudo-grid">
+      <div class="fudo-item">
+        <div class="fudo-year">地理 · 南投埔里</div>
+        <div class="fudo-item-title">盆地風土</div>
+        <p class="fudo-item-text">埔里盆地環山避風，水氣穩定、日照充足，形成甘蔗生長的適合條件，也積累了鐵比倫黑糖溫潤甘甜的風味底層。</p>
+      </div>
+      <div class="fudo-item">
+        <div class="fudo-year">地名 · 帖比倫溪</div>
+        <div class="fudo-item-title">溪流記憶</div>
+        <p class="fudo-item-text">鐵比倫的名字來自帖比倫溪的地名記憶。那條溪流過埔里盆地，是這片土地的氣候與風土的一部分。</p>
+      </div>
+      <div class="fudo-item">
+        <div class="fudo-year">在地合作 · 二十餘年</div>
+        <div class="fudo-item-title">農會與鄰里</div>
+        <p class="fudo-item-text">與埔里鎮農會及在地攤商持續合作二十幾年，深根在地供應鏈，每一批原料都有穩定可追溯的來源。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 07 USAGE -->
+<div class="section-wrap">
+  <span class="anno">[USAGE] 07 · 日常使用情境 — 四欄</span>
+  <div class="usage-section">
+    <div class="section-header">
+      <span class="section-label">日常使用情境</span>
+    </div>
+    <div class="usage-grid">
+      <div class="usage-cell">
+        <div class="usage-img img-placeholder">[ 優格 / 燕麥情境圖 ]</div>
+        <div class="usage-tag">早餐</div>
+        <div class="usage-name">優格 · 燕麥</div>
+        <p class="usage-desc">淋在優格或燕麥粥上，一匙溫潤的甘甜帶出早餐的飽足感。</p>
+      </div>
+      <div class="usage-cell">
+        <div class="usage-img img-placeholder">[ 牛奶 / 豆漿飲品圖 ]</div>
+        <div class="usage-tag">飲品</div>
+        <div class="usage-name">牛奶 · 豆漿</div>
+        <p class="usage-desc">加進牛奶、豆漿或紅茶，輕鬆調出一杯帶黑糖香氣的日常飲。</p>
+      </div>
+      <div class="usage-cell">
+        <div class="usage-img img-placeholder">[ 吐司 / 鬆餅圖 ]</div>
+        <div class="usage-tag">麵包</div>
+        <div class="usage-name">吐司 · 鬆餅</div>
+        <p class="usage-desc">塗在吐司或淋在鬆餅上，比果醬更多一層焦香與厚度。</p>
+      </div>
+      <div class="usage-cell">
+        <div class="usage-img img-placeholder">[ 甜點淋醬圖 ]</div>
+        <div class="usage-tag">甜點</div>
+        <div class="usage-name">布丁 · 豆花</div>
+        <p class="usage-desc">作為布丁、仙草、豆花的淋醬，風味自然，沒有多餘添加。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 08 TRUST -->
+<div class="section-wrap">
+  <span class="anno">[TRUST] 08 · 第三方見證 — 三欄（新增版塊）</span>
+  <div class="trust-section">
+    <div class="section-header">
+      <span class="section-label">品質見證</span>
+    </div>
+    <div class="trust-grid">
+
+      <div class="trust-card">
+        <div class="trust-badge">在地認證</div>
+        <div class="trust-card-img img-placeholder">
+          <div>[ 埔里鎮農會 合作照片 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：農會標誌 or 合作場景</div>
+        </div>
+        <div class="trust-card-title">埔里鎮農會<br>長期合作夥伴</div>
+        <p class="trust-card-desc">與埔里鎮農會持續合作逾二十年，在地供應鏈穩定，原料來源可追溯。</p>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-badge">獲獎肯定</div>
+        <div class="trust-card-img img-placeholder">
+          <div>[ 2016 埔里十大伴手禮 獎狀照片 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：獎狀實拍 or 頒獎場景</div>
+        </div>
+        <div class="trust-card-title">2016 埔里十大伴手禮</div>
+        <p class="trust-card-desc">獲選為埔里十大伴手禮，代表在地消費者與評審對鐵比倫品質的長期肯定。</p>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-badge">檢驗合格</div>
+        <div class="trust-card-img img-placeholder">
+          <div>[ SGS 檢驗證書 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：SGS 證書實拍或 logo</div>
+        </div>
+        <div class="trust-card-title">SGS 檢驗合格</div>
+        <p class="trust-card-desc">通過 SGS 第三方檢驗，讓你吃得放心，也讓品質有具體的依據可以查閱。</p>
+        <div class="trust-card-note">[ 證書字號待品牌方提供 ]</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 09 SOCIAL WALL -->
+<div class="section-wrap">
+  <span class="anno">[SOCIAL] 09 · 社群牆 UGC — 四欄（新增版塊）</span>
+  <div class="social-section">
+    <div class="section-header">
+      <span class="section-label">來自社群的日常</span>
+      <a href="#" class="section-link">追蹤 @tiebilun →</a>
+    </div>
+    <div class="social-grid">
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 1 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 2 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 3 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 4 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 B2B -->
+<div class="section-wrap">
+  <span class="anno">[B2B] 10 · 伴手禮 / 企業採購入口</span>
+  <div class="b2b-section">
+    <div class="b2b-cell">
+      <div class="b2b-label">埔里伴手禮</div>
+      <h3 class="b2b-title">送一份有故事<br>的埔里滋味</h3>
+      <p class="b2b-desc">來自帖比倫溪畔的黑糖，適合作為旅遊伴手禮、節慶送禮或探親的心意。包裝樸實、風味穩定，不讓對方猜測。</p>
+      <a href="#" class="b2b-btn">查看伴手禮組合 →</a>
+    </div>
+    <div class="b2b-cell">
+      <div class="b2b-label">企業採購</div>
+      <h3 class="b2b-title">需要穩定品質<br>的大量採購</h3>
+      <p class="b2b-desc">適合公司尾牙禮、員工福利或客戶伴手禮。我們提供穩定品質、客製包裝諮詢與批量報價服務。</p>
+      <a href="#" class="b2b-btn">洽詢企業採購 →</a>
+    </div>
+  </div>
+</div>
+
+<!-- 11 FOOTER -->
+<div class="section-wrap">
+  <span class="anno" style="background:#555;">[FOOTER] 11 · 頁尾</span>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">鐵比倫 TIEBILUN</div>
+        <p>來自埔里山林的純淨黑糖。<br>創辦人把關，每批穩定。</p>
+      </div>
+      <div class="footer-col">
+        <h4>產品</h4>
+        <ul>
+          <li><a href="#">黑糖蜜系列</a></li>
+          <li><a href="#">黑糖磚系列</a></li>
+          <li><a href="#">埔里伴手禮</a></li>
+          <li><a href="#">企業採購</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>品牌</h4>
+        <ul>
+          <li><a href="#">品牌故事</a></li>
+          <li><a href="#">埔里風土</a></li>
+          <li><a href="#">實體據點</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>服務</h4>
+        <ul>
+          <li><a href="#">購物須知</a></li>
+          <li><a href="#">聯絡我們</a></li>
+          <li><a href="#">Instagram</a></li>
+          <li><a href="#">Facebook</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 鐵比倫 TIEBILUN. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#">IG</a>
+        <a href="#">FB</a>
+      </div>
+    </div>
+  </footer>
+</div>
+
 </body>
 </html>

@@ -26,7 +26,6 @@
 html{scroll-behavior:smooth;}
 body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.7;}
 
-/* ─── ANNOTATION SYSTEM ─────────────────────── */
 .anno{
   position:absolute;top:12px;right:12px;
   background:#1a6bff;color:#fff;
@@ -42,7 +41,6 @@ body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:
   font-family:monospace;text-align:center;line-height:1.6;
 }
 
-/* ─── ANNOTATION LEGEND ─────────────────────── */
 .legend{
   background:#f0f4ff;border:1px solid #c5d3f5;
   padding:1.2rem 1.5rem;margin-bottom:0;
@@ -53,7 +51,6 @@ body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:
 .legend li{color:#334;}
 .legend span{color:#1a6bff;font-weight:600;margin-right:.4rem;}
 
-/* ─── NAV ─────────────────────────────────────── */
 nav{
   position:relative;
   display:flex;align-items:center;justify-content:space-between;
@@ -73,7 +70,6 @@ nav{
 .nav-right a{font-size:.78rem;color:var(--brown);text-decoration:none;}
 .cart-icon{width:20px;height:20px;border:1.5px solid var(--brown);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--brown);}
 
-/* ─── HERO ─────────────────────────────────────── */
 .hero{
   position:relative;
   display:grid;grid-template-columns:1fr 1fr;
@@ -104,16 +100,10 @@ nav{
   font-family:var(--sans);
 }
 .hero-cta:hover{background:var(--gold);}
-.hero-img{
-  position:relative;overflow:hidden;
-}
-.hero-img .img-placeholder{
-  height:100%;font-size:11px;
-  flex-direction:column;gap:.5rem;
-}
+.hero-img{position:relative;overflow:hidden;}
+.hero-img .img-placeholder{height:100%;font-size:11px;flex-direction:column;gap:.5rem;}
 .hero-img-note{font-size:10px;color:var(--sand);max-width:140px;text-align:center;}
 
-/* ─── TAGLINE BAR ─────────────────────────────── */
 .tagline-bar{
   padding:1.8rem 2.5rem;
   text-align:center;
@@ -126,7 +116,6 @@ nav{
 }
 .tagline-bar span{color:var(--gold-light);}
 
-/* ─── PRODUCTS ─────────────────────────────────── */
 .products-section{padding:4rem 2.5rem;border-bottom:1px solid var(--cream-mid);}
 .section-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2.5rem;}
 .section-label{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;}
@@ -140,7 +129,6 @@ nav{
 .product-desc{font-size:.78rem;color:var(--brown);line-height:1.8;margin-bottom:.9rem;}
 .product-btn{font-size:.72rem;color:var(--gold);letter-spacing:.08em;text-decoration:none;border-bottom:1px solid var(--sand);}
 
-/* ─── STORY ─────────────────────────────────────── */
 .story-section{
   display:grid;grid-template-columns:1fr 1fr;
   min-height:460px;border-bottom:1px solid var(--cream-mid);
@@ -151,14 +139,10 @@ nav{
 .story-title{font-family:var(--serif);font-size:1.5rem;font-weight:500;color:var(--warm);line-height:1.5;margin-bottom:1.2rem;}
 .story-body{font-size:.85rem;color:var(--brown);line-height:2.1;margin-bottom:1.8rem;}
 .story-body p+p{margin-top:.9rem;}
-.story-quote{
-  border-left:2px solid var(--sand);padding:.7rem 1rem;
-  margin-bottom:1.8rem;
-}
+.story-quote{border-left:2px solid var(--sand);padding:.7rem 1rem;margin-bottom:1.8rem;}
 .story-quote p{font-family:var(--serif);font-size:.88rem;color:var(--warm);line-height:1.9;font-style:italic;}
 .text-link{font-size:.78rem;color:var(--gold);letter-spacing:.08em;text-decoration:none;border-bottom:1px solid var(--sand);}
 
-/* ─── FUDO (風土) ────────────────────────────── */
 .fudo-section{
   padding:4.5rem 2.5rem;
   background:var(--cream);
@@ -173,7 +157,6 @@ nav{
 .fudo-item-title{font-family:var(--serif);font-size:.95rem;color:var(--warm);font-weight:500;margin-bottom:.5rem;line-height:1.5;}
 .fudo-item-text{font-size:.78rem;color:var(--brown);line-height:1.85;}
 
-/* ─── USAGE ─────────────────────────────────────── */
 .usage-section{padding:4rem 2.5rem;border-bottom:1px solid var(--cream-mid);}
 .usage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
 .usage-cell{background:var(--white);padding:1.3rem 1.1rem;}
@@ -182,7 +165,33 @@ nav{
 .usage-name{font-family:var(--serif);font-size:.9rem;color:var(--warm);font-weight:500;margin-bottom:.3rem;}
 .usage-desc{font-size:.75rem;color:var(--brown);line-height:1.75;}
 
-/* ─── B2B ────────────────────────────────────────── */
+/* TRUST / 第三方見證 */
+.trust-section{
+  padding:4.5rem 2.5rem;
+  border-bottom:1px solid var(--cream-mid);
+  background:var(--white);
+}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.trust-card{background:var(--white);padding:2rem 1.5rem;display:flex;flex-direction:column;gap:1rem;}
+.trust-badge{
+  display:inline-block;align-self:flex-start;
+  font-size:.62rem;letter-spacing:.14em;color:var(--gold);
+  border:1px solid var(--sand);padding:3px 10px;text-transform:uppercase;
+}
+.trust-card-img.img-placeholder{height:120px;font-size:9px;flex-direction:column;gap:.3rem;}
+.trust-card-title{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--warm);line-height:1.5;}
+.trust-card-desc{font-size:.78rem;color:var(--brown);line-height:1.85;}
+.trust-card-note{font-size:.7rem;color:var(--sand);font-family:monospace;}
+
+/* SOCIAL WALL */
+.social-section{
+  padding:4rem 2.5rem;
+  border-bottom:1px solid var(--cream-mid);
+  background:var(--cream-light);
+}
+.social-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.social-cell.img-placeholder{height:160px;flex-direction:column;gap:.3rem;font-size:9px;}
+
 .b2b-section{
   display:grid;grid-template-columns:1fr 1fr;
   border-bottom:1px solid var(--cream-mid);
@@ -201,7 +210,6 @@ nav{
 }
 .b2b-btn:hover{background:var(--warm);color:var(--cream);border-color:var(--warm);}
 
-/* ─── FOOTER ─────────────────────────────────────── */
 footer{
   background:var(--warm);color:var(--sand);
   padding:3rem 2.5rem 2rem;
@@ -222,9 +230,9 @@ footer{
 </head>
 <body>
 
-<!-- ANNOTATION LEGEND -->
+<!-- LEGEND -->
 <div class="legend">
-  <h2>[ DESIGN SPEC — 設計師溝通用稿 · 鐵比倫首頁 · v1.0 · 2026-05-22 ]</h2>
+  <h2>[ DESIGN SPEC — 設計師溝通用稿 · 鐵比倫首頁 · v1.1 · 2026-05-22 ]</h2>
   <ul>
     <li><span>[NAV]</span> 導覽列</li>
     <li><span>[HERO]</span> 主視覺區</li>
@@ -233,6 +241,8 @@ footer{
     <li><span>[STORY]</span> 品牌故事摘要</li>
     <li><span>[FUDO]</span> 風土與產地</li>
     <li><span>[USAGE]</span> 日常使用情境</li>
+    <li><span>[TRUST]</span> 第三方見證（新增）</li>
+    <li><span>[SOCIAL]</span> 社群牆 UGC（新增）</li>
     <li><span>[B2B]</span> 伴手禮 / 企業採購入口</li>
     <li><span>[FOOTER]</span> 頁尾</li>
     <li><span>灰色區塊</span> = 圖片佔位（需品牌提供實拍）</li>
@@ -241,7 +251,7 @@ footer{
 
 <!-- 01 NAV -->
 <div class="section-wrap">
-  <span class="anno">[NAV] 01 · 導覽列 — 透明底 / 白底 · sticky</span>
+  <span class="anno">[NAV] 01 · 導覽列 — sticky</span>
   <nav>
     <div class="nav-logo">
       鐵比倫
@@ -264,23 +274,23 @@ footer{
 
 <!-- 02 HERO -->
 <div class="section-wrap">
-  <span class="anno">[HERO] 02 · 主視覺 — 左文右圖 · 全高</span>
+  <span class="anno">[HERO] 02 · 主視覺 — 左文右圖</span>
   <div class="hero">
     <div class="hero-text">
       <div class="hero-eyebrow">南投 · 埔里 · 純淨黑糖</div>
       <h1 class="hero-title">
         鐵比倫
-        <em>黑糖 · 來自山林</em>
+        <em>來自埔里山林的純淨黑糖</em>
       </h1>
       <p class="hero-sub">
-        細心掌控熬煮時間與火候，<br>
-        創辦人把關每一批成品的穩定度。<br>
-        一瓶，放進你的日常裡。
+        從擺攤到自己生產把關，<br>
+        二十幾年只做一件事：<br>
+        讓每一批黑糖都值得信任。
       </p>
       <a href="#" class="hero-cta">選購產品 →</a>
     </div>
     <div class="hero-img">
-      <div class="img-placeholder" style="height:100%;">
+      <div class="img-placeholder" style="height:100%;flex-direction:column;gap:.5rem;">
         <div>[ 主視覺圖片 ]</div>
         <div class="hero-img-note">建議：黑糖蜜產品實拍<br>或埔里山林風景<br>比例 1:1 以上<br>暖色調自然光</div>
       </div>
@@ -290,9 +300,9 @@ footer{
 
 <!-- 03 TAGLINE BAR -->
 <div class="section-wrap">
-  <span class="anno">[TAGLINE] 03 · 品牌核心句 — 單行 · 米色底</span>
+  <span class="anno">[TAGLINE] 03 · 品牌核心句</span>
   <div class="tagline-bar">
-    <p>鐵比倫：來自埔里山林的純淨黑糖。<span>還原製成 · 創辦人把關 · 每批穩定</span></p>
+    <p>鐵比倫：來自埔里山林的純淨黑糖。<span>創辦人把關 · 每批穩定 · 埔里風土</span></p>
   </div>
 </div>
 
@@ -305,7 +315,6 @@ footer{
       <a href="#" class="section-link">查看全部 →</a>
     </div>
     <div class="product-grid">
-
       <div class="product-card">
         <div class="product-img img-placeholder">
           <div>[ 黑糖蜜產品圖 ]</div>
@@ -318,7 +327,6 @@ footer{
           <a href="#" class="product-btn">了解更多 →</a>
         </div>
       </div>
-
       <div class="product-card">
         <div class="product-img img-placeholder">
           <div>[ 黑糖磚產品圖 ]</div>
@@ -331,7 +339,6 @@ footer{
           <a href="#" class="product-btn">了解更多 →</a>
         </div>
       </div>
-
       <div class="product-card">
         <div class="product-img img-placeholder">
           <div>[ 伴手禮禮盒圖 ]</div>
@@ -344,7 +351,6 @@ footer{
           <a href="#" class="product-btn">了解更多 →</a>
         </div>
       </div>
-
     </div>
   </div>
 </div>
@@ -359,10 +365,10 @@ footer{
     </div>
     <div class="story-text">
       <div class="section-label">品牌故事</div>
-      <h2 class="story-title">從攤商初心<br>到自己把關的黑糖</h2>
+      <h2 class="story-title">從擺攤二十年<br>到自己生產把關</h2>
       <div class="story-body">
-        <p>鐵比倫的創辦人早年在台糖販售部經營攤商，長期面對鄰居與老客人。因為見過品質不穩定的原料，也深知消費者真正的擔心，所以後來選擇自己把關黑糖品質。</p>
-        <p>帖比倫溪流過埔里盆地，這片環山避風的土地孕育了鐵比倫的黑糖風味。我們不把它說得複雜，只把該做好的地方做好。</p>
+        <p>鐵比倫的創辦人從台糖販售部的攤商做起，二十幾年來長期面對鄰居與老客人。見過品質不穩的原料，也記得每一個信任自己的人，所以後來選擇自己生產、自己把關。</p>
+        <p>帖比倫溪流過埔里盆地。那條溪的名字，成了這個品牌的名字。我們不把黑糖說得複雜，只把該做好的地方做好。</p>
       </div>
       <div class="story-quote">
         <p>自己敢吃，才敢賣給別人。</p>
@@ -377,7 +383,7 @@ footer{
   <span class="anno">[FUDO] 06 · 風土與產地 — 米色底 · 三欄卡片</span>
   <div class="fudo-section">
     <h2 class="fudo-title">埔里的風土記憶</h2>
-    <p class="fudo-sub">環山避風的盆地地形，帖比倫溪的水氣與土壤，以及一百年前落腳於此的紅甘蔗——這些是鐵比倫黑糖風味的底層。</p>
+    <p class="fudo-sub">環山避風的盆地地形，帖比倫溪的水氣與土壤，以及二十幾年在地深耕的農會夥伴——這些是鐵比倫黑糖風味的底層。</p>
     <div class="fudo-grid">
       <div class="fudo-item">
         <div class="fudo-year">地理 · 南投埔里</div>
@@ -390,9 +396,9 @@ footer{
         <p class="fudo-item-text">鐵比倫的名字來自帖比倫溪的地名記憶。那條溪流過埔里盆地，是這片土地的氣候與風土的一部分。</p>
       </div>
       <div class="fudo-item">
-        <div class="fudo-year">歷史 · 1916年</div>
-        <div class="fudo-item-title">紅甘蔗的歷史</div>
-        <p class="fudo-item-text">Badila 紅甘蔗於 1916 年引進台灣，1930 年代起埔里成為重要產區。這段歷史是鐵比倫黑糖風味記憶的一部分。</p>
+        <div class="fudo-year">在地合作 · 二十餘年</div>
+        <div class="fudo-item-title">農會與鄰里</div>
+        <p class="fudo-item-text">與埔里鎮農會及在地攤商持續合作二十幾年，深根在地供應鏈，每一批原料都有穩定可追溯的來源。</p>
       </div>
     </div>
   </div>
@@ -434,9 +440,82 @@ footer{
   </div>
 </div>
 
-<!-- 08 B2B -->
+<!-- 08 TRUST -->
 <div class="section-wrap">
-  <span class="anno">[B2B] 08 · 伴手禮 / 企業採購入口 — 左右分欄</span>
+  <span class="anno">[TRUST] 08 · 第三方見證 — 三欄（新增版塊）</span>
+  <div class="trust-section">
+    <div class="section-header">
+      <span class="section-label">品質見證</span>
+    </div>
+    <div class="trust-grid">
+
+      <div class="trust-card">
+        <div class="trust-badge">在地認證</div>
+        <div class="trust-card-img img-placeholder">
+          <div>[ 埔里鎮農會 合作照片 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：農會標誌 or 合作場景</div>
+        </div>
+        <div class="trust-card-title">埔里鎮農會<br>長期合作夥伴</div>
+        <p class="trust-card-desc">與埔里鎮農會持續合作逾二十年，在地供應鏈穩定，原料來源可追溯。</p>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-badge">獲獎肯定</div>
+        <div class="trust-card-img img-placeholder">
+          <div>[ 2016 埔里十大伴手禮 獎狀照片 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：獎狀實拍 or 頒獎場景</div>
+        </div>
+        <div class="trust-card-title">2016 埔里十大伴手禮</div>
+        <p class="trust-card-desc">獲選為埔里十大伴手禮，代表在地消費者與評審對鐵比倫品質的長期肯定。</p>
+      </div>
+
+      <div class="trust-card">
+        <div class="trust-badge">檢驗合格</div>
+        <div class="trust-card-img img-placeholder">
+          <div>[ SGS 檢驗證書 ]</div>
+          <div style="font-size:9px;color:#b8a080;">建議：SGS 證書實拍或 logo</div>
+        </div>
+        <div class="trust-card-title">SGS 檢驗合格</div>
+        <p class="trust-card-desc">通過 SGS 第三方檢驗，讓你吃得放心，也讓品質有具體的依據可以查閱。</p>
+        <div class="trust-card-note">[ 證書字號待品牌方提供 ]</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- 09 SOCIAL WALL -->
+<div class="section-wrap">
+  <span class="anno">[SOCIAL] 09 · 社群牆 UGC — 四欄（新增版塊）</span>
+  <div class="social-section">
+    <div class="section-header">
+      <span class="section-label">來自社群的日常</span>
+      <a href="#" class="section-link">追蹤 @tiebilun →</a>
+    </div>
+    <div class="social-grid">
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 1 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 2 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 3 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+      <div class="social-cell img-placeholder">
+        <div>[ IG 貼文圖 4 ]</div>
+        <div style="font-size:9px;color:#b8a080;">UGC or 品牌自拍</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 10 B2B -->
+<div class="section-wrap">
+  <span class="anno">[B2B] 10 · 伴手禮 / 企業採購入口</span>
   <div class="b2b-section">
     <div class="b2b-cell">
       <div class="b2b-label">埔里伴手禮</div>
@@ -453,9 +532,9 @@ footer{
   </div>
 </div>
 
-<!-- 09 FOOTER -->
+<!-- 11 FOOTER -->
 <div class="section-wrap">
-  <span class="anno" style="background:#555;">[FOOTER] 09 · 頁尾</span>
+  <span class="anno" style="background:#555;">[FOOTER] 11 · 頁尾</span>
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
