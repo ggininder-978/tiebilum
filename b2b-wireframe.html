@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐵比倫 — 企業採購（設計師溝通用）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#1a1410;
+  --warm:#2e1f0a;
+  --brown:#5a3a1a;
+  --gold:#8b6020;
+  --gold-light:#b8893c;
+  --sand:#c9ad80;
+  --cream:#f5efe3;
+  --cream-light:#faf6ef;
+  --cream-mid:#ede3cf;
+  --white:#fdfaf5;
+  --muted:#888070;
+  --blue:#1a6bff;
+  --serif:'Noto Serif TC',serif;
+  --sans:'Noto Sans TC',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.75;}
+
+/* ANNOTATION */
+.section-wrap{position:relative;}
+.anno{
+  position:absolute;top:12px;right:12px;z-index:10;
+  background:var(--blue);color:#fff;
+  font-family:monospace;font-size:10px;letter-spacing:.04em;
+  padding:3px 8px;border-radius:2px;pointer-events:none;
+}
+.img-placeholder{
+  background:var(--cream-mid);color:var(--sand);
+  font-family:monospace;font-size:11px;letter-spacing:.05em;
+  text-align:center;line-height:1.6;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.45rem;padding:1rem;min-height:200px;
+}
+.img-note{font-size:10px;color:#a98d60;max-width:200px;text-align:center;}
+
+/* LEGEND */
+.legend{
+  background:#f0f4ff;border:1px solid #c5d3f5;
+  padding:1.2rem 1.5rem;font-family:monospace;font-size:12px;
+}
+.legend h2{font-size:13px;color:var(--blue);font-weight:600;margin-bottom:.7rem;letter-spacing:.05em;}
+.legend ul{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:4px 2rem;}
+.legend span{color:var(--blue);font-weight:600;margin-right:.4rem;}
+
+/* NAV */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 2.5rem;border-bottom:1px solid var(--cream-mid);background:var(--white);
+}
+.nav-logo{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--warm);letter-spacing:.06em;}
+.nav-logo span{display:block;font-size:.7rem;font-weight:300;color:var(--gold);letter-spacing:.18em;margin-top:1px;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:.8rem;color:var(--brown);text-decoration:none;letter-spacing:.05em;}
+.nav-right{display:flex;gap:1.2rem;align-items:center;}
+.nav-right a{font-size:.78rem;color:var(--brown);text-decoration:none;}
+
+/* SHARED */
+.section-label{font-size:.68rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1.1rem;display:block;}
+.section-title{font-family:var(--serif);font-size:1.55rem;font-weight:500;color:var(--warm);line-height:1.5;margin-bottom:1rem;}
+.section-body{font-size:.86rem;color:var(--brown);line-height:2.1;}
+.section-body p+p{margin-top:.9rem;}
+.btn{display:inline-block;padding:.72rem 1.75rem;text-decoration:none;font-size:.78rem;letter-spacing:.1em;font-family:var(--sans);}
+.btn-primary{background:var(--warm);color:var(--cream);}
+.btn-outline{border:1px solid var(--brown);color:var(--brown);}
+.btn-gold{background:var(--gold);color:var(--cream);}
+
+/* HERO */
+.hero{
+  display:grid;grid-template-columns:1fr 1fr;min-height:580px;
+  border-bottom:1px solid var(--cream-mid);
+}
+.hero-text{
+  padding:5rem 3rem 4rem 2.5rem;display:flex;flex-direction:column;
+  justify-content:center;border-right:1px solid var(--cream-mid);
+}
+.eyebrow{font-size:.68rem;letter-spacing:.22em;color:var(--gold);margin-bottom:1.4rem;text-transform:uppercase;}
+.hero-title{font-family:var(--serif);font-size:2.8rem;font-weight:500;color:var(--warm);line-height:1.2;margin-bottom:1.2rem;}
+.hero-sub{font-size:.9rem;color:var(--brown);line-height:2.1;max-width:340px;margin-bottom:2.2rem;}
+.hero-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2rem;}
+.tag{font-size:.72rem;color:var(--gold);border:1px solid var(--sand);padding:.25rem .75rem;letter-spacing:.06em;}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+.hero-img .img-placeholder{height:100%;min-height:580px;}
+
+/* SERVICE SPLIT */
+.service-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--cream-mid);
+}
+.service-cell{padding:3.5rem 2.5rem;display:flex;flex-direction:column;}
+.service-cell:first-child{border-right:1px solid var(--cream-mid);}
+.service-cell:last-child{background:var(--cream);}
+.service-icon{
+  width:44px;height:44px;border:1.5px solid var(--sand);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;margin-bottom:1.2rem;color:var(--gold);
+}
+.service-title{font-family:var(--serif);font-size:1.35rem;color:var(--warm);margin-bottom:.9rem;line-height:1.45;}
+.service-desc{font-size:.84rem;color:var(--brown);line-height:2;margin-bottom:1.5rem;}
+.service-points{list-style:none;display:grid;gap:.55rem;margin-bottom:1.8rem;}
+.service-points li{
+  display:grid;grid-template-columns:auto 1fr;gap:.7rem;
+  font-size:.8rem;color:var(--brown);line-height:1.8;
+}
+.service-points li::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--gold-light);margin-top:.65rem;flex-shrink:0;
+}
+
+/* PROOF */
+.proof-section{padding:4rem 2.5rem;background:var(--warm);border-bottom:1px solid var(--cream-mid);}
+.proof-section .section-label{color:var(--gold-light);}
+.proof-section .section-title{color:var(--cream-light);font-size:1.3rem;margin-bottom:2rem;}
+.proof-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:#4a3020;}
+.proof-card{background:#3a2010;padding:1.8rem 1.5rem;}
+.proof-badge{
+  display:inline-block;font-size:.62rem;letter-spacing:.14em;
+  color:var(--gold-light);border:1px solid #6a4820;
+  padding:3px 10px;text-transform:uppercase;margin-bottom:1rem;
+}
+.proof-title{font-family:var(--serif);font-size:1rem;color:var(--cream-light);margin-bottom:.6rem;line-height:1.5;}
+.proof-text{font-size:.78rem;color:var(--sand);line-height:1.9;}
+
+/* PRODUCT */
+.product-section{padding:4rem 2.5rem;border-bottom:1px solid var(--cream-mid);}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.product-card{background:var(--white);}
+.product-card .img-placeholder{min-height:160px;font-size:10px;}
+.product-info{padding:1.1rem 1rem 1.4rem;}
+.product-kicker{font-size:.62rem;letter-spacing:.14em;color:var(--gold-light);text-transform:uppercase;margin-bottom:.4rem;}
+.product-name{font-family:var(--serif);font-size:.95rem;color:var(--warm);margin-bottom:.4rem;}
+.product-desc{font-size:.75rem;color:var(--brown);line-height:1.8;margin-bottom:.8rem;}
+.product-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
+.product-tag{font-size:.62rem;color:var(--gold);border:1px solid var(--cream-mid);padding:2px 7px;}
+
+/* CUSTOM */
+.custom-section{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid var(--cream-mid);
+}
+.custom-copy{padding:4rem 3rem;display:flex;flex-direction:column;justify-content:center;}
+.custom-visual{background:var(--cream);}
+.custom-visual .img-placeholder{height:100%;min-height:480px;}
+.steps{display:grid;gap:1.2rem;margin-top:1.8rem;}
+.step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:flex-start;}
+.step-num{
+  width:28px;height:28px;border:1px solid var(--sand);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.72rem;color:var(--gold);flex-shrink:0;font-family:monospace;
+}
+.step-content{}
+.step-title{font-family:var(--serif);font-size:.95rem;color:var(--warm);margin-bottom:.3rem;}
+.step-text{font-size:.78rem;color:var(--brown);line-height:1.85;}
+.custom-options{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.8rem;
+}
+.custom-option{background:var(--cream);padding:1rem;border:1px solid var(--cream-mid);}
+.custom-option-label{font-size:.65rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.35rem;}
+.custom-option-text{font-size:.78rem;color:var(--brown);line-height:1.75;}
+
+/* FAQ */
+.faq-section{padding:4rem 2.5rem;background:var(--cream-light);border-bottom:1px solid var(--cream-mid);}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5px;background:var(--cream-mid);margin-top:2rem;}
+.faq-group{background:var(--white);padding:2rem 1.8rem;}
+.faq-group-label{font-size:.65rem;color:var(--gold);letter-spacing:.16em;text-transform:uppercase;margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:1px solid var(--cream-mid);}
+.faq-items{display:grid;gap:1.2rem;}
+.faq-item{}
+.faq-q{font-family:var(--serif);font-size:.9rem;color:var(--warm);margin-bottom:.35rem;line-height:1.5;}
+.faq-a{font-size:.78rem;color:var(--brown);line-height:1.85;}
+
+/* CTA */
+.cta-section{
+  display:grid;grid-template-columns:1.1fr .9fr;
+  min-height:400px;border-bottom:1px solid var(--cream-mid);
+}
+.cta-copy{
+  padding:4.5rem 3rem;display:flex;flex-direction:column;justify-content:center;
+  background:var(--warm);
+}
+.cta-copy .section-label{color:var(--gold-light);}
+.cta-title{font-family:var(--serif);font-size:2rem;font-weight:400;color:var(--cream-light);line-height:1.4;margin-bottom:1rem;}
+.cta-sub{font-size:.86rem;color:var(--sand);line-height:2;margin-bottom:2rem;max-width:380px;}
+.cta-actions{display:flex;gap:.8rem;flex-wrap:wrap;}
+.cta-actions .btn-primary{background:var(--cream);color:var(--warm);}
+.cta-actions .btn-outline{border-color:var(--sand);color:var(--sand);}
+.cta-contact{
+  padding:4.5rem 2.5rem;display:flex;flex-direction:column;justify-content:center;
+  background:var(--cream);gap:1.5rem;
+}
+.contact-card{background:var(--white);border:1px solid var(--cream-mid);padding:1.5rem 1.3rem;}
+.contact-method{font-size:.65rem;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem;}
+.contact-value{font-family:var(--serif);font-size:1.05rem;color:var(--warm);margin-bottom:.35rem;}
+.contact-note{font-size:.75rem;color:var(--muted);}
+.contact-qr .img-placeholder{height:100px;min-height:100px;font-size:10px;margin-top:.8rem;}
+
+/* DESIGN NOTES */
+.design-notes{background:#f7f0e2;border-top:1px solid var(--cream-mid);padding:2.5rem;font-size:.8rem;color:var(--brown);}
+.design-notes h2{font-family:var(--serif);font-size:1.1rem;color:var(--warm);margin-bottom:1rem;}
+.notes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;}
+.notes-card{background:var(--white);border:1px solid var(--cream-mid);padding:1.1rem;}
+.notes-card h3{font-size:.72rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.6rem;text-transform:uppercase;}
+.notes-card ul{padding-left:1.1rem;line-height:2;}
+
+footer{background:#1b130c;color:var(--sand);padding:2.4rem 2.5rem;}
+.footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:2rem;}
+.footer-logo{font-family:var(--serif);font-size:1.05rem;color:var(--cream-light);margin-bottom:.5rem;}
+.footer-copy{font-size:.75rem;line-height:1.85;}
+.footer-meta{font-size:.7rem;color:#8f7654;text-align:right;line-height:1.8;}
+</style>
+</head>
+<body>
+
+<!-- LEGEND -->
+<div class="legend">
+  <h2>[ DESIGN SPEC — 設計師溝通用稿 · 鐵比倫企業採購 · v1.0 · 2026-05-22 ]</h2>
+  <ul>
+    <li><span>[NAV]</span> 導覽列</li>
+    <li><span>[HERO]</span> 主視覺 — 雙訪客自我定位</li>
+    <li><span>[SERVICE]</span> 禮盒採購 vs OEM/ODM 分流</li>
+    <li><span>[PROOF]</span> 信任背書三欄</li>
+    <li><span>[PRODUCT]</span> 可採購產品一覽</li>
+    <li><span>[CUSTOM]</span> 客製化說明與流程</li>
+    <li><span>[FAQ]</span> 常見問題分組</li>
+    <li><span>[CTA]</span> 聯絡方式 — 電話 / Line</li>
+    <li><span>灰色區塊</span> 圖片佔位，需品牌提供素材</li>
+  </ul>
+</div>
+
+<!-- 01 NAV -->
+<div class="section-wrap">
+  <span class="anno">[NAV] 01 · 導覽列</span>
+  <nav class="nav">
+    <div class="nav-logo">鐵比倫<span>TIEBILUN · 企業採購</span></div>
+    <ul class="nav-links">
+      <li><a href="#service">採購類型</a></li>
+      <li><a href="#product">採購產品</a></li>
+      <li><a href="#custom">客製說明</a></li>
+      <li><a href="#faq">常見問題</a></li>
+      <li><a href="#cta">立即洽詢</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#">回首頁</a>
+    </div>
+  </nav>
+</div>
+
+<!-- 02 HERO -->
+<div class="section-wrap">
+  <span class="anno">[HERO] 02 · 主視覺 — 左文右圖，雙訪客自我定位</span>
+  <section class="hero">
+    <div class="hero-text">
+      <div class="eyebrow">企業採購 · 禮盒訂製 · OEM / ODM</div>
+      <h1 class="hero-title">不管是送禮，<br>還是自有品牌，<br>我們都能配合。</h1>
+      <p class="hero-sub">
+        鐵比倫自 2002 年設廠生產，具備完整的黑糖食品製造能力。無論是企業禮盒大量採購、客製包裝，或 OEM / ODM 代工合作，歡迎直接聯絡洽談。
+      </p>
+      <div class="hero-tags">
+        <span class="tag">禮盒大量採購</span>
+        <span class="tag">全客製包裝</span>
+        <span class="tag">OEM 代工</span>
+        <span class="tag">ODM 開發</span>
+        <span class="tag">無最低訂量限制</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#cta">立即洽詢 →</a>
+        <a class="btn btn-outline" href="#service">了解服務內容</a>
+      </div>
+    </div>
+    <div class="hero-img">
+      <div class="img-placeholder" style="min-height:580px;">
+        <div>[ 企業採購主視覺 ]</div>
+        <div class="img-note">建議：禮盒排列 / 包裝特寫 / 工廠製程。傳遞「規模感 + 品質感」，避免單一產品棚拍。</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 03 SERVICE -->
+<div class="section-wrap" id="service">
+  <span class="anno">[SERVICE] 03 · 雙軌分流 — 禮盒採購 vs OEM/ODM</span>
+  <section class="service-section">
+
+    <div class="service-cell">
+      <div class="service-icon">◻</div>
+      <span class="section-label">企業禮盒 · 大量採購</span>
+      <h2 class="service-title">需要一份有故事的<br>埔里黑糖禮盒？</h2>
+      <p class="service-desc">適合公司尾牙禮、員工福利、客戶伴手禮、觀光業補貨。鐵比倫黑糖具備 SGS 定期送檢與埔里十大伴手禮獲獎背書，送出去不需要多做解釋。</p>
+      <ul class="service-points">
+        <li>黑糖蜜、黑糖磚、禮盒組均可大量採購</li>
+        <li>可加購提袋、提盒或自訂外包裝設計</li>
+        <li>無明確最低訂量，歡迎先詢價</li>
+        <li>交期與數量依實際需求洽詢確認</li>
+        <li>適合政府機關、飯店、企業、旅遊業者</li>
+      </ul>
+      <a class="btn btn-primary" href="#cta">洽詢禮盒報價 →</a>
+    </div>
+
+    <div class="service-cell">
+      <div class="service-icon">◼</div>
+      <span class="section-label">OEM · ODM 代工合作</span>
+      <h2 class="service-title">想用自己的品牌<br>賣黑糖？</h2>
+      <p class="service-desc">鐵比倫自 2002 年設廠，具備穩定的黑糖食品製造能力與品質管理流程。接受 OEM（代工貼牌）與 ODM（配方開發）合作，可全客製包裝與標籤設計。</p>
+      <ul class="service-points">
+        <li>OEM：使用鐵比倫既有配方，貼上你的品牌包裝</li>
+        <li>ODM：依需求調整配方規格，開發專屬產品</li>
+        <li>全客製包裝：瓶型、標籤、外盒均可配合</li>
+        <li>具食品工廠製造背景，品質管理流程完整</li>
+        <li>歡迎品牌主、通路商、零售商洽談</li>
+      </ul>
+      <a class="btn btn-gold" href="#cta">洽詢 OEM / ODM →</a>
+    </div>
+
+  </section>
+</div>
+
+<!-- 04 PROOF -->
+<div class="section-wrap">
+  <span class="anno">[PROOF] 04 · 信任背書 — 深色底，B2B 訪客需要更多製造資歷</span>
+  <section class="proof-section">
+    <span class="section-label">為什麼選鐵比倫</span>
+    <h2 class="section-title">二十幾年製造背景，三個可查證的信任依據。</h2>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-badge">品質檢驗</div>
+        <h3 class="proof-title">SGS 定期送檢</h3>
+        <p class="proof-text">定期委託 SGS 進行第三方食品安全檢驗，不是一次性認證，而是持續性的品質確認機制。讓你採購時有依據，出貨給客戶時不需要多解釋。</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-badge">市場肯定</div>
+        <h3 class="proof-title">2016 埔里十大伴手禮</h3>
+        <p class="proof-text">獲選為埔里十大伴手禮，代表在地消費者與評審的長期肯定。對禮盒採購者來說，這是現成的送禮理由；對品牌主來說，這是原廠的市場驗證。</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-badge">製造資歷</div>
+        <h3 class="proof-title">2002 年設廠至今</h3>
+        <p class="proof-text">2002 年在埔里設立黑糖食品工廠，具備完整製造能力與品質管理流程。設廠初期曾供應台灣多個糖廠展售通路，製造穩定度有實際通路背書。</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 05 PRODUCT -->
+<div class="section-wrap" id="product">
+  <span class="anno">[PRODUCT] 05 · 可採購產品一覽 — 四欄，標示採購類型</span>
+  <section class="product-section">
+    <span class="section-label">可採購產品</span>
+    <h2 class="section-title">每一款產品都可大量採購，部分可客製包裝。</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="img-placeholder" style="min-height:160px;">[ 黑糖蜜產品圖 ]</div>
+        <div class="product-info">
+          <div class="product-kicker">黑糖蜜系列</div>
+          <div class="product-name">鐵比倫黑糖蜜</div>
+          <p class="product-desc">適合餐飲業、伴手禮、健康食品通路。瓶裝規格可依需求洽詢。</p>
+          <div class="product-tags">
+            <span class="product-tag">大量採購</span>
+            <span class="product-tag">客製包裝</span>
+            <span class="product-tag">OEM</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="img-placeholder" style="min-height:160px;">[ 黑糖磚產品圖 ]</div>
+        <div class="product-info">
+          <div class="product-kicker">黑糖磚系列</div>
+          <div class="product-name">鐵比倫黑糖磚</div>
+          <p class="product-desc">適合觀光伴手、獨立包裝禮品。克重與包裝形式可依需求配合。</p>
+          <div class="product-tags">
+            <span class="product-tag">大量採購</span>
+            <span class="product-tag">客製包裝</span>
+            <span class="product-tag">OEM</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="img-placeholder" style="min-height:160px;">[ 禮盒組圖 ]</div>
+        <div class="product-info">
+          <div class="product-kicker">埔里伴手禮</div>
+          <div class="product-name">禮盒組合</div>
+          <p class="product-desc">現有禮盒組合可直接大量訂購，也可依節慶需求調整內容物與外盒設計。</p>
+          <div class="product-tags">
+            <span class="product-tag">大量採購</span>
+            <span class="product-tag">節慶客製</span>
+          </div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="img-placeholder" style="min-height:160px;">[ 客製包裝示意 ]</div>
+        <div class="product-info">
+          <div class="product-kicker">OEM / ODM</div>
+          <div class="product-name">全客製方案</div>
+          <p class="product-desc">從配方到包裝全部客製。適合想以自有品牌銷售黑糖產品的品牌主或通路商。</p>
+          <div class="product-tags">
+            <span class="product-tag">OEM 貼牌</span>
+            <span class="product-tag">ODM 開發</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 06 CUSTOM -->
+<div class="section-wrap" id="custom">
+  <span class="anno">[CUSTOM] 06 · 客製化說明 — 左文右圖，三步驟流程</span>
+  <section class="custom-section">
+    <div class="custom-copy">
+      <span class="section-label">客製化流程</span>
+      <h2 class="section-title">不用填複雜表單，<br>直接跟我們說你要什麼。</h2>
+      <div class="section-body">
+        <p>從包裝設計、容量規格到標籤印刷，我們提供彈性的客製配合。沒有硬性的最低訂量規定，第一步只需要一通電話或一則 Line 訊息。</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <div class="step-title">聯絡洽詢</div>
+            <p class="step-text">告訴我們你的需求：用途、數量、預算、時間、是否需要客製包裝。電話或 Line 都可以，不需要先準備完整規格。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <div class="step-title">確認規格與報價</div>
+            <p class="step-text">我們會依需求提供建議方案與報價。客製包裝部分會確認包裝形式、標籤設計、容量規格與交期。</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <div class="step-title">生產出貨</div>
+            <p class="step-text">確認細節後進入生產排程。每批產品出貨前會進行品質確認，確保與報價時樣品一致。</p>
+          </div>
+        </div>
+      </div>
+      <div class="custom-options">
+        <div class="custom-option">
+          <div class="custom-option-label">包裝</div>
+          <p class="custom-option-text">瓶型、外盒、提袋均可配合，可用現有規格或全新設計。</p>
+        </div>
+        <div class="custom-option">
+          <div class="custom-option-label">標籤</div>
+          <p class="custom-option-text">可印製自有品牌標籤，OEM 貼牌不顯示鐵比倫品牌名稱。</p>
+        </div>
+        <div class="custom-option">
+          <div class="custom-option-label">配方</div>
+          <p class="custom-option-text">ODM 方案可依需求調整配方規格，開發專屬產品線。</p>
+        </div>
+      </div>
+    </div>
+    <div class="custom-visual">
+      <div class="img-placeholder" style="min-height:520px;">
+        <div>[ 客製包裝 / 設計稿 / 樣品圖 ]</div>
+        <div class="img-note">建議：不同包裝版本排列、客製標籤特寫、樣品盒展示。呈現彈性與專業感。</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- 07 FAQ -->
+<div class="section-wrap" id="faq">
+  <span class="anno">[FAQ] 07 · 常見問題 — 左欄禮盒採購，右欄 OEM/ODM</span>
+  <section class="faq-section">
+    <span class="section-label">常見問題</span>
+    <h2 class="section-title">你可能想先知道的事。</h2>
+    <div class="faq-grid">
+
+      <div class="faq-group">
+        <div class="faq-group-label">禮盒 · 大量採購</div>
+        <div class="faq-items">
+          <div class="faq-item">
+            <div class="faq-q">有最低訂購量嗎？</div>
+            <p class="faq-a">目前沒有硬性的最低訂量規定。數量不同，報價與交期會有差異，歡迎直接詢價。</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">可以加購提袋或外盒嗎？</div>
+            <p class="faq-a">可以。現有提袋與禮盒規格可搭配採購，也可以洽詢客製外盒設計。</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">交期大約多久？</div>
+            <p class="faq-a">依數量與是否需要客製包裝而定，請洽詢時一併告知需求日期，我們會回覆可行的交期安排。</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">可以先看樣品嗎？</div>
+            <p class="faq-a">可以安排樣品確認，細節請來電或 Line 洽詢。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-group">
+        <div class="faq-group-label">OEM · ODM 合作</div>
+        <div class="faq-items">
+          <div class="faq-item">
+            <div class="faq-q">OEM 跟 ODM 有什麼差別？</div>
+            <p class="faq-a">OEM 是使用鐵比倫既有配方，貼上你的品牌包裝出售。ODM 是依你的需求調整或開發配方，再客製包裝生產。</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">包裝上會有鐵比倫的名字嗎？</div>
+            <p class="faq-a">OEM 貼牌方案可以不顯示鐵比倫品牌名稱，完全以你的品牌呈現。法規標示欄位（如工廠資訊）依食品標示規定處理。</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">配方可以調整嗎？</div>
+            <p class="faq-a">ODM 方案可以依需求討論配方調整方向，包含糖度、添加物、口味變化等，細節需個別洽談評估。</p>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">你們有工廠資料可以提供嗎？</div>
+            <p class="faq-a">可以提供工廠基本資料與 SGS 檢驗報告，供品牌主評估合作條件使用。請來電或 Line 索取。</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!-- 08 CTA -->
+<div class="section-wrap" id="cta">
+  <span class="anno">[CTA] 08 · 聯絡方式 — 電話 / Line，單一清楚行動呼籲</span>
+  <section class="cta-section">
+    <div class="cta-copy">
+      <span class="section-label">立即洽詢</span>
+      <h2 class="cta-title">不用填表單。<br>直接跟我們說你要什麼。</h2>
+      <p class="cta-sub">無論是禮盒報價、客製包裝，還是 OEM / ODM 合作討論，一通電話或一則 Line 訊息就可以開始。</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="tel:+886-XXXXXXXX">電話洽詢 →</a>
+        <a class="btn btn-outline" href="#">Line 官方帳號</a>
+      </div>
+    </div>
+    <div class="cta-contact">
+      <div class="contact-card">
+        <div class="contact-method">電話</div>
+        <div class="contact-value">待品牌方確認</div>
+        <p class="contact-note">週一至週五 09:00–18:00</p>
+      </div>
+      <div class="contact-card contact-qr">
+        <div class="contact-method">Line 官方帳號</div>
+        <div class="contact-value">@tiebilun（待確認）</div>
+        <p class="contact-note">掃描 QR Code 加入，可直接傳訊息詢價。</p>
+        <div class="img-placeholder" style="min-height:100px;">
+          [ Line QR Code ]
+          <div class="img-note">待品牌方提供 Line 官方帳號 QR Code</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- DESIGN NOTES -->
+<div class="design-notes">
+  <h2>設計與文案注意事項</h2>
+  <div class="notes-grid">
+    <div class="notes-card">
+      <h3>頁面功能</h3>
+      <ul>
+        <li>目標訪客：陌生禮盒採購者 + OEM/ODM 品牌主</li>
+        <li>分流說服：SERVICE 版塊讓訪客自我定位</li>
+        <li>單一 CTA：電話 / Line，降低聯絡門檻</li>
+        <li>無明確 MOQ，避免在頁面上設置障礙</li>
+      </ul>
+    </div>
+    <div class="notes-card">
+      <h3>素材缺口</h3>
+      <ul>
+        <li>企業採購主視覺（禮盒排列 / 工廠製程）</li>
+        <li>客製包裝樣品或設計稿</li>
+        <li>Line 官方帳號 QR Code</li>
+        <li>電話號碼、營業時間確認</li>
+        <li>SGS 檢驗報告（可供 B2B 索取）</li>
+      </ul>
+    </div>
+    <div class="notes-card">
+      <h3>禁用文案</h3>
+      <ul>
+        <li>還原製成、傳統手工、手工製程</li>
+        <li>契作原料、全台唯一、最高品質</li>
+        <li>醫療療效宣稱</li>
+        <li>翠果子（早期工廠名稱不公開）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">鐵比倫 TIEBILUN</div>
+      <p class="footer-copy">企業採購頁面設計溝通稿 v1.0。雙軌分流：禮盒採購 / OEM·ODM。</p>
+    </div>
+    <div class="footer-meta">
+      v1.0 · 2026-05-22<br>
+      File: b2b-wireframe.html<br>
+      Status: design review draft
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
