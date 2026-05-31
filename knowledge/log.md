@@ -1,5 +1,10 @@
 # Tiebilum OS Operation Log
 
+## [2026-05-31] Deployment | GitHub Pages about-us wireframe v3
+- **Artifact**: Added `about-us-wireframe-v3.html` to the repository root for GitHub Pages static hosting.
+- **Source**: Copied from `C:/Users/USER/Desktop/about-us-wireframe-v3.html`.
+- **Audit**: Prepared for deployment through `origin/main`; unrelated untracked files were left untouched.
+
 ## [2026-05-11] 🖋️ Synthesis | 正式寫入品牌核心訊息
 - **New Concept**: 建立 `knowledge/wiki/concepts/brand_core_messages.md`。
 - **Alignment**: 整合使用者提供的最新版文案，確立「一句話品牌文案」與「五大核心訊息（攤商初心、避風盆地、21年固執、紅甘蔗榮光、鄰里誠信）」之標準規格。

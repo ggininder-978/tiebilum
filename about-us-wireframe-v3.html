@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鐵比倫 — 關於我們</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#1a1410;
+  --warm:#2e1f0a;
+  --brown:#5a3a1a;
+  --gold:#8b6020;
+  --gold-light:#b8893c;
+  --sand:#c9ad80;
+  --cream:#f5efe3;
+  --cream-light:#faf6ef;
+  --cream-mid:#ede3cf;
+  --white:#fdfaf5;
+  --muted:#888070;
+  --blue:#1a6bff;
+  --serif:'Noto Serif TC',serif;
+  --sans:'Noto Sans TC',sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--white);color:var(--ink);
+  font-family:var(--sans);font-size:16px;line-height:1.75;
+  max-width:480px;margin:0 auto;
+}
+
+/* ANNOTATION */
+.anno{
+  display:block;background:var(--blue);color:#fff;
+  font-family:monospace;font-size:10px;letter-spacing:.04em;
+  padding:4px 10px;
+}
+.img-placeholder{
+  background:var(--cream-mid);color:#a98d60;
+  font-family:monospace;font-size:11px;letter-spacing:.04em;
+  text-align:center;line-height:1.6;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:.4rem;padding:1.2rem;width:100%;
+}
+.img-size{font-size:10px;color:var(--muted);max-width:220px;text-align:center;}
+
+/* LEGEND */
+.legend{
+  background:#f0f4ff;border-bottom:2px solid var(--blue);
+  padding:1rem 1.2rem;font-family:monospace;font-size:11px;
+}
+.legend h2{font-size:12px;color:var(--blue);font-weight:700;margin-bottom:.6rem;}
+.legend ul{list-style:none;display:grid;gap:3px;}
+.legend span{color:var(--blue);font-weight:700;margin-right:.4rem;}
+
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--white);border-bottom:1px solid var(--cream-mid);
+  padding:.85rem 1.2rem;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--warm);letter-spacing:.05em;}
+.nav-logo small{display:block;font-size:.62rem;font-weight:300;color:var(--gold);letter-spacing:.16em;}
+.nav-cta{
+  background:var(--warm);color:var(--cream);
+  font-size:.72rem;letter-spacing:.08em;padding:.45rem 1rem;
+  text-decoration:none;white-space:nowrap;
+}
+
+/* SHARED */
+.section-label{display:block;font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.9rem;}
+.section-title{font-family:var(--serif);font-size:1.45rem;font-weight:500;color:var(--warm);line-height:1.45;margin-bottom:.9rem;}
+.section-body{font-size:.86rem;color:var(--brown);line-height:2.05;}
+.section-body p+p{margin-top:.85rem;}
+.btn{display:block;width:100%;padding:.85rem 1rem;text-align:center;text-decoration:none;font-size:.82rem;letter-spacing:.1em;font-family:var(--sans);}
+.btn-primary{background:var(--warm);color:var(--cream);}
+.btn-outline{border:1px solid var(--brown);color:var(--brown);margin-top:.6rem;}
+.divider{height:1px;background:var(--cream-mid);}
+
+/* HERO */
+.hero-img .img-placeholder{height:56vw;max-height:270px;min-height:0;}
+.hero-text{padding:1.8rem 1.2rem 2rem;}
+.eyebrow{display:block;font-size:.65rem;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem;}
+.hero-title{font-family:var(--serif);font-size:1.75rem;font-weight:500;color:var(--warm);line-height:1.3;margin-bottom:1rem;}
+.hero-sub{font-size:.86rem;color:var(--brown);line-height:2.05;margin-bottom:1.6rem;}
+.hero-actions{display:grid;gap:.6rem;}
+
+/* TAGLINE */
+.tagline{
+  padding:1.2rem 1.2rem;text-align:center;
+  background:var(--cream-light);border-top:1px solid var(--cream-mid);border-bottom:1px solid var(--cream-mid);
+}
+.tagline p{font-size:.72rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;line-height:1.9;}
+
+/* ORIGIN */
+.origin-section{border-bottom:1px solid var(--cream-mid);}
+.origin-img .img-placeholder{height:60vw;max-height:280px;min-height:0;}
+.origin-copy{padding:1.8rem 1.2rem;}
+
+/* PROOF */
+.proof-section{background:var(--cream-light);padding:1.8rem 1.2rem;border-bottom:1px solid var(--cream-mid);}
+.proof-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--cream-mid);margin-top:1.4rem;}
+.proof-card{background:var(--white);padding:1rem .85rem 1.3rem;display:flex;flex-direction:column;}
+.proof-card-icon{font-size:1.2rem;margin-bottom:.6rem;}
+.proof-card-title{font-family:var(--serif);font-size:.82rem;color:var(--warm);line-height:1.45;margin-bottom:.5rem;}
+.proof-card-text{font-size:.72rem;color:var(--brown);line-height:1.75;}
+
+/* HOW */
+.how-section{padding:1.8rem 1.2rem;border-bottom:1px solid var(--cream-mid);}
+.how-stack{display:grid;gap:1px;background:var(--cream-mid);margin-top:1.4rem;}
+.how-card{background:var(--white);}
+.how-card .img-placeholder{height:48vw;max-height:200px;min-height:0;font-size:10px;}
+.how-info{padding:1rem 1rem 1.3rem;}
+.how-kicker{display:block;font-size:.63rem;color:var(--gold-light);letter-spacing:.15em;margin-bottom:.35rem;}
+.how-title{font-family:var(--serif);font-size:.98rem;color:var(--warm);margin-bottom:.45rem;}
+.how-text{font-size:.78rem;color:var(--brown);line-height:1.85;}
+
+/* TODAY */
+.today-section{border-bottom:1px solid var(--cream-mid);}
+.today-copy{padding:1.8rem 1.2rem 1.2rem;}
+.today-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--cream-mid);}
+.today-grid .img-placeholder{height:44vw;max-height:180px;min-height:0;font-size:10px;}
+
+/* CTA */
+.cta-section{border-bottom:1px solid var(--cream-mid);}
+.cta-cell{padding:2rem 1.2rem;display:flex;flex-direction:column;}
+.cta-cell.consumer{background:var(--warm);}
+.cta-cell.business{background:var(--cream);}
+.cta-label{display:block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.9rem;}
+.cta-cell.consumer .cta-label{color:var(--gold-light);}
+.cta-cell.business .cta-label{color:var(--gold);}
+.cta-title{font-family:var(--serif);font-size:1.45rem;font-weight:400;line-height:1.45;margin-bottom:.8rem;}
+.cta-cell.consumer .cta-title{color:var(--cream-light);}
+.cta-cell.business .cta-title{color:var(--warm);}
+.cta-text{font-size:.84rem;line-height:2;margin-bottom:1.6rem;}
+.cta-cell.consumer .cta-text{color:var(--sand);}
+.cta-cell.business .cta-text{color:var(--brown);}
+.cta-cell.consumer .btn-primary{background:var(--cream);color:var(--warm);}
+.cta-cell.business .btn-primary{background:var(--warm);color:var(--cream);}
+.cta-cell.business .btn-outline{border-color:var(--brown);color:var(--brown);}
+
+/* DESIGN NOTES */
+.design-notes{background:#f0f4ff;border-top:2px solid var(--blue);padding:1.5rem 1.2rem;font-size:.78rem;color:#334;font-family:monospace;}
+.design-notes h2{font-size:.8rem;color:var(--blue);font-weight:700;margin-bottom:1rem;}
+.notes-item{margin-bottom:1rem;}
+.notes-item h3{font-size:.68rem;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.notes-item ul{padding-left:1.1rem;line-height:2;}
+
+footer{background:#1b130c;color:var(--sand);padding:1.8rem 1.2rem;font-size:.75rem;line-height:1.85;}
+.footer-logo{font-family:var(--serif);font-size:1rem;color:var(--cream-light);margin-bottom:.4rem;}
+.footer-meta{font-size:.68rem;color:#8f7654;margin-top:.8rem;font-family:monospace;}
+</style>
+</head>
+<body>
+
+<!-- LEGEND -->
+<div class="legend">
+  <h2>[ DESIGN SPEC · 鐵比倫關於我們 · v3.1 · Mobile-First · 375px base ]</h2>
+  <ul>
+    <li><span>[NAV]</span> Sticky · Logo + 右側 CTA</li>
+    <li><span>[HERO]</span> 上圖下文 · 16:9</li>
+    <li><span>[TAGLINE]</span> 三個資格錨點</li>
+    <li><span>[ORIGIN]</span> 品牌起源 · 上圖下文</li>
+    <li><span>[PROOF]</span> 三層外部驗證</li>
+    <li><span>[HOW]</span> 品質把關方法 · 三張堆疊</li>
+    <li><span>[TODAY]</span> 產品呈現 · 2×1 格</li>
+    <li><span>[CTA]</span> 消費者 / 企業採購 · 堆疊</li>
+  </ul>
+</div>
+
+<!-- 01 NAV -->
+<div class="anno">[NAV] 01 · Sticky · 右側直接放主要 CTA</div>
+<nav class="nav">
+  <div class="nav-logo">鐵比倫<small>TIEBILUN · 關於我們</small></div>
+  <a class="nav-cta" href="#cta">探索產品</a>
+</nav>
+
+<!-- 02 HERO -->
+<div class="anno">[HERO] 02 · 上圖下文 · 圖片 750×422px @2x（16:9）</div>
+<section>
+  <div class="hero-img">
+    <div class="img-placeholder">
+      <div>[ 關於我們主視覺 ]</div>
+      <div class="img-size">750 × 422px @2x（16:9）<br>工廠場景 / 品牌主理人<br>暖色自然光，避免商業棚拍</div>
+    </div>
+  </div>
+  <div class="hero-text">
+    <span class="eyebrow">埔里 · 黑糖 · 自己把關</span>
+    <h1 class="hero-title">二十幾年，我們只做一件事——把每批黑糖的品質顧好。</h1>
+    <p class="hero-sub">穩定的品質是我們最在意的事情。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#cta">探索全系列商品</a>
+      <a class="btn btn-outline" href="#origin">了解品牌故事</a>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- 03 TAGLINE -->
+<div class="anno">[TAGLINE] 03 · 三個資格錨點 · 補充 Hero 未說的維度</div>
+<div class="tagline">
+  <p>2002 年埔里設廠 · 2016 埔里十大伴手禮 · SGS 定期送檢</p>
+</div>
+
+<!-- 04 ORIGIN -->
+<div class="anno">[ORIGIN] 04 · 品牌起源 · 上圖下文 · 圖片 750×500px @2x（3:2）</div>
+<section class="origin-section" id="origin">
+  <div class="origin-img">
+    <div class="img-placeholder">
+      <div>[ 台糖展售中心 / 早期設廠場景 ]</div>
+      <div class="img-size">750 × 500px @2x（3:2）<br>埔里早期販售場景 / 工廠設備<br>暖色自然光，帶時代感</div>
+    </div>
+  </div>
+  <div class="origin-copy">
+    <span class="section-label">品牌起源</span>
+    <h2 class="section-title">在第一線賣東西，品質出問題是無法交代的</h2>
+    <div class="section-body">
+      <p>我們曾赴日本學習食品生產，回台後自己開過食品工廠，清楚知道食品生產該有的規範。</p>
+      <p>在埔里台糖展售中心銷售農特產品的時期，發現批來的黑糖發霉，幾次溝通不見改善。</p>
+      <p>親自去拜訪上游工廠，看到的是缺乏食品安全管理的生產環境。</p>
+      <p>2002 年，我們決定自己設廠生產黑糖，自己把關每一批黑糖的品質。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PROOF -->
+<div class="anno">[PROOF] 05 · 三格並排卡片 · 外部驗證</div>
+<section class="proof-section" id="proof">
+  <span class="section-label">外部驗證</span>
+  <h2 class="section-title">長期合作夥伴，是我們品質最直接的證明。</h2>
+  <div class="proof-cards">
+    <div class="proof-card">
+      <div class="proof-card-title">多個台糖展售中心上架</div>
+      <p class="proof-card-text">2002 年設廠後，黑糖陸續進入台糖展售通路。</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-card-title">埔里十大伴手禮</div>
+      <p class="proof-card-text">2016 年獲選，在地長期認可。</p>
+    </div>
+    <div class="proof-card">
+      <div class="proof-card-title">埔里農會長期合作夥伴</div>
+      <p class="proof-card-text">在地長期合作關係，持續至今。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 06 HOW -->
+<div class="anno">[HOW] 06 · 品質把關方法 · 三張單欄堆疊 · 圖片 750×390px @2x</div>
+<section class="how-section" id="how">
+  <span class="section-label">品質方法</span>
+  <h2 class="section-title">合格食品工廠登記，嚴選當地來源清楚的原料。</h2>
+  <div class="how-stack">
+    <div class="how-card">
+      <div class="img-placeholder">
+        <div>[ 工廠登記 / 生產設備 ]</div>
+        <div class="img-size">750 × 390px @2x<br>工廠設備 / 合格字號文件</div>
+      </div>
+      <div class="how-info">
+        <span class="how-kicker">生產資格</span>
+        <div class="how-title">合格食品工廠登記字號</div>
+        <p class="how-text">自有工廠，持有合格食品工廠登記字號，生產條件符合食品安全管理規範。</p>
+      </div>
+    </div>
+    <div class="how-card">
+      <div class="img-placeholder">
+        <div>[ 南投在地原料 ]</div>
+        <div class="img-size">750 × 390px @2x<br>竹山小黃薑 / 中寮柴燒桂圓</div>
+      </div>
+      <div class="how-info">
+        <span class="how-kicker">原料選擇</span>
+        <div class="how-title">南投產地原料，新鮮直送</div>
+        <p class="how-text">原料以南投在地農產為主。竹山的小黃薑、中寮的柴燒桂圓——產地新鮮直送，來源清楚。</p>
+      </div>
+    </div>
+    <div class="how-card">
+      <div class="img-placeholder">
+        <div>[ 送檢 / 檢驗報告 ]</div>
+        <div class="img-size">750 × 390px @2x<br>檢驗報告 / 品管流程</div>
+      </div>
+      <div class="how-info">
+        <span class="how-kicker">第三方檢驗</span>
+        <div class="how-title">產品定期送檢</div>
+        <p class="how-text">產品依規定送檢，確保品質穩定。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 TODAY -->
+<div class="anno">[TODAY] 07 · 產品呈現 · 2×1 格 · 各圖 375×375px @2x（1:1）</div>
+<section class="today-section" id="today">
+  <div class="today-copy">
+    <span class="section-label">設廠至今</span>
+    <h2 class="section-title">每一款產品，都是我們二十幾年來不斷優化的成果。</h2>
+  </div>
+  <div class="today-grid">
+    <div class="img-placeholder">
+      <div>[ 黑糖蜜 ]</div>
+      <div class="img-size">375×375px @2x（1:1）</div>
+    </div>
+    <div class="img-placeholder">
+      <div>[ 黑糖磚 ]</div>
+      <div class="img-size">375×375px @2x（1:1）</div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 CTA -->
+<div class="anno">[CTA] 08 · A+B 堆疊 · 消費者在上 / 企業採購在下</div>
+<section class="cta-section" id="cta">
+  <div class="cta-cell consumer">
+    <span class="cta-label">一般消費者</span>
+    <h2 class="cta-title">找一款放進日常的黑糖。</h2>
+    <p class="cta-text">黑糖蜜、黑糖磚，或是來自埔里的伴手禮。</p>
+    <a class="btn btn-primary" href="#">探索全系列商品 →</a>
+  </div>
+  <div class="cta-cell business">
+    <span class="cta-label">企業採購 · 批量詢價</span>
+    <h2 class="cta-title">需要穩定品質的批量採購？</h2>
+    <p class="cta-text">提供企業採購、員工福利禮與客戶伴手禮的批量報價，可洽詢客製包裝需求。</p>
+    <a class="btn btn-primary" href="#">洽詢企業採購 →</a>
+    <a class="btn btn-outline" href="#">查看伴手禮組合</a>
+  </div>
+</section>
+
+<!-- DESIGN NOTES -->
+<div class="design-notes">
+  <h2>[ DESIGN NOTES · 設計注意事項 ]</h2>
+  <div class="notes-item">
+    <h3>架構版本</h3>
+    <ul>
+      <li>v3.0 · 六塊精簡架構：Hero → Origin → Proof → How → Today → CTA</li>
+      <li>移除 v2.1 的 Background / Story / Problem / Timeline / History / Puli 六個版塊</li>
+    </ul>
+  </div>
+  <div class="notes-item">
+    <h3>圖片素材規格</h3>
+    <ul>
+      <li>Hero：750 × 422px @2x（16:9）</li>
+      <li>Origin：750 × 500px @2x（3:2）</li>
+      <li>How × 3：750 × 390px @2x</li>
+      <li>Today 兩格：375 × 375px @2x（1:1）</li>
+    </ul>
+  </div>
+  <div class="notes-item">
+    <h3>待品牌方確認</h3>
+    <ul>
+      <li>How 版塊：火候與時間管理是否補回為第四張卡片？</li>
+      <li>Today 版塊：產品線是否只呈現黑糖蜜、黑糖磚兩款？</li>
+      <li>Proof 版塊：台糖展售中心是否補充具體據點名稱？</li>
+    </ul>
+  </div>
+  <div class="notes-item">
+    <h3>禁用文案</h3>
+    <ul>
+      <li>還原製成、傳統手工、手工製程、手工製作、手工黑糖</li>
+      <li>契作原料、全台唯一、最高品質、醫療療效宣稱</li>
+      <li>翠果子、不是⋯⋯而是⋯⋯句型、絕對性敘述（如：每一批）</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">鐵比倫 TIEBILUN</div>
+  <p>關於我們 · Mobile-First · v3.1</p>
+  <p class="footer-meta">File: about-us-wireframe-v3.html · 2026-05-31</p>
+</footer>
+
+</body>
+</html>
